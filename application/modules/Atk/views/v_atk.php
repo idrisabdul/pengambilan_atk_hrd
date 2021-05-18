@@ -57,11 +57,11 @@
                                         <?= $a['kat_barang'] ?>
                                     </td>
                                     <td>
-                                        sat
+                                        <?= $a['satuan'] ?>
                                     </td>
 
                                     <td>
-                                        <?= $a['jml_stok'] ?>
+                                        <?= $a['qty'] ?>
                                     </td>
 
                                     <td>
@@ -109,22 +109,35 @@
                         </div>
                     </div>
                     <div class="row clearfix mb-1">
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <label for="">Kategori</label>
                             <select name="kat_bar" class="form-control" required>
-                                <option value="Kertas">Kertas</option>
-                                <option value="Alat Menulis">Alat Menulis</option>
-                                <option value="Elektronik">Elektronik</option>
-                                <option value="Printer">Printer</option>
+                                <option value="" selected disabled>- Select Level - </option>
+                                <?php foreach ($kategori as $kat) : ?>
+                                    <option value="<?= $kat['nm_kategori'] ?>"><?= $kat['nm_kategori'] ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
+                            <label for="">Satuan</label>
+                            <select name="sat" class="form-control" required>
+                                <option value="" selected disabled>- Select Level - </option>
+                                <?php foreach ($sat as $s) : ?>
+                                    <option value="<?= $s['satuan'] ?>"><?= $s['satuan'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
                             <label for="">Kode Barang</label>
                             <div class="form-group">
                                 <input type="text" name="kodebar" class="form-control" placeholder="Kode Barang" required />
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
                             <label for="">Jumlah Stok</label>
                             <div class="form-group">
                                 <input type="number" name="jml_stok" class="form-control" placeholder="Jumlah Stok" required />
@@ -141,7 +154,6 @@
         </div>
     </div>
 </div>
-
 <script>
     function add() {
         $('#addModal').modal('show');

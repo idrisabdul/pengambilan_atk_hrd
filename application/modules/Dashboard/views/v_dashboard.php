@@ -5,7 +5,6 @@
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
-                    <button class="btn btn-primary" onclick="add()"> + Tambah Barang</button>
                 </div>
                 <h4 class="page-title">Dashboard</h4>
                 <?= $this->session->flashdata('message') ?>
@@ -80,32 +79,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
+                            <?php foreach ($stok_atk as $sa) { ?>
 
-                                    <h5 class="m-0 font-weight-normal">Tomaslau</h5>
-                                    <p class="mb-0 text-muted"><small>Member Since 2017</small></p>
-                                </td>
+                                <tr>
+                                    <td>
 
-                                <td>
-                                    <i class="mdi mdi-currency-btc text-primary"></i> BTC
-                                </td>
+                                        <h5 class="m-0 font-weight-normal"><?= $sa['nm_barang'] ?></h5>
+                                        <p class="mb-0 text-muted"><small>Member Since 2017</small></p>
+                                    </td>
 
-                                <td>
-                                    0.00816117 BTC
-                                </td>
-                                <td>
-                                    0.00816117 BTC
-                                </td>
+                                    <td>
+                                        <i class="mdi mdi-currency-btc text-primary"></i> <?= $sa['kd_barang'] ?>
+                                    </td>
 
-                                <td>
-                                    0.00097036 BTC
-                                </td>
+                                    <td>
+                                        <?= $sa['kat_barang'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $sa['satuan'] ?>
+                                    </td>
 
-                                <td>
-                                    <a href="javascript: void(0);" class="btn btn-xs btn-success"><i class="mdi mdi-plus"></i>Permintaan Barang</a>
-                                </td>
-                            </tr>
+                                    <td>
+                                        <?= $sa['qtyatk'] ?>
+                                    </td>
+
+                                    <td>
+                                        <?= anchor('Ambil_atk/getAtk/' . $sa['nm_barang'], '<button href="#" class="btn btn-xs btn-success"><i class="mdi mdi-plus"></i>Permintaan ATK</button>') ?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
 
 
                         </tbody>
@@ -116,67 +118,6 @@
     </div> <!-- end card-box -->
 </div> <!-- end col-->
 
-<!-- ADD ITEM MODAL -->
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="title" id="defaultModalLabel">Tambah ATK</h4>
-            </div>
-            <div class="modal-body">
-                <form action="<?= base_url('Dashboard/addBarang') ?>" method="POST">
-                    <div class="row clearfix mb-1">
-                        <div class="col-sm-12">
-                            <label for="">Nama PT</label>
-                            <select name="nama_pt" class="form-control" required>
-                                <option value="" selected disabled>- Select Level - </option>
-                                <?php foreach ($pt as $p) : ?>
-                                    <option value="<?= $p['alias'] ?>"><?= $p['alias'] ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row clearfix">
-                        <div class="col-sm-12">
-                            <label for="">Nama Barang</label>
-                            <div class="form-group">
-                                <input type="text" name="nama_bar" class="form-control" placeholder="Nama Barang" required />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row clearfix mb-1">
-                        <div class="col-sm-4">
-                            <label for="">Kategori</label>
-                            <select name="kat_bar" class="form-control" required>
-                                <option value="Kertas">Kertas</option>
-                                <option value="Alat Menulis">Alat Menulis</option>
-                                <option value="Elektronik">Elektronik</option>
-                                <option value="Printer">Printer</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="">Kode Barang</label>
-                            <div class="form-group">
-                                <input type="text" name="kodebar" class="form-control" placeholder="Kode Barang" required />
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="">Jumlah Stok</label>
-                            <div class="form-group">
-                                <input type="number" name="jml_stok" class="form-control" placeholder="Jumlah Stok" required />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row modal-footer">
-                        <button type="button" class="btn btn-danger btn-round waves-effect" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary btn-round waves-effect">Save</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
     function add() {

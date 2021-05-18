@@ -18,6 +18,8 @@ class Dashboard extends MX_Controller
     {
         $sql = "SELECT * FROM db_sso.tb_pt";
         $data['pt'] = $this->db->query($sql)->result_array();
+        $sql1 = "SELECT SUM(qty) as qtyatk,nm_barang,kat_barang,kd_barang,satuan  FROM tb_barang GROUP BY nm_barang";
+        $data['stok_atk'] = $this->db->query($sql1)->result_array();
         // echo "<pre>";
         // var_dump($data['pt']);
         // echo "</pre>";
@@ -31,8 +33,8 @@ class Dashboard extends MX_Controller
             'nama_pt' => $this->input->post('nama_pt'),
             'kat_barang' => $this->input->post('kat_bar'),
             'kd_barang' => $this->input->post('kodebar'),
-            'jml_stok' => $this->input->post('jml_stok'),
-            'status' => 0,
+            'qty' => $this->input->post('jml_stok'),
+            'satuan' => $this->input->post('sat'),
             'tgl_masuk_barang' => date('Y-m-d H:i:s')
         ];
 

@@ -609,9 +609,26 @@
                         <li>
                             <a href="apps-calendar.html">
                                 <i data-feather="calendar"></i>
-                                <span> Permintaan ATK </span>
+                                <span> List Pengambilan ATK </span>
                             </a>
                         </li>
+
+                        <li class="menu-title mt-2">Settings</li>
+
+                        <li>
+                            <a href="<?= base_url('Setting') ?>">
+                                <i data-feather="calendar"></i>
+                                <span> Kategori </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="apps-calendar.html">
+                                <i data-feather="calendar"></i>
+                                <span> Satuan </span>
+                            </a>
+                        </li>
+
 
 
 
