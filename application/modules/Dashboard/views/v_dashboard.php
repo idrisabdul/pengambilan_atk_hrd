@@ -6,7 +6,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <buttoan class="btn btn-md btn-success mr-2" onclick="add()"><i class="fas fa-plus mr-1"></i>Masukkan ATK</buttoan>
-                    <button class="btn btn-md btn-primary"><i class="fas fa-hand-holding mr-1"></i>Pengambilan ATK</button>
+                    <a href="<?= base_url('Ambil_atk/pilihAtk') ?>" class="btn btn-md btn-primary"><i class="fas fa-hand-holding mr-1"></i>Pengambilan ATK</a>
                 </div>
                 <h4 class="page-title">Dashboard</h4>
                 <?= $this->session->flashdata('message') ?>
@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-6">
                         <div class="text-right">
-                            <h3 class="text-dark mt-1"><span data-plugin="counterup">127</span></h3>
+                            <h3 class="text-dark mt-1"><span data-plugin="counterup"><?= $ambil_atk ?></span></h3>
                             <p class="text-muted mb-1 text-truncate">Ambil ATK</p>
                         </div>
                     </div>
@@ -128,6 +128,7 @@
 
                         <thead class="thead-light">
                             <tr>
+                                <th>No</th>
                                 <th>Nama Barang</th>
                                 <th>Kode Barang</th>
                                 <th>Kategori</th>
@@ -137,9 +138,13 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $no = 1; ?>
                             <?php foreach ($stok_atk as $sa) { ?>
 
                                 <tr>
+                                    <td>
+                                        <?= $no++; ?>
+                                    </td>
                                     <td>
 
                                         <h5 class="m-0 font-weight-normal"><?= $sa['nm_barang'] ?></h5>

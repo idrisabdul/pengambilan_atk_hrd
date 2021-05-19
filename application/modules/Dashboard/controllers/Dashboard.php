@@ -26,9 +26,19 @@ class Dashboard extends MX_Controller
         $data['kategori'] = $this->db->query($sql_kat)->result_array();
         $sql_sat = "SELECT * FROM satuan";
         $data['sat'] = $this->db->query($sql_sat)->result_array();
+
+        $sql_ambil = "SELECT * FROM tb_ambil_atk";
+        $data['ambil_atk'] = $this->db->query($sql_ambil)->num_rows();
         // echo "<pre>";
         // var_dump($data['total_atk']);
         // echo "</pre>";
         $this->template->load('template', 'v_dashboard', $data);
+    }
+
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('http://localhost/Login/');
+        // redirect('https://192.168.1.231/msal-login/Login');
     }
 }

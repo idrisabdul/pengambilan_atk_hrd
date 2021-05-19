@@ -22,7 +22,7 @@
                     <br>
                     <form class="form-horizontal" action="<?= base_url('Ambil_atk/addAmbilAtk') ?>" method="POST">
                         <?php foreach ($stok_atk as $a) { ?>
-                            <input type="text" name="nama_pt" class="form-control" value="<?= $a['nama_pt'] ?>">
+                            <input type="hidden" name="nama_pt" class="form-control" value="<?= $a['nama_pt'] ?>">
                             <div class="form-group row mb-2">
                                 <label class="col-2 col-form-label">Nama</label>
                                 <div class="col-6">
@@ -53,8 +53,8 @@
                                         <button href="#" class="btn btn-dark waves-effect waves-light"><?= $a['satuan'] ?></button>
                                     </div>
                                 </div>
-                                <input type="text" name="kat_barang" class="form-control" value="<?= $a['kat_barang'] ?>">
-                                <input type="text" name="satuan" class="form-control" value="<?= $a['satuan'] ?>">
+                                <input type="hidden" name="kat_barang" class="form-control" value="<?= $a['kat_barang'] ?>">
+                                <input type="hidden" name="satuan" class="form-control" value="<?= $a['satuan'] ?>">
                             </div>
                             <br>
                             <!-- <div class="form-group row mb-2">

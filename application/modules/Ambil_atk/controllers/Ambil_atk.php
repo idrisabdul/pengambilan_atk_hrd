@@ -27,6 +27,18 @@ class Ambil_atk extends CI_Controller
 
 
 
+    public function pilihAtk()
+    {
+        $sql = "SELECT * FROM db_sso.tb_pt";
+        $data['pt'] = $this->db->query($sql)->result_array();
+        $sqluser = "SELECT nama FROM db_sso.user_ho";
+        $data['user_nama'] = $this->db->query($sqluser)->result_array();
+        // echo "<pre>";
+        // var_dump($data['stok_atk']);
+        // echo "</pre>";
+        $this->template->load('template', 'v_pilihAtk', $data);
+    }
+
     public function getAtk($nm_barang)
     {
         $sql1 = "SELECT SUM(qty) as qtyatk,nm_barang,kat_barang,kd_barang,satuan,qty,nama_pt FROM tb_barang WHERE nm_barang = '$nm_barang' GROUP BY nm_barang";
