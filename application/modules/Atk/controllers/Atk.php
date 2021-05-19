@@ -2,6 +2,18 @@
 
 class Atk extends CI_Controller
 {
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->model('M_atk');
+
+        if (!$this->session->userdata('userlogin')) {
+            // redirect('https://192.168.1.231/msal-login/Login');
+            redirect('localhost/Login');
+        }
+        date_default_timezone_set("Asia/Bangkok");
+    }
+
     function index()
     {
         $sql = "SELECT * FROM db_sso.tb_pt";
@@ -16,5 +28,46 @@ class Atk extends CI_Controller
         // var_dump($data['user_nama']);
         // echo "</pre>";
         $this->template->load('template', 'v_atk', $data);
+    }
+
+    public function addAtk()
+    {
+        $atk = [
+            'nm_barang' => $this->input->post('nama_bar'),
+            'nama_pt' => $this->input->post('nama_pt'),
+            'kat_barang' => $this->input->post('kat_bar'),
+            'kd_barang' => $this->input->post('kodebar'),
+            'qty' => $this->input->post('jml_stok'),
+            'satuan' => $this->input->post('sat'),
+            'tgl_masuk_barang' => date('Y-m-d H:i:s')
+        ];
+
+        $this->M_atk->inputAtk($atk);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">ATK Berhasil Ditambahkan</div>');
+        redirect('Atk');
+    }
+
+    public function editAtk()
+    {
+        $id_barang = $this->input->post('id_barang');
+        $atk = [
+            'nm_barang' => $this->input->post('nm_barang'),
+            'nama_pt' => $this->input->post('nama_pt'),
+            'kat_barang' => $this->input->post('kat_barang'),
+            'kd_barang' => $this->input->post('kd_barang'),
+            'qty' => $this->input->post('qty'),
+            'satuan' => $this->input->post('satuan'),
+        ];
+
+        $this->M_atk->updateAtk($atk, $id_barang);
+        $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">ATK Berhasil Diedit</div>');
+        redirect('Atk');
+    }
+
+    public function delete($id_bar)
+    {
+        $this->M_atk->deleteAtk($id_bar);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">ATK Berhasil Dihapus</div>');
+        redirect('Atk');
     }
 }
