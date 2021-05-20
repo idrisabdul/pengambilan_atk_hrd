@@ -17,10 +17,19 @@ class Ambil_atk extends CI_Controller
 
     public function index()
     {
-        $sql = "SELECT * FROM tb_ambil_atk";
+        $sql = "SELECT * FROM tb_ambil_atk ORDER BY id DESC";
         $data['ambil_atk'] = $this->db->query($sql)->result_array();
+
+        $sqluser = "SELECT nama FROM db_sso.user_ho";
+        $data['user_nama'] = $this->db->query($sqluser)->result_array();
+
+        $sql1 = "SELECT *  FROM tb_barang ORDER BY id_barang DESC";
+        $data['stok_atk'] = $this->db->query($sql1)->result_array();
+
+        $sql = "SELECT * FROM db_sso.tb_pt";
+        $data['pt'] = $this->db->query($sql)->result_array();
         // echo "<pre>";
-        // var_dump($data['stok_atk']);
+        // var_dump($data['ambil_atk']);
         // echo "</pre>";
         $this->template->load('template', 'v_indexAmbil', $data);
     }
@@ -29,6 +38,13 @@ class Ambil_atk extends CI_Controller
 
     public function pilihAtk()
     {
+        // $sql1 = "SELECT SUM(qty) as qtyatk,nm_barang,kat_barang,kd_barang,satuan,id_barang  FROM tb_barang GROUP BY nm_barang";
+        $sql1 = "SELECT * FROM tb_barang ORDER BY id_barang DESC";
+        $data['stok_atk'] = $this->db->query($sql1)->result_array();
+
+        $sqluser = "SELECT nama FROM db_sso.user_ho";
+        $data['user_nama'] = $this->db->query($sqluser)->result_array();
+
         $sql = "SELECT * FROM db_sso.tb_pt";
         $data['pt'] = $this->db->query($sql)->result_array();
         $sqluser = "SELECT nama FROM db_sso.user_ho";
@@ -39,10 +55,32 @@ class Ambil_atk extends CI_Controller
         $this->template->load('template', 'v_pilihAtk', $data);
     }
 
-    public function getAtk($nm_barang)
+    // public function getAtk($nm_barang)
+    // {
+    //     $sql1 = "SELECT SUM(qty) as qtyatk,nm_barang,kat_barang,kd_barang,satuan,qty,nama_pt FROM tb_barang WHERE nm_barang = '$nm_barang' GROUP BY nm_barang";
+    //     $data['stok_atk'] = $this->db->query($sql1)->result_array();
+    //     $sqluser = "SELECT nama FROM db_sso.user_ho";
+    //     $data['user_nama'] = $this->db->query($sqluser)->result_array();
+    //     // echo "<pre>";
+    //     // var_dump($data['stok_atk']);
+    //     // echo "</pre>";
+    //     $this->template->load('template', 'v_ambilatk', $data);
+    // }
+    public function getAtk($id)
     {
-        $sql1 = "SELECT SUM(qty) as qtyatk,nm_barang,kat_barang,kd_barang,satuan,qty,nama_pt FROM tb_barang WHERE nm_barang = '$nm_barang' GROUP BY nm_barang";
+        $sql1 = "SELECT * FROM tb_barang WHERE id_barang = '$id'";
         $data['stok_atk'] = $this->db->query($sql1)->result_array();
+
+        foreach ($data['stok_atk'] as $sa) {
+            $nm_atk = $sa['kd_inputatk'];
+            $qryambil = "SELECT SUM(qty) as qtyambil  FROM tb_ambil_atk where kd_inputatk='$nm_atk'";
+
+            $result2 = $this->db->query($qryambil)->result_array();
+            foreach ($result2 as $row2) {
+                $data['qtyambilatk'] = $row2['qtyambil'];
+            }
+        }
+
         $sqluser = "SELECT nama FROM db_sso.user_ho";
         $data['user_nama'] = $this->db->query($sqluser)->result_array();
         // echo "<pre>";
@@ -55,6 +93,7 @@ class Ambil_atk extends CI_Controller
     {
         $ambil_atk = [
             'no_ambilatk' => 1,
+            'kd_inputatk' => $this->input->post('kd_inputatk'),
             'user_nama' => $this->input->post('user_nama'),
             'nm_barang' => $this->input->post('nm_barang'),
             'kat_barang' => $this->input->post('kat_barang'),

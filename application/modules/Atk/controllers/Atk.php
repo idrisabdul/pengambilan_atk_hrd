@@ -32,13 +32,30 @@ class Atk extends CI_Controller
 
     public function addAtk()
     {
+        $kd_atk = $this->input->post('nama_bar');
+        if ($kd_atk == 'HVS') {
+            $kd = 'KERT-001';
+        } else if ($kd_atk == 'Pulpen') {
+            $kd = 'AM-001';
+        }
+
+        $kd = '1234567890';
+        $string = 'ATK-' . date("Ymd");
+        for ($i = 0; $i < 3; $i++) {
+            $pos = rand(0, strlen($kd) - 1);
+            $string .= $pos;
+        }
         $atk = [
+            'kd_inputatk' => $string,
             'nm_barang' => $this->input->post('nama_bar'),
             'nama_pt' => $this->input->post('nama_pt'),
             'kat_barang' => $this->input->post('kat_bar'),
-            'kd_barang' => $this->input->post('kodebar'),
+            'merek' => $this->input->post('merek'),
+            'kd_barang' => 'kd',
+            'harga' => $this->input->post('harga'),
             'qty' => $this->input->post('jml_stok'),
             'satuan' => $this->input->post('sat'),
+            'keterangan' => $this->input->post('keperluan'),
             'tgl_masuk_barang' => date('Y-m-d H:i:s')
         ];
 

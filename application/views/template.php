@@ -55,7 +55,7 @@
                         <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <img src="<?= base_url() ?>/assets/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
                             <span class="pro-user-name ml-1">
-                                Geneva <i class="mdi mdi-chevron-down"></i>
+                                <?= $this->session->userdata('userlogin'); ?> <i class="mdi mdi-chevron-down"></i>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
@@ -349,14 +349,14 @@
 
                         <li>
                             <a href="<?= base_url('Atk') ?>">
-                                <i data-feather="calendar"></i>
+                                <i class="fas fa-pencil-ruler"></i>
                                 <span> List Barang ATK </span>
                             </a>
                         </li>
 
                         <li>
                             <a href="<?= base_url('Ambil_atk') ?>">
-                                <i data-feather="calendar"></i>
+                                <i class="fas fa-user-edit"></i>
                                 <span> List Pengambilan ATK </span>
                             </a>
                         </li>
@@ -365,14 +365,14 @@
 
                         <li>
                             <a href="<?= base_url('Kategori') ?>">
-                                <i data-feather="calendar"></i>
+                                <i class="fas fa-project-diagram"></i>
                                 <span> Kategori </span>
                             </a>
                         </li>
 
                         <li>
                             <a href="<?= base_url('Satuan') ?>">
-                                <i data-feather="calendar"></i>
+                                <i class="fas fa-cube"></i>
                                 <span> Satuan </span>
                             </a>
                         </li>

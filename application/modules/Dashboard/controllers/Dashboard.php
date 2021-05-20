@@ -18,7 +18,8 @@ class Dashboard extends MX_Controller
     {
         $sql = "SELECT * FROM db_sso.tb_pt";
         $data['pt'] = $this->db->query($sql)->result_array();
-        $sql1 = "SELECT SUM(qty) as qtyatk,nm_barang,kat_barang,kd_barang,satuan  FROM tb_barang GROUP BY nm_barang";
+        // $sql1 = "SELECT SUM(qty) as qtyatk,nm_barang,kat_barang,kd_barang,satuan  FROM tb_barang GROUP BY nm_barang";
+        $sql1 = "SELECT *  FROM tb_barang ORDER BY id_barang DESC";
         $data['stok_atk'] = $this->db->query($sql1)->result_array();
         $sql_atk = "SELECT * FROM tb_barang ORDER BY id_barang DESC";
         $data['atk'] = $this->db->query($sql_atk)->result_array();
@@ -26,6 +27,9 @@ class Dashboard extends MX_Controller
         $data['kategori'] = $this->db->query($sql_kat)->result_array();
         $sql_sat = "SELECT * FROM satuan";
         $data['sat'] = $this->db->query($sql_sat)->result_array();
+
+        $sql_user = "SELECT * FROM tb_ambil_atk GROUP BY user_nama";
+        $data['jml_user'] = $this->db->query($sql_user)->num_rows();
 
         $sql_ambil = "SELECT * FROM tb_ambil_atk";
         $data['ambil_atk'] = $this->db->query($sql_ambil)->num_rows();

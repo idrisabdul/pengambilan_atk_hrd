@@ -32,24 +32,29 @@
 
                         <thead class="thead-light">
                             <tr>
+                                <th>No</th>
                                 <th>Nama Barang</th>
-                                <th>Kode Barang</th>
+                                <th>Kode Atk</th>
                                 <th>Kategori</th>
                                 <th>Satuan</th>
                                 <th>Jumlah Stok</th>
+                                <th>Tgl Masuk Barang</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $no = 1; ?>
                             <?php foreach ($atk as $a) { ?>
                                 <tr>
                                     <td>
+                                        <?= $no++; ?>
+                                    </td>
+                                    <td>
                                         <h5 class="m-0 font-weight-normal"><?= $a['nm_barang'] ?></h5>
-                                        <p class="mb-0 text-muted"><small><?= $a['tgl_masuk_barang'] ?></small></p>
                                     </td>
 
                                     <td>
-                                        <i class="mdi mdi-currency-btc text-primary"></i> <?= $a['kd_barang'] ?>
+                                        <?= $a['kd_inputatk'] ?>
                                     </td>
 
                                     <td>
@@ -61,6 +66,9 @@
 
                                     <td>
                                         <?= $a['qty'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $a['tgl_masuk_barang'] ?>
                                     </td>
 
                                     <td>
@@ -87,7 +95,7 @@
             </div>
             <div class="modal-body">
                 <form action="<?= base_url('Atk/addAtk') ?>" method="POST">
-                    <div class="row clearfix mb-1">
+                    <div class="row clearfix">
                         <div class="col-sm-12">
                             <label for="">Nama PT</label>
                             <select name="nama_pt" class="form-control" required>
@@ -127,10 +135,16 @@
                         </div>
                     </div>
                     <div class="row clearfix">
-                        <div class="col-sm-12">
-                            <label for="">Kode Barang</label>
+                        <div class="col-sm-6">
+                            <label for="">Harga</label>
                             <div class="form-group">
-                                <input type="text" name="kodebar" class="form-control" placeholder="Kode Barang" required />
+                                <input type="text" name="harga" class="form-control" placeholder="Harga" required />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="">Merek</label>
+                            <div class="form-group">
+                                <input type="text" name="merek" class="form-control" placeholder="Merek" required />
                             </div>
                         </div>
                     </div>
@@ -139,6 +153,14 @@
                             <label for="">Jumlah Stok</label>
                             <div class="form-group">
                                 <input type="number" name="jml_stok" class="form-control" placeholder="Jumlah Stok" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <label for="">Keterangan</label>
+                            <div class="form-group">
+                                <textarea type="text" rows="1" name="keperluan" class="form-control"></textarea>
                             </div>
                         </div>
                     </div>

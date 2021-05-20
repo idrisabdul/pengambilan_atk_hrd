@@ -25,7 +25,7 @@
 
                 <h4 class="header-title mb-3">Menu Satuan</h4>
                 <div class="table-responsive">
-                    <table class="table table-bordered dt-responsive nowrap w-100">
+                    <table class="table table-bordered nowrap w-100" id="basic-datatable">
 
                         <thead class="thead-light">
                             <tr>
