@@ -20,15 +20,12 @@
             <div class="card-box pb-2">
                 <div class="float-right d-none d-md-inline-block">
                     <div class="btn-group mb-2">
-                        <button type="button" class="btn btn-xs btn-light">Today</button>
-                        <button type="button" class="btn btn-xs btn-light">Weekly</button>
-                        <button type="button" class="btn btn-xs btn-light">Monthly</button>
                     </div>
                 </div>
 
                 <h4 class="header-title mb-3">Total ATK</h4>
                 <div class="table-responsive">
-                    <table class="table table-borderless table-hover table-nowrap table-centered m-0" id="basic-datatable">
+                    <table class="table table-borderless table-hover table-sm table-centered m-0" id="basic-datatable">
 
                         <thead class="thead-light">
                             <tr>
@@ -99,7 +96,7 @@
                         <div class="col-sm-12">
                             <label for="">Nama PT</label>
                             <select name="nama_pt" class="form-control" required>
-                                <option value="" selected disabled>- Select Level - </option>
+                                <option value="" selected disabled>- Select PT - </option>
                                 <?php foreach ($pt as $p) : ?>
                                     <option value="<?= $p['alias'] ?>"><?= $p['alias'] ?></option>
                                 <?php endforeach; ?>
@@ -118,7 +115,7 @@
                         <div class="col-sm-6">
                             <label for="">Kategori</label>
                             <select name="kat_bar" class="form-control" required>
-                                <option value="" selected disabled>- Select Level - </option>
+                                <option value="" selected disabled>- Select Kategori - </option>
                                 <?php foreach ($kategori as $kat) : ?>
                                     <option value="<?= $kat['nm_kategori'] ?>"><?= $kat['nm_kategori'] ?></option>
                                 <?php endforeach; ?>
@@ -127,7 +124,7 @@
                         <div class="col-sm-6">
                             <label for="">Satuan</label>
                             <select name="sat" class="form-control" required>
-                                <option value="" selected disabled>- Select Level - </option>
+                                <option value="" selected disabled>- Select Satuan - </option>
                                 <?php foreach ($sat as $s) : ?>
                                     <option value="<?= $s['satuan'] ?>"><?= $s['satuan'] ?></option>
                                 <?php endforeach; ?>

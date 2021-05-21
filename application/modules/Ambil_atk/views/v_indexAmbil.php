@@ -5,7 +5,8 @@
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
-                    <button class="btn btn-primary" onclick="add()"> + Ajukan Pengambilan Atk</button>
+                    <button class="btn btn-primary btn-rounded mr-2" onclick="add()"><i class="fas fa-eye mr-1"></i>Lihat ATK Saat ini</button>
+                    <a href="<?= base_url('Ambil_atk/pilihAtk') ?>" class="btn btn-rounded btn-success"><i class="fas fa-user-edit mr-1"></i>Ajukan Pengambilan ATK</a>
                 </div>
                 <h4 class="page-title">Daftar Pengambilan ATK</h4>
                 <?= $this->session->flashdata('message') ?>
@@ -19,49 +20,42 @@
         <div class="col-lg-12">
             <div class="card-box pb-2">
                 <div class="float-right d-none d-md-inline-block">
+                    <div class="btn-group mb-2">
+                        <button type="button" class="btn btn-xs btn-light">Per Item</button>
+                        <button type="button" class="btn btn-xs btn-secondary">Monthly</button>
+                    </div>
                 </div>
 
                 <h4 class="header-title mb-3">Total ambil ATK</h4>
                 <div class="table-responsive">
-                    <table class="table table-borderless table-hover table-nowrap table-centered m-0" id="basic-datatable">
+                    <table class="table table-borderless table-hover table-nowrap table-sm m-0" id="basic-datatable">
 
                         <thead class="thead-light">
                             <tr>
+                                <th>No</th>
                                 <th>No Ambil ATk</th>
                                 <th>User</th>
-                                <th>Kategori</th>
-                                <th>Satuan</th>
-                                <th>Jumlah Stok</th>
                                 <th>Tgl Pengambilan</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $no = 1; ?>
                             <?php foreach ($ambil_atk as $aa) { ?>
                                 <tr>
+                                    <td><?= $no++; ?>
+                                    </td>
                                     <td>
                                         <h5 class="m-0 font-weight-normal"><?= $aa['no_ambilatk'] ?></h5>
                                     </td>
 
                                     <td>
-                                        <i class="mdi mdi-currency-btc text-primary"></i> <?= $aa['user_nama'] ?>
+                                        <?= $aa['user_nama'] ?>
                                     </td>
 
-                                    <td>
-                                        <?= $aa['nm_barang'] ?>
-                                    </td>
-                                    <td>
-                                        <?= $aa['sat'] ?>
-                                    </td>
-
-
-                                    <td>
-                                        <?= $aa['qty'] ?>
-                                    </td>
                                     <td>
                                         <?= $aa['tgl_permintaan'] ?>
                                     </td>
-
                                     <td>
                                         <button class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal<?= $aa['id'] ?>"><i class="fa fa-edit mr-1"></i>Edit</button>
                                         <button onclick="deleteConfirm('<?= base_url('Ambil_atk/delete/' . $aa['id']) ?>')" href="#!" class="btn btn-xs btn-danger"><i class="mdi mdi-delete mr-1"></i>Hapus</button>
@@ -83,11 +77,11 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="title" id="defaultModalLabel">Pilih ATK Yang Tersedia</h4>
+                <h4 class="title" id="defaultModalLabel">ATK Yang Tersedia</h4>
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
-                    <table class="table table-borderless table-hover" id="basic-datatable">
+                    <table class="table table-bordered table-hover table-sm" id="basic-datatable">
 
                         <thead class="thead-light">
                             <tr>
@@ -95,9 +89,9 @@
                                 <th>Nama Barang</th>
                                 <th>Kode Input ATK</th>
                                 <th>Kategori</th>
-                                <th>Satuan</th>
                                 <th>Jumlah Stok</th>
-                                <th>Action</th>
+                                <th>Satuan</th>
+                                <!-- <th>Action</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -112,7 +106,7 @@
                                     $qtyatk = $data['qtyatk'];
                                 }
 
-                                $qryambil = "SELECT SUM(qty) as qtyambil  FROM tb_ambil_atk where kd_inputatk='$nm_atk'";
+                                $qryambil = "SELECT SUM(qty) as qtyambil  FROM tb_detail_ambilatk where kd_inputatk='$nm_atk'";
 
                                 $result2 = $this->db->query($qryambil)->result_array();
                                 foreach ($result2 as $row2) {
@@ -132,23 +126,23 @@
                                         </td>
 
                                         <td>
-                                            <i class="mdi mdi-currency-btc text-primary"></i> <?= $sa['kd_inputatk'] ?>
+                                            <?= $sa['kd_inputatk'] ?>
                                         </td>
 
                                         <td>
                                             <?= $sa['kat_barang'] ?>
                                         </td>
-                                        <td>
-                                            <?= $sa['satuan'] ?>
-                                        </td>
 
                                         <td>
                                             <?= $saldo ?>
                                         </td>
-
                                         <td>
-                                            <?= anchor('Ambil_atk/getAtk/' . $sa['id_barang'], '<button href="#" class="btn btn-xs btn-success"><i class="mdi mdi-plus"></i>Permintaan ATK</button>') ?>
+                                            <?= $sa['satuan'] ?>
                                         </td>
+
+                                        <!-- <td>
+                                            <?= anchor('Ambil_atk/getAtk/' . $sa['id_barang'], '<button href="#" class="btn btn-xs btn-success"><i class="mdi mdi-plus"></i>Permintaan ATK</button>') ?>
+                                        </td> -->
                                     </tr>
                                 <?php endif; ?>
                             <?php } ?>
@@ -170,10 +164,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="title" id="defaultModalLabel">Edit Pengambilan ATK</h4>
+                    <h4 class="title mr-0" id="defaultModalLabel">Edit Pengambilan ATK</h4>
+                    <h4 class="bg-light"><?= $aa['no_ambilatk'] ?></h4>
                 </div>
                 <div class="modal-body">
                     <form action="<?= base_url('Ambil_atk/editAmbilAtk') ?>" method="POST">
+                        <input type="text" name="id" class="form-control bg-light" placeholder="Nama Barang" value="<?= $aa['id'] ?>" />
+
                         <div class="row clearfix">
                             <div class="col-sm-12">
                                 <label for="">Nama User</label>
@@ -236,6 +233,24 @@
     </div>
 <?php endforeach; ?>
 
+<!-- DELETE MODAL -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Anda yakin?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Data yang dihapus tidak akan bisa dikembalikan.</div>
+            <div class="modal-footer">
+                <button class="btn" type="button" data-dismiss="modal">Batal</button>
+                <a id="btn-delete" class="btn btn-danger" href="#">Hapus</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     function add() {

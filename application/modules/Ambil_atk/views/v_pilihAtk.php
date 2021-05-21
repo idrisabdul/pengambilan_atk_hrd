@@ -47,41 +47,40 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 border border-info">
                                 <div class="form-group row mb-2">
-                                    <label class="col-3 col-form-label">Pilih ATK</label>
+                                    <label class="col-3 col-form-label">Nama ATK</label>
                                     <div class="col-6">
-                                        <select name="nama_pt" class="form-control" required>
-                                            <option value="" selected disabled>-- SELECT --</option>
-                                            <?php foreach ($pt as $p) : ?>
-                                                <option value="<?= $p['alias'] ?>"><?= $p['alias'] ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
+                                        <input type="hidden" id="no" class="form-control">
+                                        <input type="hidden" id="getuser" class="form-control">
+                                        <input type="hidden" id="getpt" class="form-control">
+                                        <input type="hidden" id="getitem_kdinput" class="form-control">
+                                        <input type="hidden" id="getitem_katatk" class="form-control">
+                                        <input type="hidden" id="getitem_sat" class="form-control">
+                                        <input type="text" id="getitematk" class="form-control mb-1" placeholder="Masukkan ATK">
+                                        <input type="text" id="getitemqty" class="form-control mb-1" placeholder="Masukkan QTY">
+                                        <textarea type="text" id="getitemkep" class="form-control" placeholder="Keperluan"></textarea>
                                     </div>
-                                </div>
-                                <div class="form-group row mb-2">
-                                    <input type="text" id="no" class="form-control">
-                                    <input type="text" id="getuser" class="form-control">
-                                    <input type="text" id="getpt" class="form-control">
-                                    <input type="text" id="getitem_kdinput" class="form-control">
-                                    <input type="text" id="getitem_katatk" class="form-control">
-                                    <input type="text" id="getitem_sat" class="form-control">
-                                    <input type="text" id="getitematk" class="form-control">
-                                    <input type="text" id="getitemqty" class="form-control">
-                                    <button class="btn btn-lg btn-info mr-1" type="button" data-toggle="modal" data-target="#modal-item">Pilih ATK</button>
-                                    <button class="btn btn-lg btn-success" type="button" id="clickambilatk">Ambil ATK</button>
+                                    <div class="col-3">
+                                        <button class="btn btn-md btn-info mb-2 mr-1" type="button" data-toggle="modal" data-target="#modal-item">Pilih ATK&nbsp;&nbsp;</button>
+                                        <button class="btn btn-md btn-success mb-2 mr-1" type="button" id="clickambilatk">Ambil ATK</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <br>
                         <br>
-                        <table class="table table-bordered nowrap w-60" id="datatable">
+                        <table class="table table-bordered w-60 table-sm" id="datatable">
 
                             <thead class="thead-light">
                                 <tr>
                                     <th>No</th>
                                     <th>Nama ATK</th>
                                     <th>Qty Input</th>
+                                    <th>Kode Input ATK</th>
+                                    <th>Kategori</th>
+                                    <th>Satuan</th>
+                                    <th>Keperluan</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -95,6 +94,7 @@
                                         <span id="qty"></span>
                                     </td>
                                 </tr> -->
+
 
                             </tbody>
                         </table>
@@ -131,7 +131,7 @@
                         </div> -->
                         <div class="form-group mb-0 justify-content-end row">
                             <div class="col-2">
-                                <button type="button" class="btn btn-info waves-effect waves-light" id="save">Simpan</button>
+                                <button type="button" class="btn btn-primary waves-effect waves-light" id="save">Simpan</button>
                             </div>
                         </div>
                     </form>
@@ -158,6 +158,7 @@
                             <th>No</th>
                             <th>Nama ATK</th>
                             <th>Qty</th>
+                            <th>Satuan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -165,22 +166,46 @@
                         <?php $no = 1; ?>
                         <?php foreach ($stok_atk as $sa) { ?>
 
-                            <tr>
-                                <td>
-                                    <?= $no++; ?>
-                                </td>
-                                <td>
-                                    <h5 class="m-0 font-weight-normal"><?= $sa['nm_barang'] ?></h5>
-                                </td>
+                            <?php $nm_atk = $sa['kd_inputatk']; ?>
+                            <?php
+                            $query = "SELECT SUM(qty) as qtyatk from tb_barang where kd_inputatk='$nm_atk'";
+                            $qry = $this->db->query($query)->result_array();
 
-                                <td>
-                                    </i> <?= $sa['qty'] ?>
-                                </td>
+                            foreach ($qry as $data) {
+                                $qtyatk = $data['qtyatk'];
+                            }
 
-                                <td>
-                                    <button type="button" id="select" data-qty="<?php echo $sa['qty']  ?>" data-satuan="<?php echo $sa['satuan']  ?>" data-kat_barang="<?php echo $sa['kat_barang']  ?>" data-kd_inputatk="<?php echo $sa['kd_inputatk']  ?>" data-nm_barang="<?php echo $sa['nm_barang'] ?>">Select</button>
-                                </td>
-                            </tr>
+                            $qryambil = "SELECT SUM(qty) as qtyambil  FROM tb_ambil_atk where kd_inputatk='$nm_atk'";
+
+                            $result2 = $this->db->query($qryambil)->result_array();
+                            foreach ($result2 as $row2) {
+                                $qtyambil = $row2['qtyambil'];
+                            }
+                            $saldo = $qtyatk - $qtyambil;
+
+                            if ($saldo > 0) : ?>
+
+                                <tr>
+                                    <td>
+                                        <?= $no++; ?>
+                                    </td>
+                                    <td>
+                                        <h5 class="m-0 font-weight-normal"><?= $sa['nm_barang'] ?></h5>
+                                    </td>
+
+                                    <td>
+                                        </i> <?= $saldo ?>
+                                    </td>
+
+                                    <td>
+                                        </i> <?= $sa['satuan'] ?>
+                                    </td>
+
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-info btn-rounded waves-effect waves-light" id="select" data-qty="<?php echo $saldo  ?>" data-satuan="<?php echo $sa['satuan']  ?>" data-kat_barang="<?php echo $sa['kat_barang']  ?>" data-kd_inputatk="<?php echo $sa['kd_inputatk']  ?>" data-nm_barang="<?php echo $sa['nm_barang'] ?>"><i class="fas fa-check mr-1"></i>Select</button>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
                         <?php } ?>
                     </tbody>
                 </table>
@@ -236,24 +261,46 @@
 
         $('#clickambilatk').click(function() {
 
-            var no = $('#no').val();
-            var getitematk = $('#getitematk').val();
-            var getitemqty = $('#getitemqty').val();
-            var getuser = $('#getuser').val();
+            var pt = $('#getpt').val();
 
-            $('#datatable tbody:last-child').append(
-                '<tr>' +
-                '<td>' + no + '</td>' +
-                '<td>' + getitematk + '</td>' +
-                '<td>' + getitemqty + '</td>' +
-                '</tr>'
-            );
+            if (pt == '') {
+                swal('Silahkan pilih pt');
+                $('#getitematk').val('');
+                $('#getitemqty').val('');
+                $('#getitemkep').val('');
+            } else {
+                var no = $('#no').val();
+                var getitematk = $('#getitematk').val();
+                var getitemqty = $('#getitemqty').val();
+                var getuser = $('#getuser').val();
+                var get_kdinput = $('#getitem_kdinput').val();
+                var get_katatk = $('#getitem_katatk').val();
+                var get_sat = $('#getitem_sat').val();
+                var get_kep = $('#getitemkep').val();
 
-            $('#no').val('');
-            $('#getitematk').val('');
-            $('#getitemqty').val('');
 
-            set_number();
+                $('#datatable tbody:last-child').append(
+                    '<tr>' +
+                    '<td>' + no + '</td>' +
+                    '<td>' + getitematk + '</td>' +
+                    '<td>' + getitemqty + '</td>' +
+                    '<td>' + get_kdinput + '</td>' +
+                    '<td>' + get_katatk + '</td>' +
+                    '<td>' + get_sat + '</td>' +
+                    '<td>' + get_kep + '</td>' +
+                    '</tr>'
+                );
+
+                $('#no').val('');
+                $('#getitematk').val('');
+                $('#getitemqty').val('');
+                $('#getitemkep').val('');
+
+                set_number();
+
+            }
+
+
 
         });
 
@@ -279,11 +326,11 @@
                         'nm_barang': $(tr).find('td:eq(1)').text(),
                         'qty': $(tr).find('td:eq(2)').text(),
                         'user_nama': getuser1,
-                        'kd_inputatk': getitem_kdinput1,
-                        'kat_barang': getitem_katatk,
+                        'kd_inputatk': $(tr).find('td:eq(3)').text(),
+                        'kat_barang': $(tr).find('td:eq(4)').text(),
                         'nama_pt': getpt1,
-                        'sat': getitem_sat,
-                        'keperluan': 'kep'
+                        'sat': $(tr).find('td:eq(5)').text(),
+                        'keperluan': $(tr).find('td:eq(6)').text(),
                     };
 
                     table_data.push(sub);
@@ -293,36 +340,96 @@
 
             // console.log(table_data);
             swal({
-                title: 'Ambil ATK?',
-                text: '',
-                type: '',
-                // showLoaderOnConfirm: true,
+                title: "Add ATK",
                 showCancelButton: true,
-                confirmButtonText: 'Ya',
-
-            }).then(function() {
-
-                var data = {
-                    'data_table': table_data
-                }
-
-                $.ajax({
-
-                    data: data,
-                    type: 'POST',
-                    url: '<?php echo base_url('Ambil_atk/ambilatk'); ?>',
-                    crossOrigin: false,
-                    dataType: 'json',
-                    success: function(result) {
-
-                        if (result.status == "success") {
-                            swal('Successfully Saved.', '', 'success');
-                        } else {
-                            swal('Simpan gagal.', '', 'warning');
-                        }
+                confirmButtonColor: "#1FAB45",
+                confirmButtonText: "Save",
+                cancelButtonText: "Cancel",
+                buttonsStyling: true
+            }).then(result => {
+                if (result.value) {
+                    // handle confirm
+                    var data = {
+                        'data_table': table_data
                     }
-                });
-            });
+
+                    $.ajax({
+
+                        data: data,
+                        type: 'POST',
+                        url: '<?php echo base_url('Ambil_atk/ambilatk'); ?>',
+                        crossOrigin: false,
+                        dataType: 'json',
+                        success: function(result) {
+
+                            if (result.status == "success") {
+                                swal('Successfully Saved.', '', 'success');
+                            } else if (result.status == 'failed') {
+                                swal('Simpan gagal.', '', 'warning');
+                            }
+                        },
+                        failure: function(result) {
+                            swal(
+                                "Internal Error",
+                                "Oops, your note was not saved.", // had a missing comma
+                                "error"
+                            )
+                        }
+                    });
+                    console.log(result.value)
+                } else {
+                    // handle dismiss, result.dismiss can be 'cancel', 'overlay', 'close', and 'timer'
+
+                    console.log(result.dismiss)
+                }
+            })
+            // swal({
+            //     title: 'Ambil ATK?',
+            //     text: '',
+            //     type: '',
+            //     // showLoaderOnConfirm: true,
+            //     showCancelButton: true,
+            //     confirmButtonText: 'Ya',
+            //     closeOnConfirm: true,
+
+            // }).then(function() {
+
+            //     var data = {
+            //         'data_table': table_data
+            //     }
+
+            //     $.ajax({
+
+            //         data: data,
+            //         type: 'POST',
+            //         url: '<?php echo base_url('Ambil_atk/ambilatk'); ?>',
+            //         crossOrigin: false,
+            //         dataType: 'json',
+            //         success: function(result) {
+
+            //             if (result.status == "success") {
+            //                 swal('Successfully Saved.', '', 'success');
+            //             } else if (result.status == 'failed') {
+            //                 swal('Simpan gagal.', '', 'warning');
+            //             }
+            //         },
+            //         failure: function(result) {
+            //             swal(
+            //                 "Internal Error",
+            //                 "Oops, your note was not saved.", // had a missing comma
+            //                 "error"
+            //             )
+            //         }
+            //     });
+            // }, function(dismiss) {
+            //     if (dismiss == "cancel") {
+            //         swal(
+            //             "Cancelled",
+            //             "Canceled Note",
+            //             "error"
+            //         )
+            //     }
+            // })
 
         });
 

@@ -17,8 +17,8 @@ class Ambil_atk extends CI_Controller
 
     public function index()
     {
-        $sql = "SELECT * FROM tb_ambil_atk ORDER BY id DESC";
-        $data['ambil_atk'] = $this->db->query($sql)->result_array();
+        $sqlambil = "SELECT * FROM tb_ambil_atk ORDER BY id DESC";
+        $data['ambil_atk'] = $this->db->query($sqlambil)->result_array();
 
         $sqluser = "SELECT nama FROM db_sso.user_ho";
         $data['user_nama'] = $this->db->query($sqluser)->result_array();
@@ -44,7 +44,26 @@ class Ambil_atk extends CI_Controller
         echo json_encode(array('status' => $status));
     }
 
+    public function editAmbilAtk()
+    {
+        $id = $this->input->post('id');
+        $ubahambil_atk = [
+            'user_nama' => $this->input->post('user_nama'),
+            'qty' => $this->input->post('jml_stok'),
+            'keperluan' => $this->input->post('keperluan'),
+        ];
 
+        $this->M_ambil_atk->updateAmbilAtk($ubahambil_atk, $id);
+        $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Anda Berhasil Mengubah Pengambilan ATK</div>');
+        redirect('Ambil_atk');
+    }
+
+    public function delete($id)
+    {
+        $this->M_ambil_atk->delete($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Pengambilan ATK Berhasil Dihapus</div>');
+        redirect('Ambil_atk');
+    }
 
     public function pilihAtk()
     {

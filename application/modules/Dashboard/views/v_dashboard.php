@@ -5,8 +5,8 @@
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
-                    <buttoan class="btn btn-md btn-success mr-2" onclick="add()"><i class="fas fa-plus mr-1"></i>Masukkan ATK</buttoan>
-                    <a href="<?= base_url('Ambil_atk/pilihAtk') ?>" class="btn btn-md btn-primary"><i class="fas fa-hand-holding mr-1"></i>Pengambilan ATK</a>
+                    <buttoan class="btn btn-md btn-rounded btn-success mr-2" onclick="add()"><i class="fas fa-plus mr-1"></i>Masukkan ATK</buttoan>
+                    <a href="<?= base_url('Ambil_atk/pilihAtk') ?>" class="btn btn-md btn-rounded btn-primary"><i class="fas fa-hand-holding mr-1"></i>Pengambilan ATK</a>
                 </div>
                 <h4 class="page-title">Dashboard</h4>
                 <?= $this->session->flashdata('message') ?>
@@ -21,7 +21,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="avatar-lg rounded-circle bg-soft-primary border-primary border">
-                            <i class="fe-heart font-22 avatar-title text-primary"></i>
+                            <i class="fe-box font-22 avatar-title text-primary"></i>
                         </div>
                     </div>
                     <div class="col-6">
@@ -39,8 +39,8 @@
                 <div class="row">
                     <div class="col-6">
                         <a href="<?= base_url('Ambil_atk/insert') ?>">
-                            <div class="avatar-lg rounded-circle bg-soft-success border-success border">
-                                <i class="fe-plus font-22 avatar-title text-white"></i>
+                            <div class="avatar-lg rounded-circle bg-soft-info border-info border">
+                                <i class="fe-archive font-22 avatar-title text-info"></i>
                             </div>
                         </a>
                         <!-- <a href="#">
@@ -63,8 +63,8 @@
                 <div class="row">
                     <div class="col-6">
                         <a href="<?= base_url('Ambil_atk/insert') ?>">
-                            <div class="avatar-lg rounded-circle bg-soft-success border-success border">
-                                <i class="fe-user font-22 avatar-title text-white"></i>
+                            <div class="avatar-lg rounded-circle bg-soft-warning border-warning border">
+                                <i class="fe-users font-22 avatar-title text-warning"></i>
                             </div>
                         </a>
                         <!-- <a href="#">
@@ -86,11 +86,9 @@
             <div class="widget-rounded-circle card-box">
                 <div class="row">
                     <div class="col-6">
-                        <a href="<?= base_url('Ambil_atk/insert') ?>">
-                            <div class="avatar-lg rounded-circle bg-soft-success border-success border">
-                                <i class="fe-user font-22 avatar-title text-white"></i>
-                            </div>
-                        </a>
+                        <div class="avatar-lg rounded-circle bg-soft-success border-success border">
+                            <i class="fe-user font-22 avatar-title text-success"></i>
+                        </div>
                         <!-- <a href="#">
                             <div class="avatar-lg rounded-circle bg-soft-white border-white border">
                                 <i class="fe-plus font-22 avatar-title text-white"></i>
@@ -99,8 +97,8 @@
                     </div>
                     <div class="col-6">
                         <div class="text-right">
-                            <h3 class="text-dark mt-1"><span data-plugin="counterup">127</span></h3>
-                            <p class="text-muted mb-1 text-truncate">Total Pengambilan ATK</p>
+                            <h3 class="text-dark mt-1"><span><?= ucfirst($this->session->userdata('userlogin')) ?></span></h3>
+                            <p class="text-muted mb-1 text-truncate">USER</p>
                         </div>
                     </div>
                 </div> <!-- end row-->
@@ -130,7 +128,7 @@
                                 <th>Kategori</th>
                                 <th>Satuan</th>
                                 <th>Jumlah Stok</th>
-                                <th>Action</th>
+                                <!-- <th>Action</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -145,7 +143,7 @@
                                     $qtyatk = $data['qtyatk'];
                                 }
 
-                                $qryambil = "SELECT SUM(qty) as qtyambil  FROM tb_ambil_atk where kd_inputatk='$nm_atk'";
+                                $qryambil = "SELECT SUM(qty) as qtyambil  FROM tb_detail_ambilatk where kd_inputatk='$nm_atk'";
 
                                 $result2 = $this->db->query($qryambil)->result_array();
                                 foreach ($result2 as $row2) {
@@ -178,10 +176,10 @@
                                         <td>
                                             <?= $saldo ?>
                                         </td>
-
+                                        <!-- 
                                         <td>
                                             <?= anchor('Ambil_atk/getAtk/' . $sa['id_barang'], '<button href="#" class="btn btn-xs btn-success"><i class="mdi mdi-plus"></i>Permintaan ATK</button>') ?>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                 <?php endif; ?>
                             <?php } ?>
@@ -208,7 +206,7 @@
                         <div class="col-sm-12">
                             <label for="">Nama PT</label>
                             <select name="nama_pt" class="form-control" required>
-                                <option value="" selected disabled>- Select Level - </option>
+                                <option value="" selected disabled>- Select PT - </option>
                                 <?php foreach ($pt as $p) : ?>
                                     <option value="<?= $p['alias'] ?>"><?= $p['alias'] ?></option>
                                 <?php endforeach; ?>
@@ -227,7 +225,7 @@
                         <div class="col-sm-6">
                             <label for="">Kategori</label>
                             <select name="kat_bar" class="form-control" required>
-                                <option value="" selected disabled>- Select Level - </option>
+                                <option value="" selected disabled>- Select Kategori - </option>
                                 <?php foreach ($kategori as $kat) : ?>
                                     <option value="<?= $kat['nm_kategori'] ?>"><?= $kat['nm_kategori'] ?></option>
                                 <?php endforeach; ?>
@@ -236,7 +234,7 @@
                         <div class="col-sm-6">
                             <label for="">Satuan</label>
                             <select name="sat" class="form-control" required>
-                                <option value="" selected disabled>- Select Level - </option>
+                                <option value="" selected disabled>- Select Satuan - </option>
                                 <?php foreach ($sat as $s) : ?>
                                     <option value="<?= $s['satuan'] ?>"><?= $s['satuan'] ?></option>
                                 <?php endforeach; ?>
