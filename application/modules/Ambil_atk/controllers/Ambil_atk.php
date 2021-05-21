@@ -34,6 +34,16 @@ class Ambil_atk extends CI_Controller
         $this->template->load('template', 'v_indexAmbil', $data);
     }
 
+    public function ambilatk()
+    {
+        $multipleatk = $this->input->post('data_table');
+
+        $status = $this->M_ambil_atk->multiInsert($multipleatk);
+
+        $this->output->set_content_type('application/json');
+        echo json_encode(array('status' => $status));
+    }
+
 
 
     public function pilihAtk()

@@ -18,6 +18,9 @@
     <link href="<?php echo base_url() ?>assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url() ?>assets/libs/datatables.net-select-bs4/css//select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+    <!-- Sweet Alert-->
+    <link href="<?= base_url() ?>/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
     <!-- Plugins css -->
     <link href="<?= base_url() ?>/assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url() ?>/assets/libs/selectize/css/selectize.bootstrap3.css" rel="stylesheet" type="text/css" />
@@ -403,6 +406,14 @@
 
         <!-- Dashboar 1 init js-->
         <script src="<?= base_url() ?>/assets/js/pages/dashboard-1.init.js"></script>
+
+        <!-- Sweet Alerts js -->
+        <script src="<?= base_url() ?>/assets/libs/sweetalert2/sweetalert2.all.min.js"></script>
+
+        <!-- Sweet alert init js-->
+        <script src="<?= base_url() ?>/assets/js/pages/sweet-alerts.init.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script> -->
+
 
         <!-- ============================================================== -->
         <!-- Start Page Content here -->

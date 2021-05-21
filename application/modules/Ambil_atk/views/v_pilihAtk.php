@@ -27,7 +27,7 @@
                                 <div class="form-group row mb-2">
                                     <label class="col-3 col-form-label">Nama PT</label>
                                     <div class="col-6">
-                                        <select name="nama_pt" class="form-control" required>
+                                        <select name="nama_pt" id="nama_pt" class="form-control" required>
                                             <option value="" selected disabled>-- SELECT --</option>
                                             <?php foreach ($pt as $p) : ?>
                                                 <option value="<?= $p['alias'] ?>"><?= $p['alias'] ?></option>
@@ -38,7 +38,7 @@
                                 <div class="form-group row mb-2">
                                     <label class="col-3 col-form-label">Nama</label>
                                     <div class="col-6">
-                                        <select name="user_nama" class="form-control" required>
+                                        <select name="user_nama" id="user_nama" class="form-control" required>
                                             <option value="<?= $this->session->userdata('userlogin') ?>"><?= $this->session->userdata('userlogin') ?></option>
                                             <?php foreach ($user_nama as $un) : ?>
                                                 <option value="<?= $un['nama'] ?>"><?= $un['nama'] ?></option>
@@ -60,26 +60,32 @@
                                     </div>
                                 </div>
                                 <div class="form-group row mb-2">
-                                    <button class="btn btn-lg btn-success" type="button" data-toggle="modal" data-target="#modal-item">Pilih ATK</button>
-
+                                    <input type="text" id="no" class="form-control">
+                                    <input type="text" id="getuser" class="form-control">
+                                    <input type="text" id="getpt" class="form-control">
+                                    <input type="text" id="getitem_kdinput" class="form-control">
+                                    <input type="text" id="getitem_katatk" class="form-control">
+                                    <input type="text" id="getitem_sat" class="form-control">
+                                    <input type="text" id="getitematk" class="form-control">
+                                    <input type="text" id="getitemqty" class="form-control">
+                                    <button class="btn btn-lg btn-info mr-1" type="button" data-toggle="modal" data-target="#modal-item">Pilih ATK</button>
+                                    <button class="btn btn-lg btn-success" type="button" id="clickambilatk">Ambil ATK</button>
                                 </div>
                             </div>
                         </div>
                         <br>
                         <br>
-                        <table class="table table-bordered nowrap w-60" id="basic-datatable">
+                        <table class="table table-bordered nowrap w-60" id="datatable">
 
                             <thead class="thead-light">
                                 <tr>
                                     <th>No</th>
                                     <th>Nama ATK</th>
-                                    <th>Qty tersedia</th>
-                                    <th>Qty</th>
-                                    <th>Keterangan</th>
+                                    <th>Qty Input</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <!-- <tr>
                                     <td>1</td>
                                     <td>
                                         <span id="nm_barang"></span>
@@ -88,15 +94,7 @@
                                     <td>
                                         <span id="qty"></span>
                                     </td>
-                                    <td>
-                                        <h5 class="m-0 font-weight-normal"></h5>
-                                        <input type="text" name="qty_input" id="qty_input">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="ket" id="ket">
-                                    </td>
-
-                                </tr>
+                                </tr> -->
 
                             </tbody>
                         </table>
@@ -133,7 +131,7 @@
                         </div> -->
                         <div class="form-group mb-0 justify-content-end row">
                             <div class="col-2">
-                                <button type="submit" class="btn btn-info waves-effect waves-light">Simpan</button>
+                                <button type="button" class="btn btn-info waves-effect waves-light" id="save">Simpan</button>
                             </div>
                         </div>
                     </form>
@@ -180,7 +178,7 @@
                                 </td>
 
                                 <td>
-                                    <button type="button" id="select" data-qty="<?php echo $sa['qty']  ?>" data-nm_barang="<?php echo $sa['nm_barang'] ?>">Select</button>
+                                    <button type="button" id="select" data-qty="<?php echo $sa['qty']  ?>" data-satuan="<?php echo $sa['satuan']  ?>" data-kat_barang="<?php echo $sa['kat_barang']  ?>" data-kd_inputatk="<?php echo $sa['kd_inputatk']  ?>" data-nm_barang="<?php echo $sa['nm_barang'] ?>">Select</button>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -196,48 +194,141 @@
         $('#addAtk').append('<input type="text" class="form-control" name="nm_barang" value="">');
     }
 
-    $(document).ready(function() {
-        $(document).on('click', '#clickAddAtk', function() {
-            var br = '<br>';
-            var nama_atk = '<label class="col-2 col-form-label">Nama ATK</label>';
-            var input_atk = '<div class="col-2">' +
-                '<input type="text" class="form-control" name="nm_barang" value="">' +
-                '</div>';
-            var nama_qty = '<label class="col-1 col-form-label">Stok Qty</label>';
-            var info_qty = '<div class="input-group col-2">' +
-                '<input type="text" class="form-control bg-light" value="">' +
-                '<div class="input-group-append">' +
-                '<button href="#" class="btn btn-dark waves-effect waves-light"></button>' +
-                '</div>' +
-                '</div>';
-            var get_qty = '<label class="col-1 col-form-label">Get Qty</label>';
-            var input_qty = '<div class="input-group col-2">' +
-                '<input type="text" class="form-control" name="qty" value="">' +
-                '<div class="input-group-append">' +
-                '<button href="#" class="btn btn-dark waves-effect waves-light"></button>' +
-                '</div>' +
-                '</div>';
-            var ket_bar = '<input type="hidden" name="kat_barang" class="form-control" value="">';
-            var satuan = '<input type="hidden" name="satuan" class="form-control" value="">';
-            var buttonmin = '<button type="button" class="btn btn-danger btn-rounded" id="clickAddAtk">x</button>';
-
-            $('#addAtk').append(br + nama_atk + input_atk + nama_qty + info_qty + get_qty + input_qty + ket_bar + satuan + buttonmin);
-        });
-    });
 
     $(document).ready(function() {
         $(document).on('click', '#select', function() {
 
             var qty = $(this).data('qty');
             var nm_barang = $(this).data('nm_barang');
+            var satuan = $(this).data('satuan');
+            var kd_inputatk = $(this).data('kd_inputatk');
+            var kat_barang = $(this).data('kat_barang');
+            var user = $('#user_nama').val();
+            var pt = $('#nama_pt').val();
 
-            $('#qty').text(qty);
-            $('#qty_input').val(qty);
-            $('#nm_barang').text(nm_barang);
-            $('#nm_barang_input').val(nm_barang);
+            // $('#qty').text(qty);
+            // $('#qty_input').val(qty);
+            // $('#nm_barang_input').val(nm_barang);
+            // $('#nm_barang').text(nm_barang);
+            // $('#modal-item').modal('hide');
+            $('#getuser').val(user);
+            $('#getpt').val(pt);
+            $('#getitematk').val(nm_barang);
+            $('#getitemqty').val(qty);
+
+            $('#getitem_kdinput').val(kd_inputatk);
+            $('#getitem_katatk').val(kat_barang);
+            $('#getitem_sat').val(satuan);
+
             $('#modal-item').modal('hide');
         });
     });
+
+    $(function() {
+        var set_number = function() {
+
+            var table_len = $('#datatable tbody tr').length + 1;
+
+            $('#no').val(table_len);
+        }
+
+        set_number();
+
+        $('#clickambilatk').click(function() {
+
+            var no = $('#no').val();
+            var getitematk = $('#getitematk').val();
+            var getitemqty = $('#getitemqty').val();
+            var getuser = $('#getuser').val();
+
+            $('#datatable tbody:last-child').append(
+                '<tr>' +
+                '<td>' + no + '</td>' +
+                '<td>' + getitematk + '</td>' +
+                '<td>' + getitemqty + '</td>' +
+                '</tr>'
+            );
+
+            $('#no').val('');
+            $('#getitematk').val('');
+            $('#getitemqty').val('');
+
+            set_number();
+
+        });
+
+        $('#save').click(function() {
+            var table_data = [];
+
+            $('#datatable tr').each(function(row, tr) {
+
+
+                if ($(tr).find('td:eq(0)').text() == '') {
+
+                } else {
+
+                    var getuser1 = $('#getuser').val();
+                    var getpt1 = $('#getpt').val();
+
+                    var getitem_kdinput1 = $('#getitem_kdinput').val();
+                    var getitem_katatk = $('#getitem_katatk').val();
+                    var getitem_sat = $('#getitem_sat').val();
+
+                    var sub = {
+                        'no_ambilatk': $(tr).find('td:eq(0)').text(),
+                        'nm_barang': $(tr).find('td:eq(1)').text(),
+                        'qty': $(tr).find('td:eq(2)').text(),
+                        'user_nama': getuser1,
+                        'kd_inputatk': getitem_kdinput1,
+                        'kat_barang': getitem_katatk,
+                        'nama_pt': getpt1,
+                        'sat': getitem_sat,
+                        'keperluan': 'kep'
+                    };
+
+                    table_data.push(sub);
+                }
+
+            });
+
+            // console.log(table_data);
+            swal({
+                title: 'Ambil ATK?',
+                text: '',
+                type: '',
+                // showLoaderOnConfirm: true,
+                showCancelButton: true,
+                confirmButtonText: 'Ya',
+
+            }).then(function() {
+
+                var data = {
+                    'data_table': table_data
+                }
+
+                $.ajax({
+
+                    data: data,
+                    type: 'POST',
+                    url: '<?php echo base_url('Ambil_atk/ambilatk'); ?>',
+                    crossOrigin: false,
+                    dataType: 'json',
+                    success: function(result) {
+
+                        if (result.status == "success") {
+                            swal('Successfully Saved.', '', 'success');
+                        } else {
+                            swal('Simpan gagal.', '', 'warning');
+                        }
+                    }
+                });
+            });
+
+        });
+
+    });
+
+
     $(document).ready(function() {
         $('#myTable').DataTable();
     });
