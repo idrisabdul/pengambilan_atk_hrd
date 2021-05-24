@@ -44,23 +44,49 @@ class Ambil_atk extends CI_Controller
         echo json_encode(array('status' => $status));
     }
 
+    public function lebihLanjut($no_ambilatk)
+    {
+        $data['detail_ambilatk'] = $this->M_ambil_atk->lebihLanjut($no_ambilatk);
+
+        foreach ($data['detail_ambilatk'] as $header) {
+            $data['no_ambilatk'] = $header['no_ambilatk'];
+            $data['user_nama'] = $header['user_nama'];
+            $data['nama_pt'] = $header['nama_pt'];
+            $data['tgl_permintaan'] = $header['tgl_permintaan'];
+            $data['jml_item_atk'] = $header['jml_item_atk'];
+        }
+        // echo "<pre>";
+        // echo var_dump($data);
+        // echo "</pre>";
+        $this->template->load('template', 'v_detail_ambilatk', $data);
+    }
+
     public function editAmbilAtk()
     {
-        $id = $this->input->post('id');
+        $id = $this->input->post('id_detail');
+        $no_ambilatk = $this->input->post('no_ambilatk');
         $ubahambil_atk = [
-            'user_nama' => $this->input->post('user_nama'),
-            'qty' => $this->input->post('jml_stok'),
+            'qty' => $this->input->post('qty'),
             'keperluan' => $this->input->post('keperluan'),
         ];
 
         $this->M_ambil_atk->updateAmbilAtk($ubahambil_atk, $id);
         $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Anda Berhasil Mengubah Pengambilan ATK</div>');
-        redirect('Ambil_atk');
+        redirect('Ambil_atk/lebihLanjut/' . $no_ambilatk);
     }
 
     public function delete($id)
     {
         $this->M_ambil_atk->delete($id);
+        $this->M_ambil_atk->deleteDetail($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Pengambilan ATK Berhasil Dihapus</div>');
+        redirect('Ambil_atk');
+    }
+
+    public function deleteItem($id)
+    {
+        $this->M_ambil_atk->delete($id);
+        $this->M_ambil_atk->deleteDetail($id);
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Pengambilan ATK Berhasil Dihapus</div>');
         redirect('Ambil_atk');
     }
@@ -136,5 +162,51 @@ class Ambil_atk extends CI_Controller
         $this->M_ambil_atk->inputAmbilAtk($ambil_atk);
         $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Anda Berhasil Mengambil ATK</div>');
         redirect('Ambil_atk');
+    }
+
+
+    // NEW METODE 2
+
+    public function insertAmbilAtk_sem()
+    {
+        // $last_numberatk = 'SELECT no_urut FROM `tb_detail_ambilatk` ORDER BY id_detail_ambilatk DESC LIMIT 1';
+        // $row = $this->db->query($last_numberatk)->row_array();
+        // $last_no = $row['no_urut'];
+
+        // $memberi_no = $last_no + 1;
+
+        // $no_ambilatk =  'AMBIL-ATK-' . date('Ymd') . '-00' . $memberi_no;
+
+        $ambil_atk = [
+            'no_urut' => $this->input->post('no_urut'),
+            'no_ambilatk' => $this->input->post('no_ambilatk'),
+            'kd_inputatk' => $this->input->post('kd_inputatk'),
+            'nm_barang' => $this->input->post('nm_barang'),
+            'kat_barang' => $this->input->post('kat_barang'),
+            'qty' => $this->input->post('qty'),
+            'sat' => $this->input->post('sat'),
+            'harga' => $this->input->post('harga'),
+            'keperluan' => $this->input->post('keperluan'),
+            'status' => 0,
+        ];
+        $this->M_ambil_atk->input_sem($ambil_atk);
+        echo json_encode($ambil_atk);
+    }
+
+    public function atkTerpilih()
+    {
+        $no_ambilatk = $this->input->get('no_ambilatk');
+
+        $sql = "SELECT * FROM tb_detail_ambilatk WHERE status = 0 && no_ambilatk = '$no_ambilatk'";
+        $data = $this->db->query($sql)->result_array();
+
+        echo json_encode($data);
+    }
+
+    public function hapus_ambilatk_sem()
+    {
+        $id = $this->input->post('id');
+        $data = $this->db->delete('tb_detail_ambilatk', ['id_detail_ambilatk' => $id]);
+        echo json_encode($data);
     }
 }

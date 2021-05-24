@@ -21,7 +21,7 @@
             <div class="card-box pb-2">
                 <div class="float-right d-none d-md-inline-block">
                     <div class="btn-group mb-2">
-                        <button type="button" class="btn btn-xs btn-light">Per Item</button>
+                        <button type="button" class="btn btn-xs btn-light">Per Item</button>..
                         <button type="button" class="btn btn-xs btn-secondary">Monthly</button>
                     </div>
                 </div>
@@ -35,6 +35,7 @@
                                 <th>No</th>
                                 <th>No Ambil ATk</th>
                                 <th>User</th>
+                                <th>Jumlah Item</th>
                                 <th>Tgl Pengambilan</th>
                                 <th>Action</th>
                             </tr>
@@ -53,12 +54,17 @@
                                         <?= $aa['user_nama'] ?>
                                     </td>
 
+                                    <td class="text-center">
+                                        <?= $aa['jml_item_atk'] ?>
+                                    </td>
+
                                     <td>
                                         <?= $aa['tgl_permintaan'] ?>
                                     </td>
                                     <td>
-                                        <button class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal<?= $aa['id'] ?>"><i class="fa fa-edit mr-1"></i>Edit</button>
-                                        <button onclick="deleteConfirm('<?= base_url('Ambil_atk/delete/' . $aa['id']) ?>')" href="#!" class="btn btn-xs btn-danger"><i class="mdi mdi-delete mr-1"></i>Hapus</button>
+                                        <button onclick="deleteConfirm('<?= base_url('Ambil_atk/delete/' . $aa['no_ambilatk']) ?>')" href="#!" class="btn btn-xs btn-danger"><i class="mdi mdi-delete mr-1"></i>Hapus</button>
+                                        <?= anchor('Ambil_atk/lebihLanjut/' . $aa['no_ambilatk'], '<button class="btn btn-xs btn-info"><i class="fas fa-angle-double-right mr-1"></i>Lebih lanjut</button>'); ?>
+                                        <!-- <button class="btn btn-xs btn-info" data-toggle="modal" data-target="#editModal<?= $aa['id'] ?>"><i class="fas fa-angle-double-right mr-1"></i>Lebih lanjut</button> -->
                                     </td>
                                 </tr>
                             <?php } ?>

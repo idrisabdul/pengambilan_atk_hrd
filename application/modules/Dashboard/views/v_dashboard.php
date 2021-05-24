@@ -27,7 +27,7 @@
                     <div class="col-6">
                         <div class="text-right">
                             <h3 class="mt-1"><span data-plugin="counterup"><?= count($stok_atk) ?></span></h3>
-                            <p class="text-muted mb-1 text-truncate">Total ATK</p>
+                            <p class="text-muted mb-1 text-truncate">Total ATK Masuk</p>
                         </div>
                     </div>
                 </div> <!-- end row-->
@@ -128,6 +128,7 @@
                                 <th>Kategori</th>
                                 <th>Satuan</th>
                                 <th>Jumlah Stok</th>
+                                <th>Tgl Masuk ATK</th>
                                 <!-- <th>Action</th> -->
                             </tr>
                         </thead>
@@ -175,6 +176,10 @@
 
                                         <td>
                                             <?= $saldo ?>
+                                        </td>
+
+                                        <td>
+                                            <?= $sa['tgl_masuk_barang'] ?>
                                         </td>
                                         <!-- 
                                         <td>

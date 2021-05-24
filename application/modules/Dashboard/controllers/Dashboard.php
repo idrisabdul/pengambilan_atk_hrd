@@ -21,6 +21,9 @@ class Dashboard extends MX_Controller
         // $sql1 = "SELECT SUM(qty) as qtyatk,nm_barang,kat_barang,kd_barang,satuan  FROM tb_barang GROUP BY nm_barang";
         $sql1 = "SELECT *  FROM tb_barang ORDER BY id_barang DESC";
         $data['stok_atk'] = $this->db->query($sql1)->result_array();
+        $data['stok_atk_'] = $this->db->query($sql1)->result_array();
+
+
         $sql_atk = "SELECT * FROM tb_barang ORDER BY id_barang DESC";
         $data['atk'] = $this->db->query($sql_atk)->result_array();
         $sql_kat = "SELECT * FROM kategori";
@@ -33,8 +36,32 @@ class Dashboard extends MX_Controller
 
         $sql_ambil = "SELECT * FROM tb_ambil_atk";
         $data['ambil_atk'] = $this->db->query($sql_ambil)->num_rows();
+
+        // foreach ($data['stok_atk_'] as $sa) {
+        //     $nm_atk = $sa['kd_inputatk'];
+        //     $query = "SELECT SUM(qty) as qtyatk from tb_barang where kd_inputatk='$nm_atk'";
+        //     $qry = $this->db->query($query)->result_array();
+
+        //     foreach ($qry as $data) {
+        //         $qtyatk = $data['qtyatk'];
+        //     }
+
+        //     $qryambil = "SELECT SUM(qty) as qtyambil  FROM tb_detail_ambilatk where kd_inputatk='$nm_atk'";
+
+        //     $result2 = $this->db->query($qryambil)->result_array();
+        //     foreach ($result2 as $row2) {
+        //         $qtyambil = $row2['qtyambil'];
+        //     }
+        //     $saldo = $qtyatk - $qtyambil;
+
+        //     if ($saldo > 0) :
+        //         $c[] = $sa;
+        //     endif;
+        // }
+
+
         // echo "<pre>";
-        // var_dump($data['total_atk']);
+        // var_dump(count($c));
         // echo "</pre>";
         $this->template->load('template', 'v_dashboard', $data);
     }
