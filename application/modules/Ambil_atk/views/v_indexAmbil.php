@@ -43,6 +43,7 @@
                         <tbody>
                             <?php $no = 1; ?>
                             <?php foreach ($ambil_atk as $aa) { ?>
+                                <?php $jml = $aa['no_ambilatk'] ?>
                                 <tr>
                                     <td><?= $no++; ?>
                                     </td>
@@ -55,7 +56,7 @@
                                     </td>
 
                                     <td class="text-center">
-                                        <?= $aa['jml_item_atk'] ?>
+                                        <?= $this->db->query("SELECT * FROM tb_detail_ambilatk WHERE no_ambilatk = '$jml' ")->num_rows() ?>
                                     </td>
 
                                     <td>

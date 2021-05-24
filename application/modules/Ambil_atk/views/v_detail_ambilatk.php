@@ -22,7 +22,7 @@
                 <div class="col-lg-6">
                     <div class="">
                         <h5 class="">Nama : <?= ucfirst($user_nama) ?></h5>
-                        <h5 class="">Jumlah Item ATK : <?= $jml_item_atk ?></h5>
+                        <h5 class="">Jumlah Item ATK : <?= count($detail_ambilatk) ?></h5>
                         <h5 class="">Tgl Permintaan&nbsp;: <span class="text-success"><?= $tgl_permintaan ?></span></h5>
                     </div>
                 </div>

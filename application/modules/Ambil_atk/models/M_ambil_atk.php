@@ -117,4 +117,9 @@ class M_ambil_atk extends CI_Model
     {
         $this->db->insert('tb_detail_ambilatk', $ambilatk);
     }
+
+    public function updateStatus($status, $no)
+    {
+        $this->db->update('tb_detail_ambilatk', $status, ['no_ambilatk' => $no]);
+    }
 }

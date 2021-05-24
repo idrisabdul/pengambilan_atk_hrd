@@ -94,6 +94,16 @@ class Ambil_atk extends CI_Controller
     public function pilihAtk()
     {
         // $sql1 = "SELECT SUM(qty) as qtyatk,nm_barang,kat_barang,kd_barang,satuan,id_barang  FROM tb_barang GROUP BY nm_barang";
+        $last_numberatk = 'SELECT no_urut FROM `tb_detail_ambilatk` WHERE status = 1 ORDER BY no_urut DESC LIMIT 1';
+        $row = $this->db->query($last_numberatk)->row_array();
+        $last_no = $row['no_urut'];
+
+        $memberi_no = $last_no + 1;
+
+        $no_ambilatk =  'AMBIL-ATK-' . date('Ymd') . '-00' . $memberi_no;
+        $data['no_ambilatk'] = $no_ambilatk;
+        $data['memberi_no'] = $memberi_no;
+
         $sql1 = "SELECT * FROM tb_barang ORDER BY id_barang DESC";
         $data['stok_atk'] = $this->db->query($sql1)->result_array();
 
@@ -169,14 +179,6 @@ class Ambil_atk extends CI_Controller
 
     public function insertAmbilAtk_sem()
     {
-        // $last_numberatk = 'SELECT no_urut FROM `tb_detail_ambilatk` ORDER BY id_detail_ambilatk DESC LIMIT 1';
-        // $row = $this->db->query($last_numberatk)->row_array();
-        // $last_no = $row['no_urut'];
-
-        // $memberi_no = $last_no + 1;
-
-        // $no_ambilatk =  'AMBIL-ATK-' . date('Ymd') . '-00' . $memberi_no;
-
         $ambil_atk = [
             'no_urut' => $this->input->post('no_urut'),
             'no_ambilatk' => $this->input->post('no_ambilatk'),
@@ -207,6 +209,28 @@ class Ambil_atk extends CI_Controller
     {
         $id = $this->input->post('id');
         $data = $this->db->delete('tb_detail_ambilatk', ['id_detail_ambilatk' => $id]);
+        echo json_encode($data);
+    }
+
+    public function updateStatus()
+    {
+        $no_ambilatk = $this->input->post('no_ambilatk');
+        $status = [
+            'status' => 1
+        ];
+        $data = $this->M_ambil_atk->updateStatus($status, $no_ambilatk);
+        echo json_encode($data);
+    }
+
+    public function insertHeader()
+    {
+        $header = [
+            'no_ambilatk' => $this->input->post('no_ambilatk'),
+            'user_nama' => $this->input->post('user_nama'),
+            'nama_pt' => $this->input->post('nama_pt'),
+            'tgl_permintaan' => date('Y-m-d H:i:s')
+        ];
+        $data = $this->db->insert('tb_ambil_atk', $header);
         echo json_encode($data);
     }
 }

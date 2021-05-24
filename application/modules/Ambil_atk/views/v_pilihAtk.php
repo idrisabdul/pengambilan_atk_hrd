@@ -1,15 +1,3 @@
-<?php
-
-$last_numberatk = 'SELECT no_urut FROM `tb_detail_ambilatk` ORDER BY no_urut DESC LIMIT 1';
-$row = $this->db->query($last_numberatk)->row_array();
-$last_no = $row['no_urut'];
-
-$memberi_no = $last_no + 1;
-
-$no_ambilatk =  'AMBIL-ATK-' . date('Ymd') . '-00' . $memberi_no;
-
-?>
-
 <div class="container-fluid">
 
     <!-- start page title -->
@@ -28,10 +16,13 @@ $no_ambilatk =  'AMBIL-ATK-' . date('Ymd') . '-00' . $memberi_no;
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-
-                    <h4 class="header-title">Form Permintaan ATK</h4>
-                    <h4 class="header-title" id="no_ambilatk_"><?= $no_ambilatk ?></h4>
-                    <input type="text" name="no_urut" id="no_urut" value="<?= $memberi_no ?>">
+                    <div class="row">
+                        <h4 class="header-title col-md-6">Form Permintaan ATK</h4>
+                        <div class="text-right col-md-6">
+                            <h4 class="header-title" id="no_ambilatk_"><?= $no_ambilatk ?></h4>
+                        </div>
+                    </div>
+                    <input type="hidden" name="no_urut" id="no_urut" value="<?= $memberi_no ?>">
                     <br>
                     <input type="hidden" name="nama_pt" class="form-control" value="">
                     <div class="row">
@@ -67,13 +58,13 @@ $no_ambilatk =  'AMBIL-ATK-' . date('Ymd') . '-00' . $memberi_no;
                                 </div>
                                 <div class="col-6">
                                     <input type="hidden" id="no" class="form-control">
-                                    <input type="text" id="getuser" class="form-control">
-                                    <input type="text" id="getpt" class="form-control">
-                                    <input type="text" id="getitem_kdinput" class="form-control">
-                                    <input type="text" id="getitem_katatk" class="form-control">
-                                    <input type="text" id="getitem_sat" class="form-control">
+                                    <input type="hidden" id="getuser" class="form-control">
+                                    <input type="hidden" id="getpt" class="form-control">
+                                    <input type="hidden" id="getitem_kdinput" class="form-control">
+                                    <input type="hidden" id="getitem_katatk" class="form-control">
+                                    <input type="hidden" id="getitem_sat" class="form-control">
 
-                                    <input type="text" id="getitemharga" class="form-control">
+                                    <input type="hidden" id="getitemharga" class="form-control">
                                     <input type="text" id="getitematk" class="form-control mb-2" placeholder="Masukkan ATK" disabled>
                                     <div class="input-group mb-1">
                                         <input type="text" class="form-control bg-light" id="getitemqty_info" id="inlineFormInputGroup" placeholder="Qty Yang Tersedia" disabled>
@@ -286,6 +277,8 @@ $no_ambilatk =  'AMBIL-ATK-' . date('Ymd') . '-00' . $memberi_no;
         $('#clickambilatk').click(function() {
 
             var pt = $('#getpt').val();
+            var qty = $('#getitemqty').val();
+            var kep = $('#getitemkep').val();
 
             if (pt == '') {
                 swal('Silahkan pilih pt');
@@ -295,44 +288,56 @@ $no_ambilatk =  'AMBIL-ATK-' . date('Ymd') . '-00' . $memberi_no;
                 $('#getitemkep').val('');
                 $('#satuan').text('');
             } else {
-                var no = $('#no').val();
-                var no_ambilatk_ = $('#no_ambilatk_').text();
-                var no_urut = $('#no_urut').val();
-                var getitematk = $('#getitematk').val();
-                var getitemqty = $('#getitemqty').val();
-                var getuser = $('#getuser').val();
-                var get_kdinput = $('#getitem_kdinput').val();
-                var get_katatk = $('#getitem_katatk').val();
-                var get_sat = $('#getitem_sat').val();
-                var get_harga = $('#getitemharga').val();
-                var get_kep = $('#getitemkep').val();
+                if (qty == '') {
+                    swal('Maaf, QTY anda belum terisi');
+                } else if (kep == '') {
+                    swal('Mohon Masukkan Keperluan Anda');
+                } else {
+                    $('#nama_pt').prop('disabled', true);
+                    $('#user_nama').prop('disabled', true);
+                    var no = $('#no').val();
+                    var no_ambilatk_ = $('#no_ambilatk_').text();
+                    var no_urut = $('#no_urut').val();
+                    var getitematk = $('#getitematk').val();
+                    var getitemqty = $('#getitemqty').val();
+                    var getuser = $('#getuser').val();
+                    var get_kdinput = $('#getitem_kdinput').val();
+                    var get_katatk = $('#getitem_katatk').val();
+                    var get_sat = $('#getitem_sat').val();
+                    var get_harga = $('#getitemharga').val();
+                    var get_kep = $('#getitemkep').val();
 
-                $.ajax({
-                    url: "<?= base_url('Ambil_atk/insertAmbilAtk_sem'); ?>",
-                    type: "POST",
-                    data: {
-                        type: 1,
-                        no_urut: no_urut,
-                        no_ambilatk: no_ambilatk_,
-                        nm_barang: getitematk,
-                        qty: getitemqty,
-                        kd_inputatk: get_kdinput,
-                        kat_barang: get_katatk,
-                        sat: get_sat,
-                        harga: get_harga,
-                        keperluan: get_kep,
-                    },
-                    cache: false,
-                    success: function(data) {
-                        alert('success');
-                        console.log(data);
-                        tabel_ambilatk(no_ambilatk_);
-                    }
-                });
+                    $.ajax({
+                        url: "<?= base_url('Ambil_atk/insertAmbilAtk_sem'); ?>",
+                        type: "POST",
+                        data: {
+                            type: 1,
+                            no_urut: no_urut,
+                            no_ambilatk: no_ambilatk_,
+                            nm_barang: getitematk,
+                            qty: getitemqty,
+                            kd_inputatk: get_kdinput,
+                            kat_barang: get_katatk,
+                            sat: get_sat,
+                            harga: get_harga,
+                            keperluan: get_kep,
+                        },
+                        cache: false,
+                        success: function(data) {
+                            // alert('success');
+                            console.log(data);
+                            tabel_ambilatk(no_ambilatk_);
+                        }
+                    });
+                }
             }
 
             $(document).ready(function() {
                 $(document).on('click', '#select', function() {
+
+                    $('#getitemqty').val('');
+                    $('#getitemkep').val('');
+                    // $('#getitemkep').prop('disabled', false);
 
                     var qty = $(this).data('qty');
                     var nm_barang = $(this).data('nm_barang');
@@ -385,29 +390,78 @@ $no_ambilatk =  'AMBIL-ATK-' . date('Ymd') . '-00' . $memberi_no;
                     id: id
                 },
                 success: function() {
-                    alert('terbatal');
+                    // alert('terbatal');
                     tabel_ambilatk(no_ambilatk_);
                 }
             });
         });
 
-        $('#batal_ambil').click(function() {
-            alert('batal');
-            // var id = $(this).attr('data');
-            // $.ajax({
-            //     dataType: 'JSON',
-            //     type: 'POST',
-            //     url: '<?= base_url('') ?>Ambil_atk/hapus_ambilatk_sem',
-            //     data: {
-            //         id: id
-            //     },
-            //     success: function() {
-            //         alert('terbatal');
-            //         tabel_ambilatk(no_ambilatk_);
-            //     }
-            // });
+        //UPDATE STATUS 0 -> 1; WHERE no_ambilatk = ;
+        //INSERT KE HEADER
+        $('#save').click(function() {
+
+            swal({
+                title: "Ambil ATK?",
+                showCancelButton: true,
+                confirmButtonColor: "#1FAB45",
+                confirmButtonText: "Save",
+                cancelButtonText: "Cancel",
+                buttonsStyling: true
+            }).then(result => {
+                if (result.value) {
+                    // update status 0 -> 1
+                    var no_ambilatk = $('#no_ambilatk_').text();
+
+                    $.ajax({
+                        dataType: 'JSON',
+                        type: 'POST',
+                        data: {
+                            no_ambilatk: no_ambilatk
+                        },
+                        url: '<?= base_url() ?>Ambil_atk/updateStatus',
+                        cache: false,
+                        success: function() {
+                            insertHeader();
+                            swal({
+                                title: "Wow!",
+                                text: "Anda Berhasil Mengambil ATK!",
+                                type: "success"
+                            }).then(function() {
+                                window.location.href = '<?= base_url() ?>Ambil_atk/lebihLanjut/' + no_ambilatk;
+                            });
+
+                        }
+                    });
+                    console.log(result.value)
+                } else {
+                    // handle dismiss, result.dismiss can be 'cancel', 'overlay', 'close', and 'timer'
+
+                    console.log(result.dismiss)
+                }
+            });
         });
 
+        function insertHeader() {
+            //SAVE HEADER
+            var no_ambilatk = $('#no_ambilatk_').text();
+            var user_nama = $('#user_nama').val();
+            var nama_pt = $('#nama_pt').val();
+
+            $.ajax({
+                dataType: 'JSON',
+                type: 'POST',
+                data: {
+                    no_ambilatk: no_ambilatk,
+                    user_nama: user_nama,
+                    nama_pt: nama_pt,
+                },
+                url: '<?= base_url() ?>Ambil_atk/insertHeader',
+                cache: false,
+                success: function() {
+                    // alert('insert header suc');
+                }
+            });
+        }
 
     });
 </script>
