@@ -83,6 +83,18 @@ class Ambil_atk extends CI_Controller
         redirect('Ambil_atk');
     }
 
+    public function BatalAmbil($no_ambilatk)
+    {
+        //DELETE YG STATUS 0 DAN NO AMBIL ATK SESUAI SAMA VIEW
+        $sql = "DELETE FROM tb_detail_ambilatk WHERE no_ambilatk = '$no_ambilatk' AND status = 0";
+        $this->db->query($sql);
+        redirect('Dashboard');
+        // $this->M_ambil_atk->delete($id);
+        // $this->M_ambil_atk->deleteDetail($id);
+        // $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Pengambilan ATK Berhasil Dihapus</div>');
+        // redirect('Dashboard');
+    }
+
     public function deleteItem()
     {
         $no_ambil = $this->input->post('no_ambilatk_del');

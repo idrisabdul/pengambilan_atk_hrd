@@ -353,14 +353,14 @@
                         <li>
                             <a href="<?= base_url('Atk') ?>">
                                 <i class="fas fa-pencil-ruler"></i>
-                                <span> List ATK Masuk </span>
+                                <span> Data ATK </span>
                             </a>
                         </li>
 
                         <li>
                             <a href="<?= base_url('Ambil_atk') ?>">
                                 <i class="fas fa-user-edit"></i>
-                                <span> List Pengambilan ATK </span>
+                                <span> Data Pengambilan ATK </span>
                             </a>
                         </li>
 

@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="col-md-1"></div>
-                        <div class="col-md-7 border border-info">
+                        <div class="col-md-7 border border-secondary">
                             <div class="form-group row mb-2 px-1 py-2">
                                 <div class="col-3">
                                     <label class="col-form-label">Nama ATK</label>
@@ -90,22 +90,24 @@
                     </div>
                     <br>
                     <br>
-                    <table class="table table-bordered w-60 table-sm" id="datatable">
+                    <!-- <span>Anda belum menyelesaikannya</span> -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered w-60 table-sm" id="datatable">
 
-                        <thead class="thead-light">
-                            <tr>
-                                <th>No</th>
-                                <th>Nama ATK</th>
-                                <th>Qty Input</th>
-                                <th>Kode Input ATK</th>
-                                <th>Kategori</th>
-                                <th>Satuan</th>
-                                <th>Harga perATK</th>
-                                <th>Keperluan</th>
-                            </tr>
-                        </thead>
-                        <tbody id="atkterpilih">
-                            <!-- <tr>
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama ATK</th>
+                                    <th>Qty Input</th>
+                                    <th>Kode Input ATK</th>
+                                    <th>Kategori</th>
+                                    <th>Satuan</th>
+                                    <th>Harga perATK</th>
+                                    <th>Keperluan</th>
+                                </tr>
+                            </thead>
+                            <tbody id="atkterpilih">
+                                <!-- <tr>
                                     <td>1</td>
                                     <td>
                                         <span id="nm_barang"></span>
@@ -117,8 +119,9 @@
                                 </tr> -->
 
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                     <!-- <div class="form-group row mb-6" id="addAtk">
                             <label class="col-2 col-form-label">Nama ATK</label>
                             <div class="col-2">
@@ -152,6 +155,7 @@
                         </div> -->
                     <div class="form-group mb-0 justify-content-end row">
                         <div class="col-2">
+                            <button onclick="deleteConfirm('<?= base_url('Ambil_atk/BatalAmbil/' . $no_ambilatk) ?>')" class="btn btn-danger waves-effect waves-light" id="batal">Batal</button>
                             <button type="button" class="btn btn-primary waves-effect waves-light" id="save">Simpan</button>
                         </div>
                     </div>
@@ -235,6 +239,24 @@
     </div>
 </div>
 
+<!-- DELETE MODAL SELURUH ATK -->
+<div class="modal fade" id="deleteModalAmbil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Batal?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Anda yakin ingin membatalkannya?</div>
+            <div class="modal-footer">
+                <button class="btn" type="button" data-dismiss="modal">Tidak jadi</button>
+                <a id="btn-batal" class="btn btn-danger" href="#">Yaa</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     $(document).ready(function() {
@@ -277,7 +299,7 @@
                             '<td>' + data[i].kd_inputatk + '</td>' +
                             '<td>' + data[i].kat_barang + '</td>' +
                             '<td>' + data[i].sat + '</td>' +
-                            '<td>Rp.' + data[i].harga + '</td>' +
+                            '<td>Rp. ' + data[i].harga + '</td>' +
                             '<td>' + data[i].keperluan + '</td>' +
                             '<td>' +
                             '<a class="btn btn-sm btn-danger btn-rounded waves-effect waves-light" href="javascript:;" id="batal_ambil" data="' + data[i].id_detail_ambilatk + '">X</a>' +
@@ -285,6 +307,14 @@
                             '</tr>';
                     }
                     $('#atkterpilih').html(html);
+                    if (data.length == 0) {
+                        $('#save').hide();
+                        $('#batal').hide();
+                    } else {
+                        $('#batal').show();
+                        $('#save').show();
+
+                    }
                 }
             });
         }
@@ -479,6 +509,11 @@
         }
 
     });
+
+    function deleteConfirm(url) {
+        $('#btn-batal').attr('href', url);
+        $('#deleteModalAmbil').modal();
+    }
 </script>
 
 <script>

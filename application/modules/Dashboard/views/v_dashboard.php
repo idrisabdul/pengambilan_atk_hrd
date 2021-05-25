@@ -6,7 +6,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <buttoan class="btn btn-md btn-rounded btn-success mr-2" onclick="add()"><i class="fas fa-plus mr-1"></i>Masukkan ATK</buttoan>
-                    <a href="<?= base_url('Ambil_atk/pilihAtk') ?>" class="btn btn-md btn-rounded btn-primary"><i class="fas fa-hand-holding mr-1"></i>Pengambilan ATK</a>
+                    <a href="<?= base_url('Ambil_atk/pilihAtk') ?>" class="btn btn-md btn-rounded btn-primary"><i class="fas fa-user-edit mr-1"></i>Ajukan Pengambilan ATK</a>
                 </div>
                 <h4 class="page-title">Dashboard</h4>
                 <?= $this->session->flashdata('message') ?>
