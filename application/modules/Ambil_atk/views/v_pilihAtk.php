@@ -33,7 +33,7 @@
                                     <select name="nama_pt" id="nama_pt" class="form-control" required>
                                         <option value="" selected disabled>-- SELECT --</option>
                                         <?php foreach ($pt as $p) : ?>
-                                            <option value="<?= $p['alias'] ?>"><?= $p['alias'] ?></option>
+                                            <option value="<?= $p['nama_pt'] ?>"><?= $p['alias'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -67,13 +67,13 @@
                                     <input type="hidden" id="getitemharga" class="form-control">
                                     <input type="text" id="getitematk" class="form-control mb-2" placeholder="Masukkan ATK" disabled>
                                     <div class="input-group mb-1">
-                                        <input type="text" class="form-control bg-light" id="getitemqty_info" id="inlineFormInputGroup" placeholder="Qty Yang Tersedia" disabled>
+                                        <input type="number" class="form-control bg-light" id="getitemqty_info" id="inlineFormInputGroup" placeholder="Qty Yang Tersedia" disabled>
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><span id="satuan">Sat</span></div>
                                         </div>
                                     </div>
                                     <div class="input-group mb-2">
-                                        <input type="text" class="form-control" id="getitemqty" id="inlineFormInputGroup" placeholder="Masukkan Qty">
+                                        <input type="number" class="form-control" id="getitemqty" id="inlineFormInputGroup" placeholder="Masukkan Qty">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><span id="satuan_inp">Sat</span></div>
                                         </div>
@@ -237,6 +237,21 @@
 
 
 <script>
+    $(document).ready(function() {
+        $('#getitemqty').keyup(function() {
+            var a = $('#getitemqty').val();
+            var b = $('#getitemqty_info').val();
+            var inp_1 = Number(a);
+            var inp_2 = Number(b);
+
+            if (inp_1 > inp_2) {
+                swal("QTY Melebihi stok");
+                $('#getitemqty').val("");
+            } else {
+                $('#getitemqty').val(inp_1);
+            }
+        });
+    });
     $(document).ready(function() {
         var no_ambilatk_ = $('#no_ambilatk_').text();
         tabel_ambilatk(no_ambilatk_);

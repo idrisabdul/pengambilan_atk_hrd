@@ -122,4 +122,9 @@ class M_ambil_atk extends CI_Model
     {
         $this->db->update('tb_detail_ambilatk', $status, ['no_ambilatk' => $no]);
     }
+
+    public function deleteItemAmbil($id)
+    {
+        return $this->db->delete('tb_detail_ambilatk', ['id_detail_ambilatk' => $id]);
+    }
 }

@@ -3,7 +3,7 @@
         <div class="page-title-box">
             <div class="page-title-right">
                 <!-- <button class="btn btn-success btn-rounded mr-2" onclick="add()"><i class="fas fa-print mr-1"></i>Cetak Bukti</button> -->
-                <a href="<?= base_url('Ambil_atk/pilihAtk') ?>" class="btn btn-rounded btn-danger"><i class="fas fa-trash mr-1"></i>Hapus Semua</a>
+                <button onclick="deleteConfirm('<?= base_url('Ambil_atk/delete/' . $no_ambilatk) ?>')" href="#!" class="btn btn-rounded btn-danger"><i class="fas fa-trash mr-1"></i>Hapus Semua</button>
             </div>
             <h4 class="page-title">Pengambilan Detail ATK</h4>
             <?= $this->session->flashdata('message') ?>
@@ -60,7 +60,7 @@
                                         <td><?= $da['keperluan'] ?></td>
                                         <td>
                                             <button class="btn btn-xs btn-warning" id="editambil" data-no_ambilatk="<?= $da['no_ambilatk'] ?>" data-id="<?php echo $da['id_detail_ambilatk'] ?>" data-nm_barang="<?php echo $da['nm_barang'] ?>" data-qty="<?php echo $da['qty'] ?>" data-keperluan="<?php echo $da['keperluan'] ?>" href="javascript:;" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit mr-1"></i>Edit</button>
-                                            <button onclick="deleteConfirm('<?= base_url('Ambil_atk/delete/' . $da['id']) ?>')" href="#!" class="btn btn-xs btn-danger"><i class="mdi mdi-delete mr-1"></i>Hapus Item</button>
+                                            <button id="delete-item" data-no_urut="<?= $da['no_ambilatk'] ?>" data-id="<?= $da['id_detail_ambilatk'] ?>" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="mdi mdi-delete mr-1"></i>Hapus Item</button>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -122,15 +122,70 @@
     </div>
 </div>
 
+<!-- DELETE MODAL -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Anda yakin?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Data yang dihapus tidak akan bisa dikembalikan.
+                <form action="<?= base_url('Ambil_atk/deleteItem') ?>" method="POST">
+                    <input type="hidden" name="no_ambilatk_del" id="no_ambilatk_del">
+                    <input type="hidden" name="id" id="id">
+            </div>
+            <div class="modal-footer">
+                <button class="btn" type="button" data-dismiss="modal">Batal</button>
+                <button type="submit" id="btn-delete" class="btn btn-danger" href="#">Hapus</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DELETE MODAL SELURUH ATK -->
+<div class="modal fade" id="deleteModalAmbil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Anda yakin?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Data yang dihapus tidak akan bisa dikembalikan.</div>
+            <div class="modal-footer">
+                <button class="btn" type="button" data-dismiss="modal">Batal</button>
+                <a id="btn-delete-atk" class="btn btn-danger" href="#">Hapus</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     function add() {
         $('#addModal').modal('show');
     }
 
     function deleteConfirm(url) {
-        $('#btn-delete').attr('href', url);
-        $('#deleteModal').modal();
+        $('#btn-delete-atk').attr('href', url);
+        $('#deleteModalAmbil').modal();
     }
+
+    $(document).ready(function() {
+        $(document).on('click', '#delete-item', function() {
+            var no_ambilatk = $(this).data('no_urut');
+            var id = $(this).data('id');
+            // alert(no_ambilatk);
+            $('#no_ambilatk_del').val(no_ambilatk);
+            $('#id').val(id);
+            $('#btn-delete').attr('href', '<?= base_url() ?>Ambil_atk/deleteItem/' + id);
+        });
+    });
 
     $(document).ready(function() {
         $(document).on('click', '#editambil', function() {

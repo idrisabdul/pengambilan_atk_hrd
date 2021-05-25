@@ -88,7 +88,7 @@
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-sm" id="basic-datatable">
+                    <table class="table table-bordered table-hover table-sm" id="myTable">
 
                         <thead class="thead-light">
                             <tr>
@@ -268,4 +268,8 @@
         $('#btn-delete').attr('href', url);
         $('#deleteModal').modal();
     }
+
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    });
 </script>

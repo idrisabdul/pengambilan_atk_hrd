@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
-                    <button class="btn btn-primary" onclick="add()"> + Tambah Barang</button>
+                    <button class="btn btn-md btn-rounded btn-success" onclick="add()"><i class="fas fa-plus mr-1"></i>Tambah Barang</button>
                 </div>
                 <h4 class="page-title">Total Barang-barang ATK</h4>
                 <?= $this->session->flashdata('message') ?>

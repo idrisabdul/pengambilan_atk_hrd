@@ -164,7 +164,7 @@
                                         </td>
 
                                         <td>
-                                            <i class="mdi mdi-currency-btc text-primary"></i> <?= $sa['kd_inputatk'] ?>
+                                            <?= $sa['kd_inputatk'] ?>
                                         </td>
 
                                         <td>

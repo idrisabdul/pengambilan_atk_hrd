@@ -83,12 +83,13 @@ class Ambil_atk extends CI_Controller
         redirect('Ambil_atk');
     }
 
-    public function deleteItem($id)
+    public function deleteItem()
     {
-        $this->M_ambil_atk->delete($id);
-        $this->M_ambil_atk->deleteDetail($id);
-        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Pengambilan ATK Berhasil Dihapus</div>');
-        redirect('Ambil_atk');
+        $no_ambil = $this->input->post('no_ambilatk_del');
+        $id = $this->input->post('id');
+        $this->M_ambil_atk->deleteItemAmbil($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Item ATK Yang sudah anda ambil berhasil dihapus</div>');
+        redirect('Ambil_atk/lebihLanjut/' . $no_ambil);
     }
 
     public function pilihAtk()
@@ -179,20 +180,37 @@ class Ambil_atk extends CI_Controller
 
     public function insertAmbilAtk_sem()
     {
-        $ambil_atk = [
-            'no_urut' => $this->input->post('no_urut'),
-            'no_ambilatk' => $this->input->post('no_ambilatk'),
-            'kd_inputatk' => $this->input->post('kd_inputatk'),
-            'nm_barang' => $this->input->post('nm_barang'),
-            'kat_barang' => $this->input->post('kat_barang'),
-            'qty' => $this->input->post('qty'),
-            'sat' => $this->input->post('sat'),
-            'harga' => $this->input->post('harga'),
-            'keperluan' => $this->input->post('keperluan'),
-            'status' => 0,
-        ];
-        $this->M_ambil_atk->input_sem($ambil_atk);
-        echo json_encode($ambil_atk);
+        // MENCARI DATA INPUT YANG SAMA
+        $kd_inputatk = $this->input->post('kd_inputatk');
+        $qty = $this->input->post('qty');
+        $check = "SELECT kd_inputatk FROM tb_detail_ambilatk WHERE kd_inputatk = '$kd_inputatk' AND status = 0";
+        $hasil = $this->db->query($check)->result_array();
+        foreach ($hasil as $kd_inputatkcek) {
+            $row = $kd_inputatkcek['kd_inputatk'];
+        }
+
+        //CHECK NM ATK JIKA YANG DIMASUKKAN SAMA
+        //MAKA FIELD YG KD_INPUTATK-NYA SAMA. UPDATE QTYNYA SAJA SESUAI YG DIINPUTAN.
+        if ($row == $kd_inputatk) {
+            $qtyinp = $this->input->post('qty');
+            $data = $this->db->update('tb_detail_ambilatk', ['qty' => $qtyinp], ['kd_inputatk' => $kd_inputatk]);
+            echo json_encode($data);
+        } else {
+            $ambil_atk = [
+                'no_urut' => $this->input->post('no_urut'),
+                'no_ambilatk' => $this->input->post('no_ambilatk'),
+                'kd_inputatk' => $kd_inputatk,
+                'nm_barang' => $this->input->post('nm_barang'),
+                'kat_barang' => $this->input->post('kat_barang'),
+                'qty' => $qty,
+                'sat' => $this->input->post('sat'),
+                'harga' => $this->input->post('harga'),
+                'keperluan' => $this->input->post('keperluan'),
+                'status' => 0,
+            ];
+            $this->M_ambil_atk->input_sem($ambil_atk);
+            echo json_encode($ambil_atk);
+        }
     }
 
     public function atkTerpilih()

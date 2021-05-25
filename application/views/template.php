@@ -353,7 +353,7 @@
                         <li>
                             <a href="<?= base_url('Atk') ?>">
                                 <i class="fas fa-pencil-ruler"></i>
-                                <span> List Barang ATK </span>
+                                <span> List ATK Masuk </span>
                             </a>
                         </li>
 
@@ -433,15 +433,13 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6">
-                            2015 - <script>
+                            <script>
                                 document.write(new Date().getFullYear())
-                            </script> &copy; UBold theme by <a href="">Coderthemes</a>
+                            </script> &copy; Pengambilan ATK HRD <a href=""></a>
                         </div>
                         <div class="col-md-6">
                             <div class="text-md-right footer-links d-none d-sm-block">
-                                <a href="javascript:void(0);">About Us</a>
-                                <a href="javascript:void(0);">Help</a>
-                                <a href="javascript:void(0);">Contact Us</a>
+                                <a href="javascript:void(0);">Management Information System</a>
                             </div>
                         </div>
                     </div>
