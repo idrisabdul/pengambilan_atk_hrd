@@ -113,7 +113,7 @@ class Ambil_atk extends CI_Controller
 
         $memberi_no = $last_no + 1;
 
-        $no_ambilatk =  'AMBIL-ATK-' . date('Ymd') . '-00' . $memberi_no;
+        $no_ambilatk =  'ATK-' . date('Ymd') . '-00' . $memberi_no;
         $data['no_ambilatk'] = $no_ambilatk;
         $data['memberi_no'] = $memberi_no;
 

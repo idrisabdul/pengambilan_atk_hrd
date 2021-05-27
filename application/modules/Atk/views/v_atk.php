@@ -1,3 +1,9 @@
+<style>
+    .table-filter-container {
+        text-align: right;
+    }
+</style>
+
 <div class="container-fluid">
 
     <!-- start page title -->
@@ -5,6 +11,7 @@
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
+                    <a href="<?= base_url() ?>Atk/pdf" class="btn btn-rounded btn-md btn-primary"><i class="fas fa-print mr-1"></i>Cetak</a>
                     <button class="btn btn-md btn-rounded btn-success" onclick="add()"><i class="fas fa-plus mr-1"></i>Tambah Barang</button>
                 </div>
                 <h4 class="page-title">Total Barang-barang ATK</h4>
@@ -13,6 +20,15 @@
         </div>
     </div>
     <!-- end page title -->
+    <p id="table-filter" style="display:none">
+        Search:
+        <select>
+            <option value="">All</option>
+            <?php foreach ($atk as $a) { ?>
+                <option><?= $a['nm_barang'] ?></option>
+            <?php } ?>
+        </select>
+    </p>
 
 
     <div class="row">
@@ -20,13 +36,27 @@
             <div class="card-box pb-2">
                 <div class="float-right d-none d-md-inline-block">
                     <div class="btn-group mb-2">
+                        <button type="button" id="btn-filter" class="btn btn-sm btn-info">Filter</button>
+                        <button type="button" id="btn-unfilter" class="btn btn-sm btn-info">-</button>
                     </div>
                 </div>
 
                 <h4 class="header-title mb-3">Total ATK</h4>
                 <div class="table-responsive">
-                    <table class="table table-borderless table-hover table-sm table-centered m-0" id="basic-datatable">
+                    <table class="table table-borderless table-hover table-sm table-centered m-0" id="example">
 
+                        <thead class="pb-10 mb-10" id="filter">
+                            <tr>
+                                <th class="text-right">Nama Atk :</th>
+                                <th></th>
+                                <th class="text-right">Kategori :</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
                         <thead class="thead-light">
                             <tr>
                                 <th>No</th>
@@ -47,7 +77,7 @@
                                         <?= $no++; ?>
                                     </td>
                                     <td>
-                                        <h5 class="m-0 font-weight-normal"><?= $a['nm_barang'] ?></h5>
+                                        <?= $a['nm_barang'] ?>
                                     </td>
 
                                     <td>
@@ -228,7 +258,7 @@
                             <div class="col-sm-12">
                                 <label for="">Kode Barang</label>
                                 <div class="form-group">
-                                    <input type="text" name="kd_barang" class="form-control" placeholder="Kode Barang" value="<?= $a['kd_barang'] ?>" required />
+                                    <input type="text" name="kd_barang" class="form-control" placeholder="Kode Barang" value="<?= $a['kd_inputatk'] ?>" required />
                                 </div>
                             </div>
                         </div>
@@ -270,7 +300,16 @@
         </div>
     </div>
 </div>
+
 <script>
+    // $('#filter').hide();
+    // $('#btn-filter').click(function() {
+    //     $('#filter').show();
+    // });
+    // $('#unbtn-filter').click(function() {
+    //     $('#filter').show();
+    // });
+
     function add() {
         $('#addModal').modal('show');
     }
@@ -279,4 +318,34 @@
         $('#btn-delete').attr('href', url);
         $('#deleteModal').modal();
     }
+
+    $(document).ready(function() {
+        $('#example').DataTable({
+            initComplete: function() {
+                this.api().columns([1, 3, 4]).every(function(d) {
+                    var column = this;
+                    var theadname = $("#example th").eq([d]).text();
+                    var select = $('<select class="form-control form-control-sm"><option value="">All</option></option></select>')
+                        .appendTo($(column.header()).empty())
+                        .on('change', function() {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function(d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+            },
+            "aoColumnDefs": [{
+                "bSortable": false,
+                "aTargets": [0, 1, 2, 3, 5, 7]
+            }, ]
+        });
+    });
 </script>

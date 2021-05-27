@@ -21,8 +21,6 @@
             <div class="card-box pb-2">
                 <div class="float-right d-none d-md-inline-block">
                     <div class="btn-group mb-2">
-                        <button type="button" class="btn btn-xs btn-light">Per Item</button>..
-                        <button type="button" class="btn btn-xs btn-secondary">Monthly</button>
                     </div>
                 </div>
 

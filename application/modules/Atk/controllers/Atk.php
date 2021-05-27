@@ -7,6 +7,8 @@ class Atk extends CI_Controller
         parent::__construct();
         $this->load->model('M_atk');
 
+        require_once APPPATH . 'third_party/dompdf/dompdf_config.inc.php';
+
         if (!$this->session->userdata('userlogin')) {
             // redirect('https://192.168.1.231/msal-login/Login');
             redirect('localhost/Login');
@@ -86,5 +88,19 @@ class Atk extends CI_Controller
         $this->M_atk->deleteAtk($id_bar);
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">ATK Berhasil Dihapus</div>');
         redirect('Atk');
+    }
+
+    public function pdf()
+    {
+        $dompdf = new Dompdf();
+        $data['atk'] = $this->db->query('SELECT * FROM tb_barang ORDER BY id_barang DESC')->result_array();
+        $html = $this->load->view('v_cetak_atk', $data, true);
+
+        $dompdf->load_html($html);
+        $dompdf->set_paper('A4', 'potrait');
+        $dompdf->render();
+        // $dompdf->set_option('enable_html5_parser', TRUE);
+        $pdf = $dompdf->output();
+        $dompdf->stream('atk.pdf', array('Attachment' => false));
     }
 }
