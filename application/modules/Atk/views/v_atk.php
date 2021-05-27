@@ -36,8 +36,8 @@
             <div class="card-box pb-2">
                 <div class="float-right d-none d-md-inline-block">
                     <div class="btn-group mb-2">
-                        <button type="button" id="btn-filter" class="btn btn-sm btn-info">Filter</button>
-                        <button type="button" id="btn-unfilter" class="btn btn-sm btn-info">-</button>
+                        <!-- <button type="button" id="btn-filter" class="btn btn-sm btn-info">Filter</button>
+                        <button type="button" id="btn-unfilter" class="btn btn-sm btn-info">-</button> -->
                     </div>
                 </div>
 

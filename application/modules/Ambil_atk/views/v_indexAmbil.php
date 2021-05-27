@@ -50,7 +50,7 @@
                                     </td>
 
                                     <td>
-                                        <?= $aa['user_nama'] ?>
+                                        <?= strtoupper($aa['user_nama']); ?>
                                     </td>
 
                                     <td class="text-center">

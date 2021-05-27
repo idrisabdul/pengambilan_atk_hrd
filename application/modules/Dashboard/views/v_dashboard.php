@@ -5,8 +5,8 @@
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
-                    <buttoan class="btn btn-md btn-rounded btn-success mr-2" onclick="add()"><i class="fas fa-plus mr-1"></i>Masukkan ATK</buttoan>
-                    <a href="<?= base_url('Ambil_atk/pilihAtk') ?>" class="btn btn-md btn-rounded btn-primary"><i class="fas fa-user-edit mr-1"></i>Ajukan Pengambilan ATK</a>
+                    <buttoan class="btn btn-md btn-rounded btn-primary mr-2" onclick="add()"><i class="fas fa-plus mr-1"></i>Masukkan ATK</buttoan>
+                    <a href="<?= base_url('Ambil_atk/pilihAtk') ?>" class="btn btn-md btn-rounded btn-success"><i class="fas fa-hands mr-1"></i>Ajukan Pengambilan ATK</a>
                 </div>
                 <h4 class="page-title">Dashboard</h4>
                 <?= $this->session->flashdata('message') ?>
@@ -27,7 +27,7 @@
                     <div class="col-6">
                         <div class="text-right">
                             <h3 class="mt-1"><span data-plugin="counterup"><?= count($stok_atk) ?></span></h3>
-                            <p class="text-muted mb-1 text-truncate">Total ATK Masuk</p>
+                            <p class="text-muted mb-1 text-truncate">ATK Masuk</p>
                         </div>
                     </div>
                 </div> <!-- end row-->
@@ -196,124 +196,125 @@
             </div>
         </div> <!-- end col -->
     </div> <!-- end card-box -->
-</div> <!-- end col-->
 
-<!-- ADD ITEM MODAL -->
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="title" id="defaultModalLabel">Tambah ATK</h4>
-            </div>
-            <div class="modal-body">
-                <form action="<?= base_url('Atk/addAtk') ?>" method="POST">
-                    <div class="row clearfix">
-                        <div class="col-sm-12">
-                            <label for="">Nama PT</label>
-                            <select name="nama_pt" class="form-control" required>
-                                <option value="" selected disabled>- Select PT - </option>
-                                <?php foreach ($pt as $p) : ?>
-                                    <option value="<?= $p['alias'] ?>"><?= $p['alias'] ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row clearfix">
-                        <div class="col-sm-12">
-                            <label for="">Nama Barang</label>
-                            <div class="form-group">
-                                <input type="text" name="nama_bar" class="form-control" placeholder="Nama Barang" required />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row clearfix mb-1">
-                        <div class="col-sm-6">
-                            <label for="">Kategori</label>
-                            <select name="kat_bar" class="form-control" required>
-                                <option value="" selected disabled>- Select Kategori - </option>
-                                <?php foreach ($kategori as $kat) : ?>
-                                    <option value="<?= $kat['nm_kategori'] ?>"><?= $kat['nm_kategori'] ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="">Satuan</label>
-                            <select name="sat" class="form-control" required>
-                                <option value="" selected disabled>- Select Satuan - </option>
-                                <?php foreach ($sat as $s) : ?>
-                                    <option value="<?= $s['satuan'] ?>"><?= $s['satuan'] ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row clearfix">
-                        <div class="col-sm-6">
-                            <label for="">Harga</label>
-                            <div class="form-group">
-                                <input type="text" name="harga" class="form-control" placeholder="Harga" required />
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="">Merek</label>
-                            <div class="form-group">
-                                <input type="text" name="merek" class="form-control" placeholder="Merek" required />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row clearfix">
-                        <div class="col-sm-12">
-                            <label for="">Jumlah Stok</label>
-                            <div class="form-group">
-                                <input type="number" name="jml_stok" class="form-control" placeholder="Jumlah Stok" required />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row clearfix">
-                        <div class="col-sm-12">
-                            <label for="">Keterangan</label>
-                            <div class="form-group">
-                                <textarea type="text" rows="1" name="keperluan" class="form-control"></textarea>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="row modal-footer">
-                        <button type="button" class="btn btn-danger btn-round waves-effect" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary btn-round waves-effect">Save</button>
-                    </div>
-                </form>
+
+    <!-- ADD ITEM MODAL -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="title" id="defaultModalLabel">Tambah ATK</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="<?= base_url('Atk/addAtk') ?>" method="POST">
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <label for="">Nama PT</label>
+                                <select name="nama_pt" class="form-control" required>
+                                    <option value="" selected disabled>- Select PT - </option>
+                                    <?php foreach ($pt as $p) : ?>
+                                        <option value="<?= $p['alias'] ?>"><?= $p['alias'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <label for="">Nama Barang</label>
+                                <div class="form-group">
+                                    <input type="text" name="nama_bar" class="form-control" placeholder="Nama Barang" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix mb-1">
+                            <div class="col-sm-6">
+                                <label for="">Kategori</label>
+                                <select name="kat_bar" class="form-control" required>
+                                    <option value="" selected disabled>- Select Kategori - </option>
+                                    <?php foreach ($kategori as $kat) : ?>
+                                        <option value="<?= $kat['nm_kategori'] ?>"><?= $kat['nm_kategori'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="">Satuan</label>
+                                <select name="sat" class="form-control" required>
+                                    <option value="" selected disabled>- Select Satuan - </option>
+                                    <?php foreach ($sat as $s) : ?>
+                                        <option value="<?= $s['satuan'] ?>"><?= $s['satuan'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+                                <label for="">Harga</label>
+                                <div class="form-group">
+                                    <input type="text" name="harga" class="form-control" placeholder="Harga" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="">Merek</label>
+                                <div class="form-group">
+                                    <input type="text" name="merek" class="form-control" placeholder="Merek" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <label for="">Jumlah Stok</label>
+                                <div class="form-group">
+                                    <input type="number" name="jml_stok" class="form-control" placeholder="Jumlah Stok" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <label for="">Keterangan</label>
+                                <div class="form-group">
+                                    <textarea type="text" rows="1" name="keperluan" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row modal-footer">
+                            <button type="button" class="btn btn-danger btn-round waves-effect" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary btn-round waves-effect">Save</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<script>
-    function add() {
-        $('#addModal').modal('show');
-    }
+    <script>
+        function add() {
+            $('#addModal').modal('show');
+        }
 
-    // function deleteConfirm(url) {
-    //     $('#btn-delete').attr('href', url);
-    //     $('#deleteModal').modal();
-    // }
+        // function deleteConfirm(url) {
+        //     $('#btn-delete').attr('href', url);
+        //     $('#deleteModal').modal();
+        // }
 
-    // $(document).ready(function() {
-    //     $(document).on('click', '#editdept', function() {
+        // $(document).ready(function() {
+        //     $(document).on('click', '#editdept', function() {
 
-    //         var id_dept = $(this).data('id');
-    //         var nama_dept = $(this).data('nama_dept');
-    //         var kode_dept = $(this).data('kode_dept');
-    //         var deskripsi = $(this).data('deskripsi');
-    //         var alias = $(this).data('alias');
-    //         var singkatan = $(this).data('singkatan');
+        //         var id_dept = $(this).data('id');
+        //         var nama_dept = $(this).data('nama_dept');
+        //         var kode_dept = $(this).data('kode_dept');
+        //         var deskripsi = $(this).data('deskripsi');
+        //         var alias = $(this).data('alias');
+        //         var singkatan = $(this).data('singkatan');
 
-    //         $('#id_dept').val(id_dept);
-    //         $('#namadept').val(nama_dept);
-    //         $('#kodedept').val(kode_dept);
-    //         $('textarea#deskripsi').val(deskripsi);
-    //         $('#alias').val(alias);
-    //         $('#singkatan').val(singkatan);
-    //     });
-    // });
-</script>
+        //         $('#id_dept').val(id_dept);
+        //         $('#namadept').val(nama_dept);
+        //         $('#kodedept').val(kode_dept);
+        //         $('textarea#deskripsi').val(deskripsi);
+        //         $('#alias').val(alias);
+        //         $('#singkatan').val(singkatan);
+        //     });
+        // });
+    </script>

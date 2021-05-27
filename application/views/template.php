@@ -358,9 +358,29 @@
                         </li>
 
                         <li>
+                            <a href="<?= base_url('Ambil_atk/pilihAtk') ?>">
+                                <i class="fas fa-hands"></i>
+                                <span> Ajukan Pengambilan </span>
+                            </a>
+                        </li>
+
+                        <li>
                             <a href="<?= base_url('Ambil_atk') ?>">
                                 <i class="fas fa-user-edit"></i>
                                 <span> Data Pengambilan ATK </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="<?= base_url('Item_terambil') ?>">
+                                <i class="fas fa-box"></i>
+                                <span> Data Pengambilan Item </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('Item_terambil') ?>">
+                                <i class="fas fa-box"></i>
+                                <span> Retur </span>
                             </a>
                         </li>
 
@@ -406,6 +426,7 @@
 
         <!-- Dashboar 1 init js-->
         <script src="<?= base_url() ?>/assets/js/pages/dashboard-1.init.js"></script>
+
 
         <!-- Sweet Alerts js -->
         <script src="<?= base_url() ?>/assets/libs/sweetalert2/sweetalert2.all.min.js"></script>
@@ -861,6 +882,11 @@
     <script src="<?= base_url() ?>/assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="<?= base_url() ?>/assets/libs/pdfmake/build/pdfmake.min.js"></script>
     <script src="<?= base_url() ?>/assets/libs/pdfmake/build/vfs_fonts.js"></script>
+    <!-- CHART -->
+    <script src="<?= base_url() ?>/assets/libs/apexcharts/apexcharts.min.js"></script>
+    <script src="https://apexcharts.com/samples/assets/irregular-data-series.js"></script>
+    <script src="https://apexcharts.com/samples/assets/ohlc.js"></script>
+    <script src="<?= base_url() ?>/assets/js/pages/apexcharts.init.js"></script>
     <!-- third party js ends -->
 
     <!-- Datatables init -->
