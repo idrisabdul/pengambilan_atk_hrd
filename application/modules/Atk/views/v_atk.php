@@ -36,8 +36,9 @@
             <div class="card-box pb-2">
                 <div class="float-right d-none d-md-inline-block">
                     <div class="btn-group mb-2">
-                        <!-- <button type="button" id="btn-filter" class="btn btn-sm btn-info">Filter</button>
-                        <button type="button" id="btn-unfilter" class="btn btn-sm btn-info">-</button> -->
+                        <button type="button" id="btn-filter" class="btn btn-sm btn-info" data-toggle="modal" data-target="#filterModal">Filter</button>
+                        <a href="<?= base_url('Atk') ?>" type="button" id="btn-filter" class="btn btn-sm btn-info">Show All</a>
+                        <!-- <button type="button" id="btn-unfilter" class="btn btn-sm btn-info">-</button> -->
                     </div>
                 </div>
 
@@ -71,7 +72,7 @@
                         </thead>
                         <tbody>
                             <?php $no = 1; ?>
-                            <?php foreach ($atk as $a) { ?>
+                            <?php foreach ($atk_filt as $a) { ?>
                                 <tr>
                                     <td>
                                         <?= $no++; ?>
@@ -296,6 +297,52 @@
             <div class="modal-footer">
                 <button class="btn" type="button" data-dismiss="modal">Batal</button>
                 <a id="btn-delete" class="btn btn-danger" href="#">Hapus</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FILTER MODAL -->
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title" id="defaultModalLabel">Filter ATK</h4>
+            </div>
+            <div class="modal-body">
+                <form action="<?= base_url('Atk/filterAtk') ?>" method="POST">
+                    <div class="row clearfix">
+                        <div class="col-sm-4">
+                            <label for="">Nama ATK</label>
+                            <select name="nm_barang" class="form-control" required>
+                                <?php foreach ($atkf as $a) : ?>
+                                    <option value="<?= $a['nm_barang'] ?>"><?= $a['nm_barang'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="">Kategori</label>
+                            <select name="kat_barang" class="form-control" required>
+                                <?php foreach ($kategori as $k) : ?>
+                                    <option value="<?= $k['nm_kategori'] ?>"><?= $k['nm_kategori'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="">Satuan</label>
+                            <select name="satuan" class="form-control" required>
+                                <?php foreach ($sat as $s) : ?>
+                                    <option value="<?= $s['satuan'] ?>"><?= $s['satuan'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row modal-footer">
+                        <button type="button" class="btn btn-danger btn-round waves-effect" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-round waves-effect">Save</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

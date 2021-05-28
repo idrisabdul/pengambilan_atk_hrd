@@ -204,7 +204,7 @@ class Ambil_atk extends CI_Controller
         //CHECK NM ATK JIKA YANG DIMASUKKAN SAMA
         //MAKA FIELD YG KD_INPUTATK-NYA SAMA. UPDATE QTYNYA SAJA SESUAI YG DIINPUTAN.
         if ($row == $kd_inputatk) {
-            $qtyinp = $this->input->post('qty');
+            $qtyinp = $qty;
             $data = $this->db->update('tb_detail_ambilatk', ['qty' => $qtyinp], ['kd_inputatk' => $kd_inputatk]);
             echo json_encode($data);
         } else {

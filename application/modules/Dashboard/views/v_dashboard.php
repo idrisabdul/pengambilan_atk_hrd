@@ -144,13 +144,19 @@
                                     $qtyatk = $data['qtyatk'];
                                 }
 
-                                $qryambil = "SELECT SUM(qty) as qtyambil  FROM tb_detail_ambilatk where kd_inputatk='$nm_atk'";
+                                $row = "SELECT SUM(qty) as qtyambil  FROM tb_detail_ambilatk where kd_inputatk='$nm_atk'";
+                                $row1 = "SELECT SUM(qty_rusak) as qtyambil_rusak  FROM tb_atk_rusak where kd_inputatk='$nm_atk'";
 
-                                $result2 = $this->db->query($qryambil)->result_array();
+                                $result2 = $this->db->query($row)->result_array();
                                 foreach ($result2 as $row2) {
                                     $qtyambil = $row2['qtyambil'];
                                 }
-                                $saldo = $qtyatk - $qtyambil;
+                                $result3 = $this->db->query($row1)->result_array();
+                                foreach ($result3 as $row3) {
+                                    $qtyambilrusak = $row3['qtyambil_rusak'];
+                                }
+                                $qtytotal = $qtyambilrusak + $qtyambil;
+                                $saldo = $qtyatk - $qtytotal;
 
                                 if ($saldo > 0) :
                                 ?>

@@ -17,36 +17,32 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <h4 class="header-title col-md-6">Form Permintaan ATK</h4>
+                        <h4 class="header-title col-md-6">Form Permintaan Retur ATK</h4>
                         <div class="text-right col-md-6">
                             <h4 class="header-title" id="no_ambilatk_"><?= $no_ambilatk ?></h4>
                         </div>
                     </div>
-                    <input type="hidden" name="no_urut" id="no_urut" value="<?= $memberi_no ?>">
                     <br>
-                    <input type="hidden" name="nama_pt" class="form-control" value="">
+                    <input type="hidden" id="id" name="id" class="form-control" value="<?= $id ?>">
+                    <input type="hidden" id="no_urut" name="no_urut" class="form-control" value="<?= $no_urut ?>">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group row mb-2">
-                                <label class="col-3 col-form-label">Nama PT</label>
+                                <label class="col-3 col-form-label">Jenis ATK</label>
                                 <div class="col-9">
-                                    <select name="nama_pt" id="nama_pt" class="form-control" required>
-                                        <option value="" selected disabled>-- SELECT --</option>
-                                        <?php foreach ($pt as $p) : ?>
-                                            <option value="<?= $p['nama_pt'] ?>"><?= $p['alias'] ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                    <input type="text" id="jenis_atk" class="form-control bg-light mb-2" placeholder="Masukkan ATK" value="<?= $nm_barang ?>" disabled>
                                 </div>
                             </div>
                             <div class="form-group row mb-2">
                                 <label class="col-3 col-form-label">Nama</label>
                                 <div class="col-9">
-                                    <select name="user_nama" id="user_nama" class="form-control" required>
-                                        <option value="<?= $this->session->userdata('userlogin') ?>"><?= $this->session->userdata('userlogin') ?></option>
-                                        <?php foreach ($user_nama as $un) : ?>
-                                            <option value="<?= $un['nama'] ?>"><?= $un['nama'] ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                    <input type="text" id="nama" class="form-control bg-light mb-2" placeholder="Masukkan ATK" value="<?= strtoupper($user_nama) ?>" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-2">
+                                <label class="col-3 col-form-label">QTY Anda</label>
+                                <div class="col-9">
+                                    <input type="text" id="qty_anda" class="form-control bg-light mb-2" placeholder="Masukkan ATK" value="<?= $qty ?>" disabled>
                                 </div>
                             </div>
                         </div>
@@ -57,9 +53,6 @@
                                     <label class="col-form-label">Nama ATK</label>
                                 </div>
                                 <div class="col-6">
-                                    <input type="hidden" id="no" class="form-control">
-                                    <input type="hidden" id="getuser" class="form-control">
-                                    <input type="hidden" id="getpt" class="form-control">
                                     <input type="hidden" id="getitem_kdinput" class="form-control">
                                     <input type="hidden" id="getitem_katatk" class="form-control">
                                     <input type="hidden" id="getitem_sat" class="form-control">
@@ -73,7 +66,7 @@
                                         </div>
                                     </div>
                                     <div class="input-group mb-2">
-                                        <input type="number" class="form-control" min="1" max="10000" id="getitemqty" placeholder="Masukkan Qty">
+                                        <input type="number" class="form-control" id="getitemqty" id="inlineFormInputGroup" placeholder="Masukkan Qty">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><span id="satuan_inp">Sat</span></div>
                                         </div>
@@ -98,7 +91,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama ATK</th>
-                                    <th>Qty Input</th>
+                                    <th>Qty Saat ini</th>
                                     <th>Kode Input ATK</th>
                                     <th>Kategori</th>
                                     <th>Satuan</th>
@@ -176,6 +169,9 @@
                 <h4 class="title" id="defaultModalLabel">Pilih ATK</h4>
             </div>
             <div class="modal-body">
+                <?php if (count($stok_atk) == 0) { ?>
+                    <span>Jika Data kosong, silahkan buat pengambilan ATK</span>
+                <?php } ?>
                 <table class="table table-sm nowrap table-bordered w-60" id="myTable">
 
                     <thead class="thead-light">
@@ -273,13 +269,6 @@
             var inp_1 = Number(a);
             var inp_2 = Number(b);
 
-            // if (inp_1 == 0) {
-            //     swal("Min 1");
-            //     $('#getitemqty').val("1");
-            // } else {
-            //     $('#getitemqty').val(inp_1);
-            // }
-
             if (inp_1 > inp_2) {
                 swal("QTY Melebihi stok");
                 $('#getitemqty').val("");
@@ -295,7 +284,7 @@
         function tabel_ambilatk(no_ambilatk_) {
             $.ajax({
                 type: 'GET',
-                url: '<?= base_url() ?>Ambil_atk/atkTerpilih',
+                url: '<?= base_url() ?>Retur/itemAtkGanti',
                 dataType: 'JSON',
                 data: {
                     no_ambilatk: no_ambilatk_
@@ -347,7 +336,7 @@
                 $('#getitemkep').val('');
                 $('#satuan').text('');
             } else {
-                if (qty == '' || qty == 0) {
+                if (qty == '') {
                     swal('Maaf, QTY anda belum terisi');
                 } else if (kep == '') {
                     swal('Mohon Masukkan Keperluan Anda');
@@ -365,16 +354,22 @@
                     var get_sat = $('#getitem_sat').val();
                     var get_harga = $('#getitemharga').val();
                     var get_kep = $('#getitemkep').val();
+                    var no_urut = $('#no_urut').val();
+
+                    var qty_anda = Number($('#qty_anda').val());
+                    var qty_fix = qty_anda + Number(getitemqty);
+                    var qty_new = $('#getitemqty').val();
 
                     $.ajax({
-                        url: "<?= base_url('Ambil_atk/insertAmbilAtk_sem'); ?>",
+                        url: "<?= base_url('Retur/atkGantiTerpilih'); ?>",
                         type: "POST",
                         data: {
                             type: 1,
                             no_urut: no_urut,
                             no_ambilatk: no_ambilatk_,
                             nm_barang: getitematk,
-                            qty: getitemqty,
+                            qty: qty_fix,
+                            qty_new: qty_new,
                             kd_inputatk: get_kdinput,
                             kat_barang: get_katatk,
                             sat: get_sat,
@@ -413,6 +408,7 @@
                     // $('#nm_barang_input').val(nm_barang);
                     // $('#nm_barang').text(nm_barang);
                     // $('#modal-item').modal('hide');
+                    // alert(nm_barang);
                     $('#getuser').val(user);
                     $('#getpt').val(pt);
                     $('#getitematk').val(nm_barang);
@@ -460,7 +456,7 @@
         $('#save').click(function() {
 
             swal({
-                title: "Ambil ATK?",
+                title: "Retur ATK?",
                 showCancelButton: true,
                 confirmButtonColor: "#1FAB45",
                 confirmButtonText: "Save",
@@ -468,27 +464,30 @@
                 buttonsStyling: true
             }).then(result => {
                 if (result.value) {
-                    // update status 0 -> 1
-                    var no_ambilatk = $('#no_ambilatk_').text();
+                    // update status 2 -> 1
+                    var id = $('#id').val();
 
                     $.ajax({
                         dataType: 'JSON',
                         type: 'POST',
                         data: {
-                            no_ambilatk: no_ambilatk
+                            // no_ambilatk: no_ambilatk,
+                            id: id
                         },
-                        url: '<?= base_url() ?>Ambil_atk/updateStatus',
+                        url: '<?= base_url() ?>Retur/returFinish',
                         cache: false,
-                        success: function() {
-                            insertHeader();
+                        success: function(data) {
                             swal({
                                 title: "Wow!",
                                 text: "Anda Berhasil Mengambil ATK!",
                                 type: "success"
                             }).then(function() {
-                                window.location.href = '<?= base_url() ?>Ambil_atk/lebihLanjut/' + no_ambilatk;
+                                window.location.href = '<?= base_url() ?>Retur';
                             });
 
+                        },
+                        error: function() {
+                            alert('eror');
                         }
                     });
                     console.log(result.value)
@@ -500,27 +499,6 @@
             });
         });
 
-        function insertHeader() {
-            //SAVE HEADER
-            var no_ambilatk = $('#no_ambilatk_').text();
-            var user_nama = $('#user_nama').val();
-            var nama_pt = $('#nama_pt').val();
-
-            $.ajax({
-                dataType: 'JSON',
-                type: 'POST',
-                data: {
-                    no_ambilatk: no_ambilatk,
-                    user_nama: user_nama,
-                    nama_pt: nama_pt,
-                },
-                url: '<?= base_url() ?>Ambil_atk/insertHeader',
-                cache: false,
-                success: function() {
-                    // alert('insert header suc');
-                }
-            });
-        }
 
     });
 

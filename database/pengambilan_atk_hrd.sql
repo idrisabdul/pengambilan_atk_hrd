@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2021 at 11:02 AM
+-- Generation Time: May 28, 2021 at 01:29 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -87,7 +87,55 @@ CREATE TABLE `tb_ambil_atk` (
 --
 
 INSERT INTO `tb_ambil_atk` (`id`, `no_ambilatk`, `user_nama`, `nama_pt`, `jml_item_atk`, `tgl_permintaan`) VALUES
-(5, 'AMBIL-ATK-20210523-001', 'IDRIS ABDUL AZIS', 'PT MSAL (HO)', 3, '2021-05-23 17:33:40');
+(6, 'AMBIL-ATK-20210524-004', 'idris', 'PT MSAL (HO)', 0, '2021-05-24 19:56:31'),
+(8, 'AMBIL-ATK-20210524-006', 'IDRIS ABDUL AZIS', 'PT MSAL (HO)', 0, '2021-05-24 20:05:05'),
+(10, 'AMBIL-ATK-20210524-007', 'idris', 'PT MSAL (HO)', 0, '2021-05-24 20:32:40'),
+(13, 'AMBIL-ATK-20210525-0010', 'ANANDA AQILLA SABRINA', 'PT MULIA SAWIT AGRO LESTARI (HO)', 0, '2021-05-25 09:07:17'),
+(15, 'AMBIL-ATK-20210525-0012', 'ADI TEGUH PRABOWO', 'PT MULIA SAWIT AGRO LESTARI (HO)', 0, '2021-05-25 11:36:28'),
+(16, 'AMBIL-ATK-20210525-0013', 'MUHAMMAD ALVI BISYRI', 'PT MULIA SAWIT AGRO LESTARI (PKS)', 0, '2021-05-25 12:58:48'),
+(20, 'AMBIL-ATK-20210525-0014', 'ERLANGGA RAMADUNI PRAMUDIA', 'PT MULIA SAWIT AGRO LESTARI (HO)', 0, '2021-05-25 15:27:01'),
+(21, 'AMBIL-ATK-20210526-0015', 'idris', 'PT MULIA SAWIT AGRO LESTARI (HO)', 0, '2021-05-26 12:38:21'),
+(22, 'ATK-20210526-0016', 'idris', 'PT MULIA SAWIT AGRO LESTARI (HO)', 0, '2021-05-26 19:38:30'),
+(23, 'ATK-20210527-0017', 'idris', 'PT MULIA SAWIT AGRO LESTARI (HO)', 0, '2021-05-27 13:57:41'),
+(24, 'ATK-20210527-0018', 'ISMIYA PEBRI YANI', 'PT MULIA SAWIT AGRO LESTARI (HO)', 0, '2021-05-27 14:34:36'),
+(26, 'ATK-20210528-0020', 'ABDUL ROHMAN', 'PT MULIA SAWIT AGRO LESTARI (HO)', 0, '2021-05-28 10:26:36'),
+(27, 'ATK-20210528-0021', 'SILVI FATIN NABILAH', 'PT MULIA SAWIT AGRO LESTARI (HO)', 0, '2021-05-28 14:36:38');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_atk_rusak`
+--
+
+CREATE TABLE `tb_atk_rusak` (
+  `id_atk` int(11) NOT NULL,
+  `user_nama` varchar(255) NOT NULL,
+  `nm_barang` varchar(128) NOT NULL,
+  `kd_inputatk` varchar(128) NOT NULL,
+  `harga` decimal(10,0) NOT NULL,
+  `kat_barang` varchar(128) NOT NULL,
+  `qty_rusak` int(11) NOT NULL,
+  `alasan` varchar(255) NOT NULL,
+  `tgl_retur` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_atk_rusak`
+--
+
+INSERT INTO `tb_atk_rusak` (`id_atk`, `user_nama`, `nm_barang`, `kd_inputatk`, `harga`, `kat_barang`, `qty_rusak`, `alasan`, `tgl_retur`) VALUES
+(4, 'IDRIS', 'Pulpen', 'ATK-20210520018', '12000', 'Alat Menulis', 8, 'Ga nyata', '0000-00-00 00:00:00'),
+(5, 'IDRIS', 'Flashdisk', 'ATK-20210520164', '90000', 'Elektronik', 1, 'Corup', '0000-00-00 00:00:00'),
+(6, 'IDRIS', 'HVS', 'ATK-20210527061', '75000', 'Kertas', 6, 'Kertasnya kunyel,', '0000-00-00 00:00:00'),
+(7, 'IDRIS', 'Penggaris', 'MSAL20210520082', '12000', 'Alat Menulis', 3, 'Penggarisnya lecet', '0000-00-00 00:00:00'),
+(8, 'IDRIS', 'Pulpen', 'ATK-20210520036', '10000', 'Alat Menulis', 1, 'Satunya ga nyata', '0000-00-00 00:00:00'),
+(9, 'IDRIS', 'Pulpen', 'ATK-20210520036', '10000', 'Alat Menulis', 2, 'tinta abis', '0000-00-00 00:00:00'),
+(10, 'ISMIYA PEBRI YANI', 'Pulpen', 'ATK-20210520036', '10000', 'Alat Menulis', 1, 'tes', '0000-00-00 00:00:00'),
+(11, 'SILVI FATIN NABILAH', 'Pensil', 'ATK-20210528355', '12000', 'Alat Menulis', 20, 'Pulpennya jele', '0000-00-00 00:00:00'),
+(12, 'IDRIS', 'Penggaris', 'MSAL20210520082', '12000', 'Alat Menulis', 2, 'Penggarisnya patah', '0000-00-00 00:00:00'),
+(13, 'IDRIS', 'Pulpen', 'ATK-20210520018', '12000', 'Alat Menulis', 12, 'aa', '0000-00-00 00:00:00'),
+(14, 'ISMIYA PEBRI YANI', 'HVS', 'ATK-20210527061', '75000', 'Kertas', 2, 'robek', '0000-00-00 00:00:00'),
+(15, 'IDRIS', 'Flashdisk', 'ATK-20210520164', '90000', 'Elektronik', 1, 'virus', '2021-05-28 10:51:38');
 
 -- --------------------------------------------------------
 
@@ -119,7 +167,9 @@ INSERT INTO `tb_barang` (`id_barang`, `kd_inputatk`, `nm_barang`, `merek`, `harg
 (17, 'ATK-20210520669', 'Penghapus', '2B', '30000', 'Alat Menulis', 'kd', 120, 'PT MSAL (HO)', 'Pcs', 'Untuk Menghapus', '2021-05-20 14:36:44'),
 (18, 'ATK-20210520036', 'Pulpen', 'Fastel', '10000', 'Alat Menulis', 'kd', 22, 'PT MSAL (HO)', 'Pack', 'menulis', '2021-05-20 14:52:33'),
 (19, 'ATK-20210520018', 'Pulpen', 'Butterfly', '12000', 'Alat Menulis', 'kd', 54, 'PT MSAL (HO)', 'Pcs', 'Pulpen satuan pcs', '2021-05-20 15:00:50'),
-(20, 'ATK-20210520164', 'Flashdisk', 'Sandisk', '90000', 'Elektronik', 'kd', 24, 'PT MSAL (HO)', 'Pcs', 'Ket', '2021-05-20 16:02:31');
+(20, 'ATK-20210520164', 'Flashdisk', 'Sandisk', '90000', 'Elektronik', 'kd', 24, 'PT MSAL (HO)', 'Pcs', 'Ket', '2021-05-20 16:02:31'),
+(21, 'ATK-20210527061', 'HVS', 'Joyko', '75000', 'Kertas', 'kd', 24, 'PT MSAL (HO)', 'Pack', 'Untuk mencoret-coret tinta', '2021-05-27 11:11:21'),
+(22, 'ATK-20210528355', 'Pensil', '2B', '12000', 'Alat Menulis', 'kd', 2000, 'PT MSAL (HO)', 'Pcs', 'Pensil Ujian', '2021-05-28 10:53:44');
 
 -- --------------------------------------------------------
 
@@ -146,14 +196,27 @@ CREATE TABLE `tb_detail_ambilatk` (
 --
 
 INSERT INTO `tb_detail_ambilatk` (`id_detail_ambilatk`, `no_urut`, `no_ambilatk`, `nm_barang`, `kd_inputatk`, `kat_barang`, `qty`, `sat`, `harga`, `keperluan`, `status`) VALUES
-(14, 1, 'AMBIL-ATK-20210523-001', 'Flashdisk', 'ATK-20210520164', 'Elektronik', 12, 'Pcs', '0', 'Untuk Membackup File', 1),
-(15, 1, 'AMBIL-ATK-20210523-001', 'Pulpen', 'ATK-20210520018', 'Alat Menulis', 20, 'Pcs', '0', 'Menulis', 1),
-(16, 1, 'AMBIL-ATK-20210523-001', 'Penghapus', 'ATK-20210520669', 'Alat Menulis', 10, 'Pcs', '0', 'Menghapus tinta kemiskinan', 1),
-(22, 2, 'AMBIL-ATK-20210524-002', 'Flashdisk', 'ATK-20210520164', 'Elektronik', 1, 'Pcs', '90000', 'a', 0),
-(23, 2, 'AMBIL-ATK-20210524-002', 'Pulpen', 'ATK-20210520018', 'Alat Menulis', 4, 'Pcs', '12000', 'aadw', 0),
-(41, 3, 'AMBIL-ATK-20210524-003', 'Pulpen', 'ATK-20210520036', 'Alat Menulis', 7, 'Pack', '10000', 'asdaw', 0),
-(42, 4, 'AMBIL-ATK-20210524-004', 'Flashdisk', 'ATK-20210520164', 'Elektronik', 3, 'Pcs', '90000', 'adw', 0),
-(43, 4, 'AMBIL-ATK-20210524-004', 'Penggaris', 'MSAL20210520082', 'Alat Menulis', 12, 'Pcs', '12000', 'adw', 0);
+(11, 4, 'AMBIL-ATK-20210524-004', 'Penghapus', 'ATK-20210520669', 'Alat Menulis', 9, 'Pcs', '30000', 'jhvjh', 1),
+(13, 4, 'AMBIL-ATK-20210524-004', 'Pulpen', 'ATK-20210520036', 'Alat Menulis', 3, 'Pack', '10000', 'jhvjh', 1),
+(19, 6, 'AMBIL-ATK-20210524-006', 'Penghapus', 'ATK-20210520669', 'Alat Menulis', 100, 'Pcs', '30000', 'buat dijual', 1),
+(20, 6, 'AMBIL-ATK-20210524-006', 'Flashdisk', 'ATK-20210520164', 'Elektronik', 3, 'Pcs', '90000', 'nyimpen video parakan', 1),
+(29, 7, 'AMBIL-ATK-20210524-007', 'Pulpen', 'ATK-20210520018', 'Alat Menulis', 8, 'Pcs', '12000', 'nv', 1),
+(30, 7, 'AMBIL-ATK-20210524-007', 'Flashdisk', 'ATK-20210520164', 'Elektronik', 2, 'Pcs', '90000', '', 2),
+(42, 10, 'AMBIL-ATK-20210525-0010', 'Flashdisk', 'ATK-20210520164', 'Elektronik', 3, 'Pcs', '90000', 'adw', 1),
+(54, 12, 'AMBIL-ATK-20210525-0012', 'Flashdisk', 'ATK-20210520164', 'Elektronik', 3, 'Pcs', '90000', 'a', 1),
+(58, 13, 'AMBIL-ATK-20210525-0013', 'Penggaris', 'MSAL20210520082', 'Alat Menulis', 12, 'Pcs', '12000', 'buat megnaris', 1),
+(59, 13, 'AMBIL-ATK-20210525-0013', 'Pulpen', 'ATK-20210520018', 'Alat Menulis', 8, 'Pcs', '12000', 'menulis takdir', 1),
+(88, 14, 'AMBIL-ATK-20210525-0014', 'Pulpen', 'ATK-20210520018', 'Alat Menulis', 8, 'Pcs', '12000', 'k', 1),
+(92, 15, 'AMBIL-ATK-20210526-0015', 'Pulpen', 'ATK-20210520018', 'Alat Menulis', 1, 'Pcs', '12000', 'awda', 1),
+(93, 16, 'ATK-20210526-0016', 'Penggaris', 'MSAL20210520082', 'Alat Menulis', 9, 'Pcs', '12000', 'adsadw', 1),
+(94, 16, 'ATK-20210526-0016', 'Pulpen', 'ATK-20210520036', 'Alat Menulis', 6, 'Pack', '10000', 'a', 1),
+(95, 17, 'ATK-20210527-0017', 'Flashdisk', 'ATK-20210520164', 'Elektronik', 2, 'Pcs', '90000', 'kk kk kk', 1),
+(96, 18, 'ATK-20210527-0018', 'HVS', 'ATK-20210527061', 'Kertas', 10, 'Pack', '75000', 'Untuk bungkus', 1),
+(97, 18, 'ATK-20210527-0018', 'Pulpen', 'ATK-20210520036', 'Alat Menulis', 9, 'Pack', '10000', 'p', 1),
+(103, 20, 'ATK-20210528-0020', 'Penghapus', 'ATK-20210520669', 'Alat Menulis', 6, 'Pcs', '30000', 'l', 1),
+(104, 20, 'ATK-20210528-0020', 'Flashdisk', 'ATK-20210520164', 'Elektronik', 1, 'Pcs', '90000', 'adw', 1),
+(115, 18, 'ATK-20210527-0018', 'Pulpen', 'ATK-20210520018', 'Alat Menulis', 6, 'Pcs', '12000', 'mz', 1),
+(116, 21, 'ATK-20210528-0021', 'Pensil', 'ATK-20210528355', 'Alat Menulis', 100, 'Pcs', '12000', 'Untuk menggambar', 1);
 
 --
 -- Indexes for dumped tables
@@ -176,6 +239,12 @@ ALTER TABLE `satuan`
 --
 ALTER TABLE `tb_ambil_atk`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_atk_rusak`
+--
+ALTER TABLE `tb_atk_rusak`
+  ADD PRIMARY KEY (`id_atk`);
 
 --
 -- Indexes for table `tb_barang`
@@ -209,19 +278,25 @@ ALTER TABLE `satuan`
 -- AUTO_INCREMENT for table `tb_ambil_atk`
 --
 ALTER TABLE `tb_ambil_atk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `tb_atk_rusak`
+--
+ALTER TABLE `tb_atk_rusak`
+  MODIFY `id_atk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tb_barang`
 --
 ALTER TABLE `tb_barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tb_detail_ambilatk`
 --
 ALTER TABLE `tb_detail_ambilatk`
-  MODIFY `id_detail_ambilatk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id_detail_ambilatk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

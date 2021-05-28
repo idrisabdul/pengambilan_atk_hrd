@@ -377,10 +377,19 @@
                                 <span> Data Pengambilan Item </span>
                             </a>
                         </li>
+
                         <li>
-                            <a href="<?= base_url('Item_terambil') ?>">
-                                <i class="fas fa-box"></i>
+                            <a href="<?= base_url('Retur') ?>">
+                                <i class="fas fa-exchange-alt"></i>
                                 <span> Retur </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="<?= base_url('Retur/atkRusak') ?>">
+                                <i class="fas fa-backspace"></i>
+                                <span class="badge badge-danger float-right"><?= $this->db->query('SELECT * FROM tb_atk_rusak')->num_rows(); ?></span>
+                                <span>Data Retur</span>
                             </a>
                         </li>
 

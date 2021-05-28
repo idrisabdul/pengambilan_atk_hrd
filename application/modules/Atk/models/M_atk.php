@@ -16,4 +16,14 @@ class M_atk extends CI_Model
     {
         return $this->db->delete('tb_barang', ['id_barang' => $id]);
     }
+
+    public function filterAtk($nm_barang, $kat_barang, $satuan)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_barang');
+        $this->db->where('nm_barang', $nm_barang);
+        $this->db->where('kat_barang', $kat_barang);
+        $this->db->where('satuan', $satuan);
+        return $this->db->get()->result_array();
+    }
 }

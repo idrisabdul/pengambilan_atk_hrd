@@ -22,10 +22,45 @@ class Atk extends CI_Controller
         $data['pt'] = $this->db->query($sql)->result_array();
         $sql_atk = "SELECT * FROM tb_barang ORDER BY id_barang DESC";
         $data['atk'] = $this->db->query($sql_atk)->result_array();
+        $data['atk_filt'] = $this->db->query($sql_atk)->result_array();
         $sql_kat = "SELECT * FROM kategori";
         $data['kategori'] = $this->db->query($sql_kat)->result_array();
         $sql_sat = "SELECT * FROM satuan";
         $data['sat'] = $this->db->query($sql_sat)->result_array();
+
+        //filter
+        $sql_atkf = "SELECT * FROM tb_barang GROUP BY nm_barang ORDER BY id_barang DESC ";
+        $data['atkf'] = $this->db->query($sql_atkf)->result_array();
+
+        // $data['atk-filt'] = $this->M_atk->filterAtk('')
+        // echo "<pre>";
+        // var_dump($data['user_nama']);
+        // echo "</pre>";
+        $this->template->load('template', 'v_atk', $data);
+    }
+    function filterAtk()
+    {
+        $sql = "SELECT * FROM db_sso.tb_pt";
+        $data['pt'] = $this->db->query($sql)->result_array();
+        $sql_atk = "SELECT * FROM tb_barang ORDER BY id_barang DESC";
+        $data['atk'] = $this->db->query($sql_atk)->result_array();
+        $sql_kat = "SELECT * FROM kategori";
+        $data['kategori'] = $this->db->query($sql_kat)->result_array();
+        $sql_sat = "SELECT * FROM satuan";
+        $data['sat'] = $this->db->query($sql_sat)->result_array();
+
+        //filter
+        $sql_atkf = "SELECT * FROM tb_barang GROUP BY nm_barang ORDER BY id_barang DESC ";
+        $data['atkf'] = $this->db->query($sql_atkf)->result_array();
+
+
+        $nm_atk = $this->input->post('nm_barang');
+        $kat = $this->input->post('kat_barang');
+        $satuan = $this->input->post('satuan');
+
+
+
+        $data['atk_filt'] = $this->M_atk->filterAtk($nm_atk, $kat, $satuan);
         // echo "<pre>";
         // var_dump($data['user_nama']);
         // echo "</pre>";
