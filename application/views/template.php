@@ -104,7 +104,7 @@
 
                 <!-- LOGO -->
                 <div class="logo-box">
-                    <a href="index.html" class="logo logo-dark text-center">
+                    <a href="<?= base_url('Dashboard') ?>" class="logo logo-dark text-center">
                         <span class="logo-sm">
                             <img src="<?= base_url() ?>/assets/images/msal.gif" alt="" height="22">
                             <!-- <span class="logo-lg-text-light">UBold</span> -->
@@ -115,7 +115,7 @@
                         </span>
                     </a>
 
-                    <a href="index.html" class="logo logo-light text-center">
+                    <a href="<?= base_url('Dashboard') ?>" class="logo logo-light text-center">
                         <span class="logo-sm">
                             <img src="<?= base_url() ?>/assets/images/msal.gif" alt="" width="20%">
                             <!-- <span class="logo-lg-text-light">UBold</span> -->
@@ -409,6 +409,13 @@
                             <a href="<?= base_url('Satuan') ?>">
                                 <i class="fas fa-cube"></i>
                                 <span> Satuan </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="<?= base_url('Kodeatk') ?>">
+                                <i class="fas fa-sort-numeric-up"></i>
+                                <span> Kode ATK </span>
                             </a>
                         </li>
 
