@@ -434,21 +434,40 @@
 
         $('#atkterpilih').on('click', '#batal_ambil', function() {
             // alert('batal');
-            var no_ambilatk_ = $('#no_ambilatk_').text();
+            swal({
+                title: "Anda Yakin?",
+                text: "Jika anda menghapus item ini, maka anda harus mengembalikan seluruhnya.",
+                type: "danger",
+                showCancelButton: true,
+                confirmButtonColor: "#1FAB45",
+                confirmButtonText: "Save",
+                cancelButtonText: "Cancel",
+                buttonsStyling: true
+            }).then(result => {
+                if (result.value) {
+                    // update status 2 -> 1
+                    var no_ambilatk_ = $('#no_ambilatk_').text();
 
-            var id = $(this).attr('data');
-            $.ajax({
-                dataType: 'JSON',
-                type: 'POST',
-                url: '<?= base_url('') ?>Ambil_atk/hapus_ambilatk_sem',
-                data: {
-                    id: id
-                },
-                success: function() {
-                    // alert('terbatal');
-                    tabel_ambilatk(no_ambilatk_);
+                    var id = $(this).attr('data');
+                    $.ajax({
+                        dataType: 'JSON',
+                        type: 'POST',
+                        url: '<?= base_url('') ?>Ambil_atk/hapus_ambilatk_sem',
+                        data: {
+                            id: id
+                        },
+                        success: function() {
+                            // alert('terbatal');
+                            tabel_ambilatk(no_ambilatk_);
+                        }
+                    });
+                    console.log(result.value)
+                } else {
+                    // handle dismiss, result.dismiss can be 'cancel', 'overlay', 'close', and 'timer'
+                    console.log(result.dismiss)
                 }
             });
+
         });
 
         //UPDATE STATUS 0 -> 1; WHERE no_ambilatk = ;

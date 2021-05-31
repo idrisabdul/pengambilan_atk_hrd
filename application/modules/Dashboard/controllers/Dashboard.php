@@ -24,18 +24,29 @@ class Dashboard extends MX_Controller
         $data['stok_atk_'] = $this->db->query($sql1)->result_array();
 
 
+        //TB BARANG
         $sql_atk = "SELECT * FROM tb_barang ORDER BY id_barang DESC";
         $data['atk'] = $this->db->query($sql_atk)->result_array();
+
+        //TB KATEGORI
         $sql_kat = "SELECT * FROM kategori";
         $data['kategori'] = $this->db->query($sql_kat)->result_array();
+
+        //TB SATUAN
         $sql_sat = "SELECT * FROM satuan";
         $data['sat'] = $this->db->query($sql_sat)->result_array();
 
-        $sql_user = "SELECT * FROM tb_ambil_atk GROUP BY user_nama";
+        //TB JUML USER YANG AMBIL ATK
+        // $sql_user = "SELECT * FROM tb_ambil_atk GROUP BY user_nama";
+        $sql_user = "SELECT * FROM db_sso.user_ho";
         $data['jml_user'] = $this->db->query($sql_user)->num_rows();
 
+        //TOTAL ROWS TB AMBIL ATK
         $sql_ambil = "SELECT * FROM tb_ambil_atk";
         $data['ambil_atk'] = $this->db->query($sql_ambil)->num_rows();
+
+        //total ROWS ATK RUSAK
+        $data['total_retur'] = $this->db->query('SELECT * FROM tb_atk_rusak')->num_rows();
 
         // foreach ($data['stok_atk_'] as $sa) {
         //     $nm_atk = $sa['kd_inputatk'];

@@ -31,9 +31,9 @@ class Retur extends CI_Controller
         $id = $this->input->post('id');
         $qty_inp = $this->input->post('qty_inp');
         $row = $this->db->query("SELECT qty FROM tb_detail_ambilatk WHERE id_detail_ambilatk = '$id'")->row_array();
-        $qty_now = $row['qty'] - $qty_inp;
-        $this->db->update('tb_detail_ambilatk', ['qty' => $qty_now], ['id_detail_ambilatk' => $id]);
-        // $this->db->update('tb_detail_ambilatk', ['status' => 2], ['id_detail_ambilatk' => $id]);
+        // $qty_now = $row['qty'] - $qty_inp;
+        // $this->db->update('tb_detail_ambilatk', ['status' => 2, 'qty' => $qty_now], ['id_detail_ambilatk' => $id]);
+        $this->db->update('tb_detail_ambilatk', ['status' => 2], ['id_detail_ambilatk' => $id]);
 
         $retur = [
             'id_detail_ambilatk' => $this->input->post('id'),
@@ -93,12 +93,15 @@ class Retur extends CI_Controller
             $row[] = $no;
             $row[] = $field->user_nama;
             $row[] = $field->nm_barang;
+            $row[] = $field->kd_inputatk;
             $row[] = $field->qty_rusak;
             $row[] = $field->alasan;
             $row[] = $field->tgl_retur;
-            $row[] = '<button href="#!" id="editretur" href="javascript:;" data-id="' . $field->id_atk . '" data-nm_barang="' . $field->nm_barang . '" data-alasan="' . $field->alasan . '" data-qty_rusak="' . $field->qty_rusak . '" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editReturModal"><i class="fa fa-edit mr-1"></i>Edit</button> <button id="delete-item" data-id_re="' . $field->id_atk . '"  class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="mdi mdi-delete mr-1"></i>Hapus</button>';
-
-
+            if ($field->status == 0) {
+                $row[] = anchor('Retur/konfDikembalikan/' . $field->id_detail_ambilatk, '<button class="btn btn-xs btn-success"><i class="fas fa-check mr-1"></i>Sudah</button>');
+            } else {
+                $row[] = '';
+            }
 
             $data[] = $row;
         }
@@ -202,39 +205,5 @@ class Retur extends CI_Controller
         // echo var_dump($data['retur']);
         // echo "</pre>";
         $this->template->load('template', 'v_indexRetur', $data);
-    }
-
-    public function pdf()
-    {
-        $dompdf = new Dompdf();
-        $data['retur'] = $this->db->query('SELECT * FROM tb_atk_rusak ORDER BY id_atk DESC')->result_array();
-        $html = $this->load->view('v_cetak_retur', $data, true);
-
-        $dompdf->load_html($html);
-        $dompdf->set_paper('A4', 'potrait');
-        $dompdf->render();
-        // $dompdf->set_option('enable_html5_parser', TRUE);
-        $pdf = $dompdf->output();
-        $dompdf->stream('retur.pdf', array('Attachment' => false));
-    }
-
-    public function editRetur()
-    {
-        $id = $this->input->post('id');
-        $retur = [
-            'qty_rusak' => $this->input->post('qty_rusak'),
-            'alasan' => $this->input->post('alasan'),
-        ];
-        $this->M_retur->updateRetur($retur, $id);
-        $this->session->set_flashdata('message', '<div class="alert alert-info" role="alert">Edit Retur Berhasil</div>');
-        redirect('Retur/atkRusak');
-    }
-
-    public function deleteRetur()
-    {
-        $id = $this->input->post('id');
-        $this->db->delete('tb_atk_rusak', ['id_atk' => $id]);
-        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Data Retur Dihapus</div>');
-        redirect('Retur/atkRusak');
     }
 }

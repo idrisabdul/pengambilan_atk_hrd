@@ -12,6 +12,9 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="<?= base_url() ?>/assets/images/favicon.ico">
 
+    <!-- SELECT2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <!-- third party css -->
     <link href="<?php echo base_url() ?>assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url() ?>assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -378,12 +381,12 @@
                             </a>
                         </li>
 
-                        <li>
+                        <!-- <li>
                             <a href="<?= base_url('Retur') ?>">
                                 <i class="fas fa-exchange-alt"></i>
                                 <span> Retur </span>
                             </a>
-                        </li>
+                        </li> -->
 
                         <li>
                             <a href="<?= base_url('Retur/atkRusak') ?>">
@@ -435,6 +438,9 @@
 
         <!-- Dashboar 1 init js-->
         <script src="<?= base_url() ?>/assets/js/pages/dashboard-1.init.js"></script>
+
+        <!-- SELECT2 -->
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
         <!-- Sweet Alerts js -->

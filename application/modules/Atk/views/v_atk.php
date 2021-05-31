@@ -11,8 +11,8 @@
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
+                    <button class="btn btn-md btn-rounded btn-success mr-1" onclick="add()"><i class="fas fa-plus mr-1"></i>Tambah Barang</button>
                     <a href="<?= base_url() ?>Atk/pdf" class="btn btn-rounded btn-md btn-primary"><i class="fas fa-print mr-1"></i>Cetak</a>
-                    <button class="btn btn-md btn-rounded btn-success" onclick="add()"><i class="fas fa-plus mr-1"></i>Tambah Barang</button>
                 </div>
                 <h4 class="page-title">Total Barang-barang ATK</h4>
                 <?= $this->session->flashdata('message') ?>
@@ -46,7 +46,7 @@
                 <div class="table-responsive">
                     <table class="table table-borderless table-hover table-sm table-centered m-0" id="example">
 
-                        <thead class="pb-10 mb-10" id="filter">
+                        <!-- <thead class="pb-10 mb-10" id="filter">
                             <tr>
                                 <th class="text-right">Nama Atk :</th>
                                 <th></th>
@@ -57,7 +57,7 @@
                                 <th></th>
                                 <th></th>
                             </tr>
-                        </thead>
+                        </thead> -->
                         <thead class="thead-light">
                             <tr>
                                 <th>No</th>
@@ -368,31 +368,31 @@
 
     $(document).ready(function() {
         $('#example').DataTable({
-            initComplete: function() {
-                this.api().columns([1, 3, 4]).every(function(d) {
-                    var column = this;
-                    var theadname = $("#example th").eq([d]).text();
-                    var select = $('<select class="form-control form-control-sm"><option value="">All</option></option></select>')
-                        .appendTo($(column.header()).empty())
-                        .on('change', function() {
-                            var val = $.fn.dataTable.util.escapeRegex(
-                                $(this).val()
-                            );
+            // initComplete: function() {
+            //     this.api().columns([1, 3, 4]).every(function(d) {
+            //         var column = this;
+            //         var theadname = $("#example th").eq([d]).text();
+            //         var select = $('<select class="form-control form-control-sm"><option value="">All</option></option></select>')
+            //             .appendTo($(column.header()).empty())
+            //             .on('change', function() {
+            //                 var val = $.fn.dataTable.util.escapeRegex(
+            //                     $(this).val()
+            //                 );
 
-                            column
-                                .search(val ? '^' + val + '$' : '', true, false)
-                                .draw();
-                        });
+            //                 column
+            //                     .search(val ? '^' + val + '$' : '', true, false)
+            //                     .draw();
+            //             });
 
-                    column.data().unique().sort().each(function(d, j) {
-                        select.append('<option value="' + d + '">' + d + '</option>')
-                    });
-                });
-            },
-            "aoColumnDefs": [{
-                "bSortable": false,
-                "aTargets": [0, 1, 2, 3, 5, 7]
-            }, ]
+            //         column.data().unique().sort().each(function(d, j) {
+            //             select.append('<option value="' + d + '">' + d + '</option>')
+            //         });
+            //     });
+            // },
+            // "aoColumnDefs": [{
+            //     "bSortable": false,
+            //     "aTargets": [0, 1, 2, 3, 5, 7]
+            // }, ]
         });
     });
 </script>

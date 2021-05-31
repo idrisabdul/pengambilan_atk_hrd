@@ -21,8 +21,6 @@
             <div class="card-box pb-2">
                 <div class="float-right d-none d-md-inline-block">
                     <div class="btn-group mb-2">
-                        <a href="<?= base_url('Retur/atkRusak') ?>" class="btn btn-outline-danger btn-rounded waves-effect waves-light"><i class="fas fa-angle-left mr-2"></i>Batal</a>
-
                     </div>
                 </div>
 
@@ -43,7 +41,7 @@
                         </thead>
                         <tbody>
                             <?php $no = 1; ?>
-                            <?php foreach ($retur as $au) { ?>
+                            <?php foreach ($ambilatk_user as $au) { ?>
                                 <tr>
                                     <td><?= $no++; ?>
                                     </td>
@@ -67,8 +65,14 @@
                                         <?= $au['tgl_permintaan'] ?>
                                     </td>
                                     <td>
-                                        <button href="#!" id="retur" class="btn btn-xs btn-success" href="javascript:;" data-id="<?php echo $au['id_detail_ambilatk'] ?>" data-user_nama="<?php echo strtoupper($au['user_nama']) ?>" data-kat_barang="<?php echo $au['kat_barang'] ?>" data-harga="<?php echo $au['harga'] ?>" data-no_ambil="<?php echo $au['no_ambilatk'] ?>" data-kd_inputatk="<?php echo $au['kd_inputatk'] ?>" data-qty="<?php echo $au['qty'] ?>" data-nm_barang="<?php echo $au['nm_barang'] ?>" data-keperluan="<?php echo $au['keperluan'] ?>" data-toggle="modal" data-target="#editModal"><i class="fas fa-exchange-alt mr-1"></i>Retur</button>
-
+                                        <?php if ($au['status'] == 3) { ?>
+                                            <?= anchor('Retur/gantiAtk/' . $au['id_detail_ambilatk'], '<button class="btn btn-xs btn-warning"><i class="fas fa-exchange-alt mr-1"></i>Diajukan</button>'); ?>
+                                        <?php } else if ($au['status'] == 2) { ?>
+                                            <button class="btn btn-xs btn-info" id="info_retur" data-toggle="modal" data-target="#infoModal"><i class="far fa-clock mr-1"></i>Menunggu</button>
+                                            <button class="btn btn-xs btn-danger" id="info_retur" data-toggle="modal" data-target="#infoModal">Batal</button>
+                                        <?php } else if ($au['status'] == 1) { ?>
+                                            <button href="#!" id="retur" class="btn btn-xs btn-success" href="javascript:;" data-id="<?php echo $au['id_detail_ambilatk'] ?>" data-user_nama="<?php echo strtoupper($au['user_nama']) ?>" data-kat_barang="<?php echo $au['kat_barang'] ?>" data-harga="<?php echo $au['harga'] ?>" data-no_ambil="<?php echo $au['no_ambilatk'] ?>" data-kd_inputatk="<?php echo $au['kd_inputatk'] ?>" data-qty="<?php echo $au['qty'] ?>" data-nm_barang="<?php echo $au['nm_barang'] ?>" data-keperluan="<?php echo $au['keperluan'] ?>" data-toggle="modal" data-target="#editModal"><i class="fas fa-exchange-alt mr-1"></i>Retur</button>
+                                        <?php } ?>
                                         <!-- <?= anchor('Retur/gantiAtk/' . $au['id_detail_ambilatk'], '<button class="btn btn-xs btn-warning"><i class="fas fa-exchange-alt mr-1"></i>Diajukan</button>'); ?> -->
                                         <!-- <?= anchor('Retur/gantiAtk/' . $au['id_detail_ambilatk'], '<button class="btn btn-xs btn-info"><i class="fas fa-exchange-alt mr-1"></i>Menunggu</button>'); ?> -->
                                         <!-- <button class="btn btn-xs btn-info" id="info_retur"><i class="fas fa-exchange-alt mr-1"></i>Menunggu</button> -->
@@ -98,7 +102,7 @@
             </div>
             <div class="modal-body">
                 <form action="<?= base_url('Retur/addRetur') ?>" method="POST">
-                    <input type="hidden" id="id" name="id" class="form-control">
+                    <input type="text" id="id" name="id" class="form-control">
                     <input type="hidden" id="kd_inputatk" name="kd_inputatk" class="form-control">
                     <input type="hidden" id="kat_barang" name="kat_barang" class="form-control">
                     <input type="hidden" id="harga" name="harga" class="form-control">
@@ -127,7 +131,7 @@
                     </div>
                     <div class="row clearfix mb-1">
                         <div class="col-sm-12">
-                            <label for="">Masukkan Jumlah QTY yang diretur?</label>
+                            <label for="">Masukkan Jumlah QTY yang rusak?</label>
                             <div class="form-group">
                                 <input type="number" id="qty_inp" name="qty_inp" class="form-control" placeholder="Qty Rusak" required>
                             </div>

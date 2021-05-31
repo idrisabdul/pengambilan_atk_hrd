@@ -38,7 +38,7 @@
             <div class="widget-rounded-circle card-box">
                 <div class="row">
                     <div class="col-6">
-                        <a href="<?= base_url('Ambil_atk/insert') ?>">
+                        <a href="<?= base_url('Ambil_atk') ?>">
                             <div class="avatar-lg rounded-circle bg-soft-info border-info border">
                                 <i class="fe-archive font-22 avatar-title text-info"></i>
                             </div>
@@ -58,13 +58,13 @@
                 </div> <!-- end row-->
             </div> <!-- end widget-rounded-circle-->
         </div> <!-- end col-->
-        <div class="col-md-3 col-xl-3">
+        <div class="col-lg-3">
             <div class="widget-rounded-circle card-box">
                 <div class="row">
                     <div class="col-6">
-                        <a href="<?= base_url('Ambil_atk/insert') ?>">
-                            <div class="avatar-lg rounded-circle bg-soft-warning border-warning border">
-                                <i class="fe-users font-22 avatar-title text-warning"></i>
+                        <a href="<?= base_url('Retur/AtkRusak') ?>">
+                            <div class="avatar-lg rounded-circle bg-soft-danger border-warning border">
+                                <i class="fe-alert-circle font-22 avatar-title text-danger"></i>
                             </div>
                         </a>
                         <!-- <a href="#">
@@ -75,13 +75,14 @@
                     </div>
                     <div class="col-6">
                         <div class="text-right">
-                            <h3 class="text-dark mt-1"><span data-plugin="counterup"><?= $jml_user ?></span></h3>
-                            <p class="text-muted mb-1 text-truncate">Total User</p>
+                            <h3 class="text-dark mt-1"><span data-plugin="counterup"><?= $total_retur ?></span></h3>
+                            <p class="text-muted mb-1 text-truncate">Data Retur</p>
                         </div>
                     </div>
                 </div> <!-- end row-->
             </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
+        </div>
+
         <div class="col-md-3 col-xl-3">
             <div class="widget-rounded-circle card-box">
                 <div class="row">
@@ -113,12 +114,11 @@
         <div class="col-lg-12">
             <div class="card-box pb-2">
                 <div class="float-right d-none d-md-inline-block">
-
                 </div>
 
                 <h4 class="header-title mb-3">Barang ATK Yang Tersedia</h4>
                 <div class="table-responsive">
-                    <table class="table table-borderless table-hover" id="basic-datatable">
+                    <table class="table table-borderless table-sm table-hover" id="basic-datatable">
 
                         <thead class="thead-light">
                             <tr>
@@ -201,6 +201,7 @@
                 </div>
             </div>
         </div> <!-- end col -->
+
     </div> <!-- end card-box -->
 
 

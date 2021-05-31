@@ -107,7 +107,7 @@ class Ambil_atk extends CI_Controller
     public function pilihAtk()
     {
         // $sql1 = "SELECT SUM(qty) as qtyatk,nm_barang,kat_barang,kd_barang,satuan,id_barang  FROM tb_barang GROUP BY nm_barang";
-        $last_numberatk = 'SELECT no_urut FROM `tb_detail_ambilatk` WHERE status = 1 ORDER BY no_urut DESC LIMIT 1';
+        $last_numberatk = 'SELECT no_urut FROM `tb_detail_ambilatk` WHERE status != 0 ORDER BY no_urut DESC LIMIT 1';
         $row = $this->db->query($last_numberatk)->row_array();
         $last_no = $row['no_urut'];
 

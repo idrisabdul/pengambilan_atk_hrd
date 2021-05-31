@@ -31,7 +31,7 @@
                                 <label class="col-3 col-form-label">Nama PT</label>
                                 <div class="col-9">
                                     <select name="nama_pt" id="nama_pt" class="form-control" required>
-                                        <option value="" selected disabled>-- SELECT --</option>
+                                        <option value="" selected disabled>-- Select PT --</option>
                                         <?php foreach ($pt as $p) : ?>
                                             <option value="<?= $p['nama_pt'] ?>"><?= $p['alias'] ?></option>
                                         <?php endforeach; ?>
@@ -42,7 +42,8 @@
                                 <label class="col-3 col-form-label">Nama</label>
                                 <div class="col-9">
                                     <select name="user_nama" id="user_nama" class="form-control" required>
-                                        <option value="<?= $this->session->userdata('userlogin') ?>"><?= $this->session->userdata('userlogin') ?></option>
+                                        <!-- <option value="<?= $this->session->userdata('userlogin') ?>"><?= $this->session->userdata('userlogin') ?></option> -->
+                                        <option value="" selected disabled>-- Select Name --</option>
                                         <?php foreach ($user_nama as $un) : ?>
                                             <option value="<?= $un['nama'] ?>"><?= $un['nama'] ?></option>
                                         <?php endforeach; ?>
@@ -324,7 +325,18 @@
                     if (data.length == 0) {
                         $('#save').hide();
                         $('#batal').hide();
+                        $('#getuser').val('');
+                        $('#nama_pt').prop('disabled', false);
+                        $('#user_nama').prop('disabled', false);
+                        $('#getitemharga').val('');
+                        $('#getitematk').val('');
+                        $('#getitemqty_info').val('');
+                        $('#getitemqty').val('');
+                        $('#getitemkep').val('');
+                        $('#satuan').text('');
                     } else {
+                        $('#nama_pt').prop('disabled', true);
+                        $('#user_nama').prop('disabled', true);
                         $('#batal').show();
                         $('#save').show();
 
@@ -336,11 +348,26 @@
         $('#clickambilatk').click(function() {
 
             var pt = $('#getpt').val();
+            var user = $('#getuser').val();
             var qty = $('#getitemqty').val();
             var kep = $('#getitemkep').val();
 
-            if (pt == '') {
-                swal('Silahkan pilih pt');
+            if (pt == '' && user == '') {
+                swal('Silahkan pilih PT dan Nama Anda');
+                $('#getitemharga').val('');
+                $('#getitematk').val('');
+                $('#getitemqty').val('');
+                $('#getitemkep').val('');
+                $('#satuan').text('');
+            } else if (pt == '') {
+                swal('Silahkan pilih PT');
+                $('#getitemharga').val('');
+                $('#getitematk').val('');
+                $('#getitemqty').val('');
+                $('#getitemkep').val('');
+                $('#satuan').text('');
+            } else if (user == '') {
+                swal('Silahkan pilih Nama Anda');
                 $('#getitemharga').val('');
                 $('#getitematk').val('');
                 $('#getitemqty').val('');
@@ -352,8 +379,6 @@
                 } else if (kep == '') {
                     swal('Mohon Masukkan Keperluan Anda');
                 } else {
-                    $('#nama_pt').prop('disabled', true);
-                    $('#user_nama').prop('disabled', true);
                     var no = $('#no').val();
                     var no_ambilatk_ = $('#no_ambilatk_').text();
                     var no_urut = $('#no_urut').val();
