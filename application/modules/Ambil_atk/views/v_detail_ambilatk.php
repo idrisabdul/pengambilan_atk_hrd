@@ -67,6 +67,7 @@
                                 <?php foreach ($detail_ambilatk as $da) { ?>
                                     <?php $id_detail = $da['id_detail_ambilatk']; ?>
                                     <?php $no_ambilatk = $da['no_ambilatk']; ?>
+                                    <?php $kd_inputatk = $da['kd_inputatk']; ?>
                                     <?php
                                     $row_retur = "SELECT SUM(qty_rusak) as qtyambil_rusak  FROM tb_atk_rusak where id_detail_ambilatk='$id_detail'  AND no_ambilatk ='$no_ambilatk'";
                                     $result = $this->db->query($row_retur)->result_array();
@@ -75,8 +76,31 @@
                                     }
 
                                     $total = $da['qty'] + $qtyambilrusak;
+
+
+                                    //MENGHITUNG SISA ATK YANG TERSEDIA
+                                    $row_atk = "SELECT SUM(qty) as qtyatk  FROM tb_barang where kd_inputatk='$kd_inputatk'";
+                                    $result_atk = $this->db->query($row_atk)->result_array();
+                                    foreach ($result_atk as $atk) {
+                                        $qtyatk = $atk['qtyatk'];
+                                    }
+
+                                    $row_atk = "SELECT SUM(qty) as qtyambil  FROM tb_detail_ambilatk where kd_inputatk='$kd_inputatk'";
+                                    $result_atk = $this->db->query($row_atk)->result_array();
+                                    foreach ($result_atk as $ambil) {
+                                        $qtyambil = $ambil['qtyambil'];
+                                    }
+
+                                    $row_rusak = "SELECT SUM(qty_rusak) as qtyambil_ret  FROM tb_atk_rusak where kd_inputatk='$kd_inputatk'";
+                                    $result_ret = $this->db->query($row_rusak)->result_array();
+                                    foreach ($result_ret as $ret) {
+                                        $qtyambil_ret = $ret['qtyambil_ret'];
+                                    }
+                                    $qtyambilretur = $qtyambil + $qtyambil_ret;
+                                    $sisa = $qtyatk - $qtyambilretur;
                                     ?>
                                     <tr>
+                                        <input type="hidden" name="" id="sisa<?= $no ?>" value="<?= $sisa ?>">
                                         <td><?= $no++ ?></td>
                                         <td><?= $da['nm_barang'] ?></td>
                                         <td><?= $da['kat_barang'] ?></td>
@@ -86,11 +110,12 @@
                                         <td><?= $da['sat'] ?></td>
                                         <td><?= $da['keperluan'] ?></td>
                                         <td>
-                                            <button class="btn btn-xs btn-warning" id="editambil" data-no_ambilatk="<?= $da['no_ambilatk'] ?>" data-id="<?php echo $da['id_detail_ambilatk'] ?>" data-nm_barang="<?php echo $da['nm_barang'] ?>" data-qty="<?php echo $da['qty'] ?>" data-keperluan="<?php echo $da['keperluan'] ?>" href="javascript:;" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit mr-1"></i>Edit</button>
+                                            <button class="btn btn-xs btn-warning" id="editambil" data-no_ambilatk="<?= $da['no_ambilatk'] ?>" data-id="<?php echo $da['id_detail_ambilatk'] ?>" data-sisa=<?= $sisa ?> data-nm_barang="<?php echo $da['nm_barang'] ?>" data-qty="<?php echo $da['qty'] ?>" data-keperluan="<?php echo $da['keperluan'] ?>" href="javascript:;" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit mr-1"></i>Edit</button>
                                             <button id="delete-item" data-no_urut="<?= $da['no_ambilatk'] ?>" data-id="<?= $da['id_detail_ambilatk'] ?>" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="mdi mdi-delete mr-1"></i>Hapus Item</button>
                                         </td>
                                     </tr>
                                 <?php } ?>
+                                <input type="hidden" name="count" id="count" value="<?= count($detail_ambilatk) ?>">
                             </tbody>
                         </table>
                     </div>
@@ -155,6 +180,7 @@
                                         }
 
                                         $total = $da['qty'] + $qtyambilrusak;
+
                                         ?>
                                         <tr>
                                             <td><?= $no++ ?></td>
@@ -201,6 +227,7 @@
                     <div class="row clearfix">
                         <div class="col-sm-12">
                             <label for="">Jumlah Stok</label>
+                            <!-- (QTY Tersisa saat ini : <span id="sisa"></span>) -->
                             <div class="form-group">
                                 <input type="number" name="qty" id="qty" class="form-control" placeholder="Jumlah Stok" required />
                             </div>
@@ -300,12 +327,31 @@
             var qty = $(this).data('qty');
             var keperluan = $(this).data('keperluan');
             var no_ambilatk = $(this).data('no_ambilatk');
+            var sisa = $(this).data('sisa');
 
             $('#id_detail').val(id);
             $('#nm_barang').val(nm_barang);
             $('#qty').val(qty);
             $('#no_ambilatk').val(no_ambilatk);
+            $('#sisa').text(sisa);
             $('textarea#keperluan').val(keperluan);
         });
     });
+
+    // var count = $("#count").val();
+    // $(document).ready(function() {
+    //     $("#qty").keyup(function() {
+    //         var qty = $("#qty").val();
+    //         var sisa = $("#sisa").text();
+    //         var inp_1 = Number(qty);
+    //         var inp_2 = Number(sisa);
+
+    //         if (qty > sisa) {
+    //             // swal("QTY Melebihi sisa");
+    //             $("#qty").val("");
+    //         } else {
+    //             $("#qty").val(inp_1);
+    //         }
+    //     });
+    // });
 </script>

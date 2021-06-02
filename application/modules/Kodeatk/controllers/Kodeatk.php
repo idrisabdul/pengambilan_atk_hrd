@@ -7,6 +7,10 @@ class Kodeatk extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_kodeatk');
+        if (!$this->session->userdata('userlogin')) {
+            // redirect('https://192.168.1.231/msal-login/Login');
+            redirect('localhost/Login');
+        }
     }
 
     public function index()

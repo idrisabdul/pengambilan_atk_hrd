@@ -5,7 +5,7 @@
         //SERVER SIDE
         var $table = 'tb_atk_rusak'; //nama tabel dari database
         var $column_order = array(null, 'user_nama', 'nm_barang', 'kd_inputatk', 'harga', 'kat_barang', 'qty_rusak', 'alasan', 'tgl_retur'); //field yang ada di table user
-        var $column_search = array('user_nama', 'nm_barang', 'alasan'); //field yang diizin untuk pencarian 
+        var $column_search = array('user_nama', 'nm_barang', 'alasan', 'no_ambilatk', 'tgl_retur'); //field yang diizin untuk pencarian 
         var $order = array('id_atk' => 'desc'); // default order 
 
         public function __construct()
