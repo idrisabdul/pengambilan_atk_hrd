@@ -37,7 +37,9 @@ class Retur extends CI_Controller
 
         $retur = [
             'id_detail_ambilatk' => $this->input->post('id'),
+            'no_ambilatk' => $this->input->post('no_ambilatk_inp'),
             'nm_barang' => $this->input->post('nm_barang'),
+            'kode_atk' => $this->input->post('kode_atk'),
             'user_nama' => $this->input->post('user_nama'),
             'qty_rusak' => $qty_inp,
             'kd_inputatk' => $this->input->post('kd_inputatk'),
@@ -91,6 +93,7 @@ class Retur extends CI_Controller
             $no++;
             $row = array();
             $row[] = $no;
+            $row[] = $field->no_ambilatk;
             $row[] = $field->user_nama;
             $row[] = $field->nm_barang;
             $row[] = $field->qty_rusak;

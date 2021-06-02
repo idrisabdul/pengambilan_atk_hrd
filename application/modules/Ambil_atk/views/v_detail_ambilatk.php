@@ -55,6 +55,8 @@
                                     <th>Nama ATK</th>
                                     <th>Kategori</th>
                                     <th>Qty</th>
+                                    <th>Retur</th>
+                                    <th>QTY sebelumnya</th>
                                     <th>Satuan</th>
                                     <th>Keperluan</th>
                                     <th>Action</th>
@@ -63,11 +65,24 @@
                             <tbody>
                                 <?php $no = 1; ?>
                                 <?php foreach ($detail_ambilatk as $da) { ?>
+                                    <?php $id_detail = $da['id_detail_ambilatk']; ?>
+                                    <?php $no_ambilatk = $da['no_ambilatk']; ?>
+                                    <?php
+                                    $row_retur = "SELECT SUM(qty_rusak) as qtyambil_rusak  FROM tb_atk_rusak where id_detail_ambilatk='$id_detail'  AND no_ambilatk ='$no_ambilatk'";
+                                    $result = $this->db->query($row_retur)->result_array();
+                                    foreach ($result as $row3) {
+                                        $qtyambilrusak = $row3['qtyambil_rusak'];
+                                    }
+
+                                    $total = $da['qty'] + $qtyambilrusak;
+                                    ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
                                         <td><?= $da['nm_barang'] ?></td>
                                         <td><?= $da['kat_barang'] ?></td>
                                         <td><?= $da['qty'] ?></td>
+                                        <td><?= $qtyambilrusak == 0 ? 0 : $qtyambilrusak ?></td>
+                                        <td><?= $total ?></td>
                                         <td><?= $da['sat'] ?></td>
                                         <td><?= $da['keperluan'] ?></td>
                                         <td>
@@ -121,6 +136,8 @@
                                         <th>Nama ATK</th>
                                         <th>Kategori</th>
                                         <th>Qty</th>
+                                        <th>Retur</th>
+                                        <th>QTY sebelumnya</th>
                                         <th>Satuan</th>
                                         <th>Keperluan</th>
                                     </tr>
@@ -128,11 +145,24 @@
                                 <tbody>
                                     <?php $no = 1; ?>
                                     <?php foreach ($detail_ambilatk as $da) { ?>
+                                        <?php $id_detail = $da['id_detail_ambilatk']; ?>
+                                        <?php $no_ambilatk = $da['no_ambilatk']; ?>
+                                        <?php
+                                        $row_retur = "SELECT SUM(qty_rusak) as qtyambil_rusak  FROM tb_atk_rusak where id_detail_ambilatk='$id_detail' AND no_ambilatk ='$no_ambilatk'";
+                                        $result = $this->db->query($row_retur)->result_array();
+                                        foreach ($result as $row3) {
+                                            $qtyambilrusak = $row3['qtyambil_rusak'];
+                                        }
+
+                                        $total = $da['qty'] + $qtyambilrusak;
+                                        ?>
                                         <tr>
                                             <td><?= $no++ ?></td>
                                             <td><?= $da['nm_barang'] ?></td>
                                             <td><?= $da['kat_barang'] ?></td>
                                             <td><?= $da['qty'] ?></td>
+                                            <td><?= $qtyambilrusak == 0 ? 0 : $qtyambilrusak ?></td>
+                                            <td><?= $total ?></td>
                                             <td><?= $da['sat'] ?></td>
                                             <td><?= $da['keperluan'] ?></td>
                                         </tr>

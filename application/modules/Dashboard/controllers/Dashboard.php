@@ -45,6 +45,10 @@ class Dashboard extends MX_Controller
         $sql_ambil = "SELECT * FROM tb_ambil_atk";
         $data['ambil_atk'] = $this->db->query($sql_ambil)->num_rows();
 
+        //TB KODEATK        
+        $sql_kode = "SELECT * FROM kode_atk";
+        $data['kodeatk'] = $this->db->query($sql_kode)->result_array();
+
         //total ROWS ATK RUSAK
         $data['total_retur'] = $this->db->query('SELECT * FROM tb_atk_rusak')->num_rows();
 

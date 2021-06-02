@@ -227,11 +227,20 @@
                             </div>
                         </div>
                         <div class="row clearfix">
-                            <div class="col-sm-12">
-                                <label for="">Nama Barang</label>
+                            <div class="col-sm-6">
+                                <label for="">Nama ATK</label>
                                 <div class="form-group">
                                     <input type="text" name="nama_bar" class="form-control" placeholder="Nama Barang" required />
                                 </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="">Kode ATK</label>
+                                <select name="kd_atk" class="form-control" required>
+                                    <option value="" selected disabled>- Select Kode ATK - </option>
+                                    <?php foreach ($kodeatk as $ka) : ?>
+                                        <option value="<?= $ka['kode_atk'] ?>"><?= $ka['kode_atk'] ?> - <?= $ka['nm_barang'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                         </div>
                         <div class="row clearfix mb-1">

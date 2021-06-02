@@ -58,7 +58,7 @@
                                     <label class="col-form-label">Nama ATK</label>
                                 </div>
                                 <div class="col-6">
-                                    <input type="hidden" id="no" class="form-control">
+                                    <input type="hidden" id="kode_atk" class="form-control">
                                     <input type="hidden" id="getuser" class="form-control">
                                     <input type="hidden" id="getpt" class="form-control">
                                     <input type="hidden" id="getitem_kdinput" class="form-control">
@@ -235,7 +235,7 @@
                                     </td>
 
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-info btn-rounded waves-effect waves-light" id="select" data-qty="<?php echo $saldo  ?>" data-ket="<?= $sa['keterangan'] ?>" data-harga="<?= $sa['harga'] ?>" data-satuan="<?php echo $sa['satuan']  ?>" data-kat_barang="<?php echo $sa['kat_barang']  ?>" data-kd_inputatk="<?php echo $sa['kd_inputatk']  ?>" data-nm_barang="<?php echo $sa['nm_barang'] ?>"><i class="fas fa-check mr-1"></i>Select</button>
+                                        <button type="button" class="btn btn-sm btn-info btn-rounded waves-effect waves-light" id="select" data-qty="<?php echo $saldo  ?>" data-ket="<?= $sa['keterangan'] ?>" data-kd_atk="<?= $sa['kd_barang'] ?>" data-harga="<?= $sa['harga'] ?>" data-satuan="<?php echo $sa['satuan']  ?>" data-kat_barang="<?php echo $sa['kat_barang']  ?>" data-kd_inputatk="<?php echo $sa['kd_inputatk']  ?>" data-nm_barang="<?php echo $sa['nm_barang'] ?>"><i class="fas fa-check mr-1"></i>Select</button>
                                     </td>
                                 </tr>
                             <?php endif; ?>
@@ -311,7 +311,7 @@
                             '<td>' + no + '</td>' +
                             '<td>' + data[i].nm_barang + '</td>' +
                             '<td>' + data[i].qty + '</td>' +
-                            '<td>' + data[i].kd_inputatk + '</td>' +
+                            '<td>' + data[i].kode_atk + '</td>' +
                             '<td>' + data[i].kat_barang + '</td>' +
                             '<td>' + data[i].sat + '</td>' +
                             '<td>Rp. ' + data[i].harga + '</td>' +
@@ -384,6 +384,7 @@
                     var no_urut = $('#no_urut').val();
                     var getitematk = $('#getitematk').val();
                     var getitemqty = $('#getitemqty').val();
+                    var kodeatk = $('#kode_atk').val();
                     var getuser = $('#getuser').val();
                     var get_kdinput = $('#getitem_kdinput').val();
                     var get_katatk = $('#getitem_katatk').val();
@@ -399,6 +400,7 @@
                             no_urut: no_urut,
                             no_ambilatk: no_ambilatk_,
                             nm_barang: getitematk,
+                            kode_atk: kodeatk,
                             qty: getitemqty,
                             kd_inputatk: get_kdinput,
                             kat_barang: get_katatk,
@@ -427,6 +429,7 @@
                     var nm_barang = $(this).data('nm_barang');
                     var satuan = $(this).data('satuan');
                     var kd_inputatk = $(this).data('kd_inputatk');
+                    var kd_atk = $(this).data('kd_atk');
                     var kat_barang = $(this).data('kat_barang');
                     var harga = $(this).data('harga');
                     var keterangan = $(this).data('ket');
@@ -452,6 +455,7 @@
                     $('#getitemket').val(keterangan);
 
                     $('#getitem_sat').val(satuan);
+                    $('#kode_atk').val(kd_atk);
 
 
 
@@ -567,6 +571,7 @@
             var nm_barang = $(this).data('nm_barang');
             var satuan = $(this).data('satuan');
             var kd_inputatk = $(this).data('kd_inputatk');
+            var kd_atk = $(this).data('kd_atk');
             var kat_barang = $(this).data('kat_barang');
             var harga = $(this).data('harga');
             var keterangan = $(this).data('ket');
@@ -592,6 +597,7 @@
             $('#getitemket').val(keterangan);
 
             $('#getitem_sat').val(satuan);
+            $('#kode_atk').val(kd_atk);
 
 
 

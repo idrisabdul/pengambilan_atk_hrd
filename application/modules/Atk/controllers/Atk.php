@@ -27,6 +27,8 @@ class Atk extends CI_Controller
         $data['kategori'] = $this->db->query($sql_kat)->result_array();
         $sql_sat = "SELECT * FROM satuan";
         $data['sat'] = $this->db->query($sql_sat)->result_array();
+        $sql_kode = "SELECT * FROM kode_atk";
+        $data['kodeatk'] = $this->db->query($sql_kode)->result_array();
 
         //filter
         $sql_atkf = "SELECT * FROM tb_barang GROUP BY nm_barang ORDER BY id_barang DESC ";
@@ -85,10 +87,10 @@ class Atk extends CI_Controller
         $atk = [
             'kd_inputatk' => $string,
             'nm_barang' => $this->input->post('nama_bar'),
+            'kd_barang' => $this->input->post('kd_atk'),
             'nama_pt' => $this->input->post('nama_pt'),
             'kat_barang' => $this->input->post('kat_bar'),
             'merek' => $this->input->post('merek'),
-            'kd_barang' => 'kd',
             'harga' => $this->input->post('harga'),
             'qty' => $this->input->post('jml_stok'),
             'satuan' => $this->input->post('sat'),
@@ -108,7 +110,7 @@ class Atk extends CI_Controller
             'nm_barang' => $this->input->post('nm_barang'),
             'nama_pt' => $this->input->post('nama_pt'),
             'kat_barang' => $this->input->post('kat_barang'),
-            'kd_barang' => $this->input->post('kd_barang'),
+            'kd_barang' => $this->input->post('kd_atk'),
             'qty' => $this->input->post('qty'),
             'satuan' => $this->input->post('satuan'),
         ];

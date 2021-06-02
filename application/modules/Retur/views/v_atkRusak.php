@@ -31,6 +31,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th>No</th>
+                                <th>No Ambil</th>
                                 <th>Nama</th>
                                 <th>Nama ATK</th>
                                 <th>QTY</th>

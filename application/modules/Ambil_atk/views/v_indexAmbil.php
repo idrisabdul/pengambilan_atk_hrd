@@ -92,7 +92,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Barang</th>
-                                <th>Kode Input ATK</th>
+                                <th>Kode ATK</th>
                                 <th>Kategori</th>
                                 <th>Jumlah Stok</th>
                                 <th>Satuan</th>
@@ -137,7 +137,7 @@
                                         </td>
 
                                         <td>
-                                            <?= $sa['kd_inputatk'] ?>
+                                            <?= $sa['kd_barang'] ?>
                                         </td>
 
                                         <td>

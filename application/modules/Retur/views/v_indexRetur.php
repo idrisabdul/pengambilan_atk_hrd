@@ -67,7 +67,7 @@
                                         <?= $au['tgl_permintaan'] ?>
                                     </td>
                                     <td>
-                                        <button href="#!" id="retur" class="btn btn-xs btn-success" href="javascript:;" data-id="<?php echo $au['id_detail_ambilatk'] ?>" data-user_nama="<?php echo strtoupper($au['user_nama']) ?>" data-kat_barang="<?php echo $au['kat_barang'] ?>" data-harga="<?php echo $au['harga'] ?>" data-no_ambil="<?php echo $au['no_ambilatk'] ?>" data-kd_inputatk="<?php echo $au['kd_inputatk'] ?>" data-qty="<?php echo $au['qty'] ?>" data-nm_barang="<?php echo $au['nm_barang'] ?>" data-keperluan="<?php echo $au['keperluan'] ?>" data-toggle="modal" data-target="#editModal"><i class="fas fa-exchange-alt mr-1"></i>Retur</button>
+                                        <button href="#!" id="retur" class="btn btn-xs btn-success" href="javascript:;" data-id="<?php echo $au['id_detail_ambilatk'] ?>" data-user_nama="<?php echo strtoupper($au['user_nama']) ?>" data-kat_barang="<?php echo $au['kat_barang'] ?>" data-kode_atk="<?php echo $au['kode_atk'] ?>" data-harga="<?php echo $au['harga'] ?>" data-no_ambil="<?php echo $au['no_ambilatk'] ?>" data-kd_inputatk="<?php echo $au['kd_inputatk'] ?>" data-qty="<?php echo $au['qty'] ?>" data-nm_barang="<?php echo $au['nm_barang'] ?>" data-keperluan="<?php echo $au['keperluan'] ?>" data-toggle="modal" data-target="#editModal"><i class="fas fa-exchange-alt mr-1"></i>Retur</button>
 
                                         <!-- <?= anchor('Retur/gantiAtk/' . $au['id_detail_ambilatk'], '<button class="btn btn-xs btn-warning"><i class="fas fa-exchange-alt mr-1"></i>Diajukan</button>'); ?> -->
                                         <!-- <?= anchor('Retur/gantiAtk/' . $au['id_detail_ambilatk'], '<button class="btn btn-xs btn-info"><i class="fas fa-exchange-alt mr-1"></i>Menunggu</button>'); ?> -->
@@ -99,6 +99,8 @@
             <div class="modal-body">
                 <form action="<?= base_url('Retur/addRetur') ?>" method="POST">
                     <input type="hidden" id="id" name="id" class="form-control">
+                    <input type="hidden" id="kode_atk" name="kode_atk" class="form-control">
+                    <input type="hidden" id="no_ambilatk_inp" name="no_ambilatk_inp" class="form-control">
                     <input type="hidden" id="kd_inputatk" name="kd_inputatk" class="form-control">
                     <input type="hidden" id="kat_barang" name="kat_barang" class="form-control">
                     <input type="hidden" id="harga" name="harga" class="form-control">
@@ -183,6 +185,7 @@
         $(document).on('click', '#retur', function() {
 
             var id = $(this).data('id');
+            var kode_atk = $(this).data('kode_atk');
             var no_ambilatk = $(this).data('no_ambil');
             var nm_barang = $(this).data('nm_barang');
             var keperluan = $(this).data('keperluan');
@@ -194,8 +197,10 @@
 
             // alert(kd_inputatk);
             $('#id').val(id);
+            $('#kode_atk').val(kode_atk);
             $('#nm_barang').val(nm_barang);
             $('#no_ambilatk').text(no_ambilatk);
+            $('#no_ambilatk_inp').val(no_ambilatk);
             $('#qty').val(qty);
             $('#kat_barang').val(kat_barang);
             $('#kd_inputatk').val(kd_inputatk);
