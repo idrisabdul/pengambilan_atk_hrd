@@ -17,7 +17,7 @@ class Ambil_atk extends CI_Controller
 
     public function index()
     {
-        $sqlambil = "SELECT * FROM tb_ambil_atk ORDER BY id DESC";
+        $sqlambil = "SELECT * FROM tb_ambil_atk WHERE status = 0 ORDER BY id DESC";
         $data['ambil_atk'] = $this->db->query($sqlambil)->result_array();
 
         $sqluser = "SELECT nama FROM db_sso.user_ho";
@@ -53,7 +53,6 @@ class Ambil_atk extends CI_Controller
             $data['user_nama'] = $header['user_nama'];
             $data['nama_pt'] = $header['nama_pt'];
             $data['tgl_permintaan'] = $header['tgl_permintaan'];
-            $data['jml_item_atk'] = $header['jml_item_atk'];
         }
         // echo "<pre>";
         // echo var_dump($data);

@@ -368,6 +368,24 @@
                         </li>
 
                         <li>
+                            <a href="#sidebarCrm" data-toggle="collapse">
+                                <i data-feather="users"></i>
+                                <span> Permintaan ATK </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarCrm">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a href="<?= base_url('Permintaan/permintaanAtk') ?>">Permintaan Pengambilan</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= base_url('Permintaan') ?>">Data Permintaan</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li>
                             <a href="<?= base_url('Ambil_atk') ?>">
                                 <i class="fas fa-user-edit"></i>
                                 <span> Data Pengambilan ATK </span>
