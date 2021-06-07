@@ -76,7 +76,7 @@ class Dashboard extends MX_Controller
 
 
         // echo "<pre>";
-        // var_dump(count($c));
+        // var_dump($c);
         // echo "</pre>";
         $this->template->load('template', 'v_dashboard', $data);
     }

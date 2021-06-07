@@ -369,7 +369,8 @@
 
                         <li>
                             <a href="#sidebarCrm" data-toggle="collapse">
-                                <i data-feather="users"></i>
+                                <!-- <i class="fas fa-users"></i> -->
+                                <i class="fas fa-user-clock"></i>
                                 <span> Permintaan ATK </span>
                                 <span class="menu-arrow"></span>
                             </a>

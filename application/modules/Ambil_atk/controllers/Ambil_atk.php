@@ -53,6 +53,7 @@ class Ambil_atk extends CI_Controller
             $data['user_nama'] = $header['user_nama'];
             $data['nama_pt'] = $header['nama_pt'];
             $data['tgl_permintaan'] = $header['tgl_permintaan'];
+            $data['status'] = $header['status'];
         }
         // echo "<pre>";
         // echo var_dump($data);
@@ -80,6 +81,14 @@ class Ambil_atk extends CI_Controller
         $this->M_ambil_atk->deleteDetail($id);
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Pengambilan ATK Berhasil Dihapus</div>');
         redirect('Ambil_atk');
+    }
+
+    public function deletePermintaan($id)
+    {
+        $this->M_ambil_atk->delete($id);
+        $this->M_ambil_atk->deleteDetail($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Pengambilan ATK Berhasil Dihapus</div>');
+        redirect('Permintaan');
     }
 
     public function BatalAmbil($no_ambilatk)

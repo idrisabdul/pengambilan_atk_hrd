@@ -27,9 +27,15 @@
 <div class="row">
     <div class="col-12">
         <div class="card-box">
-            <div class="text-right">
-                <a href="<?= base_url('Ambil_atk') ?>" class="btn btn-outline-info btn-rounded waves-effect waves-light"><i class="fas fa-angle-left mr-2"></i>Kembali</a>
-            </div>
+            <?php if ($status == 2) { ?>
+                <div class="alert alert-warning" role="alert">
+                    <i class="mdi mdi-alert-outline mr-2"></i> <strong>ATK</strong> ini belum diambil oleh User
+                </div>
+            <?php } else { ?>
+                <div class="text-right mb-1">
+                    <a href="<?= base_url('Ambil_atk') ?>" class="btn btn-outline-info btn-rounded waves-effect waves-light"><i class="fas fa-angle-left mr-2"></i>Kembali</a>
+                </div>
+            <?php } ?>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="">

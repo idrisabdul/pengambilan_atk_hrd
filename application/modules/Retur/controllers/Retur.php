@@ -77,13 +77,14 @@ class Retur extends CI_Controller
     //SERVER SIDE
     public function atkRusak()
     {
-        $data['pilih_no'] = $this->db->query("SELECT no_ambilatk FROM tb_ambil_atk ORDER BY id DESC")->result_array();
+        $data['pilih_no'] = $this->db->query("SELECT no_ambilatk FROM tb_ambil_atk WHERE status = 0 ORDER BY id DESC")->result_array();
         // echo "<pre>";
         // echo var_dump($data['atk_rusak']);
         // echo "</pre>";
         // $this->template->load('template', 'v_atkRusak', $data);
         $this->template->load('template', 'v_atkRusak', $data);
     }
+
     function get_data_retur()
     {
         $list = $this->M_retur->get_datatables();
