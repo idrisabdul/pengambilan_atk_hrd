@@ -61,9 +61,9 @@
                                         <?= $aa['tgl_permintaan'] ?>
                                     </td>
                                     <td>
-                                        <button href="#!" data-no_ambilatk=<?= $jml ?> id="oke" class="btn btn-xs btn-success"><i class="mdi mdi-check mr-1"></i>Sudah</button>
-                                        <?= anchor('Ambil_atk/lebihLanjut/' . $aa['no_ambilatk'], '<button class="btn btn-xs btn-info"><i class="mdi mdi-eye mr-1"></i>Lihat</button>'); ?>
-                                        <button onclick="deleteConfirm('<?= base_url('Ambil_atk/deletePermintaan/' . $aa['no_ambilatk']) ?>')" href="#!" class="btn btn-xs btn-danger"><i class="mdi mdi-delete mr-1"></i>Hapus</button>
+                                        <button href="#!" data-no_ambilatk=<?= $jml ?> id="oke" class="btn btn-sm  btn-rounded waves-effect waves-light btn-success"><i class="mdi mdi-check mr-1"></i></button>
+                                        <?= anchor('Ambil_atk/lebihLanjut/' . $aa['no_ambilatk'], '<button class="btn btn-sm  btn-rounded waves-effect waves-light btn-info"><i class="mdi mdi-eye mr-1"></i></button>'); ?>
+                                        <button onclick="deleteConfirm('<?= base_url('Ambil_atk/deletePermintaan/' . $aa['no_ambilatk']) ?>')" href="#!" class="btn btn-sm  btn-rounded waves-effect waves-light btn-danger"><i class="mdi mdi-delete mr-1"></i></button>
                                         <!-- <button class="btn btn-xs btn-info" data-toggle="modal" data-target="#editModal<?= $aa['id'] ?>"><i class="fas fa-angle-double-right mr-1"></i>Lebih lanjut</button> -->
                                     </td>
                                 </tr>

@@ -50,6 +50,8 @@ class Atk extends CI_Controller
         $data['kategori'] = $this->db->query($sql_kat)->result_array();
         $sql_sat = "SELECT * FROM satuan";
         $data['sat'] = $this->db->query($sql_sat)->result_array();
+        $sql_kode = "SELECT * FROM kode_atk";
+        $data['kodeatk'] = $this->db->query($sql_kode)->result_array();
 
         //filter
         $sql_atkf = "SELECT * FROM tb_barang GROUP BY nm_barang ORDER BY id_barang DESC ";

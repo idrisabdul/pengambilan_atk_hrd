@@ -100,7 +100,7 @@ class Retur extends CI_Controller
             $row[] = $field->qty_rusak;
             $row[] = $field->alasan;
             $row[] = $field->tgl_retur;
-            $row[] = '<button href="#!" id="editretur" href="javascript:;" data-id="' . $field->id_atk . '" data-nm_barang="' . $field->nm_barang . '" data-alasan="' . $field->alasan . '" data-qty_rusak="' . $field->qty_rusak . '" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editReturModal"><i class="fa fa-edit mr-1"></i>Edit</button> <button id="delete-item" data-id_re="' . $field->id_atk . '"  class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="mdi mdi-delete mr-1"></i>Hapus</button>';
+            $row[] = '<button href="#!" id="editretur" href="javascript:;" data-id="' . $field->id_atk . '" data-nm_barang="' . $field->nm_barang . '" data-alasan="' . $field->alasan . '" data-qty_rusak="' . $field->qty_rusak . '" class="btn btn-sm  btn-rounded waves-effect waves-light btn-warning" data-toggle="modal" data-target="#editReturModal"><i class="fa fa-edit mr-1"></i></button> <button id="delete-item" data-id_re="' . $field->id_atk . '"  class="btn btn-sm btn-rounded waves-effect waves-light btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="mdi mdi-delete mr-1"></i></button>';
 
 
 

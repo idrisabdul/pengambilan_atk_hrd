@@ -56,7 +56,25 @@ class Permintaan extends CI_Controller
         // echo "<pre>";
         // var_dump($data['stok_atk']);
         // echo "</pre>";
-        $this->template->load('template', 'v_pilihAtkUser', $data);
+        // $this->template->load('template', 'v_pilihAtkUser', $data);
+        $this->load->view('v_pilihAtkUser_', $data);
+    }
+
+    public function lebihLanjut($no_ambilatk)
+    {
+        $data['detail_ambilatk'] = $this->M_Permintaan->lebihLanjut($no_ambilatk);
+
+        foreach ($data['detail_ambilatk'] as $header) {
+            $data['no_ambilatk'] = $header['no_ambilatk'];
+            $data['user_nama'] = $header['user_nama'];
+            $data['nama_pt'] = $header['nama_pt'];
+            $data['tgl_permintaan'] = $header['tgl_permintaan'];
+            $data['status'] = $header['status'];
+        }
+        // echo "<pre>";
+        // echo var_dump($data);
+        // echo "</pre>";
+        $this->load->view('v_detailPermintaan', $data);
     }
 
     //ambil ATK from USER

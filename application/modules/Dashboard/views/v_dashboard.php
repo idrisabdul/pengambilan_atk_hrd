@@ -170,7 +170,7 @@
                                         </td>
 
                                         <td>
-                                            <?= $sa['kd_inputatk'] ?>
+                                            <?= $sa['kd_barang'] ?>
                                         </td>
 
                                         <td>

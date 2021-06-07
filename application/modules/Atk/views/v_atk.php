@@ -100,8 +100,8 @@
                                     </td>
 
                                     <td>
-                                        <button class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal<?= $a['id_barang'] ?>"><i class="fa fa-edit mr-1"></i>Edit</button>
-                                        <button onclick="deleteConfirm('<?= base_url('Atk/delete/' . $a['id_barang']) ?>')" href="#!" class="btn btn-xs btn-danger"><i class="mdi mdi-delete mr-1"></i>Hapus</button>
+                                        <button class="btn btn-sm btn-rounded waves-effect waves-light btn-warning" data-toggle="modal" data-target="#editModal<?= $a['id_barang'] ?>"><i class="fa fa-edit mr-1"></i></button>
+                                        <button onclick="deleteConfirm('<?= base_url('Atk/delete/' . $a['id_barang']) ?>')" href="#!" class="btn btn-sm  btn-rounded waves-effect waves-light btn-danger"><i class="mdi mdi-delete mr-1"></i></button>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -405,4 +405,12 @@
             // }, ]
         });
     });
+    $(document).ready(function() {
+
+        // Format mata uang.
+        $('.uang').mask('000.000.000', {
+            reverse: true
+        });
+
+    })
 </script>

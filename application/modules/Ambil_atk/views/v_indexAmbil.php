@@ -61,8 +61,8 @@
                                         <?= $aa['tgl_permintaan'] ?>
                                     </td>
                                     <td>
-                                        <button onclick="deleteConfirm('<?= base_url('Ambil_atk/delete/' . $aa['no_ambilatk']) ?>')" href="#!" class="btn btn-xs btn-danger"><i class="mdi mdi-delete mr-1"></i>Hapus</button>
-                                        <?= anchor('Ambil_atk/lebihLanjut/' . $aa['no_ambilatk'], '<button class="btn btn-xs btn-info"><i class="fas fa-angle-double-right mr-1"></i>Lebih lanjut</button>'); ?>
+                                        <button onclick="deleteConfirm('<?= base_url('Ambil_atk/delete/' . $aa['no_ambilatk']) ?>')" href="#!" class="btn btn-sm  btn-rounded waves-effect waves-light btn-danger"><i class="mdi mdi-delete mr-1"></i></button>
+                                        <?= anchor('Ambil_atk/lebihLanjut/' . $aa['no_ambilatk'], '<button class="btn btn-sm  btn-rounded waves-effect waves-light btn-info"><i class="fas fa-angle-double-right mr-1"></i>Lebih lanjut</button>'); ?>
                                         <!-- <button class="btn btn-xs btn-info" data-toggle="modal" data-target="#editModal<?= $aa['id'] ?>"><i class="fas fa-angle-double-right mr-1"></i>Lebih lanjut</button> -->
                                     </td>
                                 </tr>
