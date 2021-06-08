@@ -270,7 +270,7 @@
                             <div class="page-title-right">
                                 <a href="<?= base_url('Permintaan/permintaanAtk') ?>" class="btn btn-primary btn-rounded mr-2"><i class="fas fa-hands mr-1"></i>Ajukan Permintaan ATK</a>
                                 <button class="btn btn-success btn-rounded mr-2" onclick="printDiv('printableArea')"><i class="fas fa-print mr-1"></i>Cetak Bukti</button>
-                                <button onclick="deleteConfirm('<?= base_url('Ambil_atk/delete/' . $no_ambilatk) ?>')" href="#!" class="btn btn-rounded btn-danger"><i class="fas fa-trash mr-1"></i>Hapus Semua</button>
+                                <button onclick="deleteConfirm('<?= base_url('Ambil_atk/deletePermintaan/' . $no_ambilatk) ?>')" href="#!" class="btn btn-rounded btn-danger"><i class="fas fa-trash mr-1"></i>Hapus Semua</button>
                             </div>
                             <h4 class="page-title">Pengambilan Detail ATK</h4>
                             <?= $this->session->flashdata('message') ?>
@@ -485,7 +485,7 @@
                                 <h4 class="title" id="defaultModalLabel">Edit Ambil ATK</h4>
                             </div>
                             <div class="modal-body">
-                                <form action="<?= base_url('Ambil_atk/editAmbilAtk') ?>" method="POST">
+                                <form action="<?= base_url('Ambil_atk/editAmbilAtkUserATK-20210604-009') ?>" method="POST">
                                     <input type="hidden" name="id_detail" id="id_detail" class="form-control" placeholder="Nama Barang" />
                                     <input type="hidden" name="no_ambilatk" id="no_ambilatk" class="form-control" placeholder="Nama Barang" />
 

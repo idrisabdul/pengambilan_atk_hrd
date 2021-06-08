@@ -53,6 +53,20 @@ class Permintaan extends CI_Controller
         $data['pt'] = $this->db->query($sql)->result_array();
         $sqluser = "SELECT nama FROM db_sso.user_ho";
         $data['user_nama'] = $this->db->query($sqluser)->result_array();
+
+        //SHOW
+        $sqlambil = "SELECT * FROM tb_ambil_atk WHERE status = 1 ORDER BY id DESC";
+        $data['ambil_atk'] = $this->db->query($sqlambil)->result_array();
+
+        $sqluser = "SELECT nama FROM db_sso.user_ho";
+        $data['user_nama'] = $this->db->query($sqluser)->result_array();
+
+        $sql1 = "SELECT *  FROM tb_barang ORDER BY id_barang DESC";
+        $data['stok_atk'] = $this->db->query($sql1)->result_array();
+
+        $sql = "SELECT * FROM db_sso.tb_pt";
+        $data['pt'] = $this->db->query($sql)->result_array();
+
         // echo "<pre>";
         // var_dump($data['stok_atk']);
         // echo "</pre>";

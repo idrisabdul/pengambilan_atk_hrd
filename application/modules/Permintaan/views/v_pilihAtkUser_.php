@@ -293,10 +293,9 @@
                                     <br>
                                     <input type="hidden" name="nama_pt" class="form-control" value="">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group row mb-2">
-                                                <label class="col-3 col-form-label">Nama PT</label>
-                                                <div class="col-9">
+                                                <div class="col">
                                                     <select name="nama_pt" id="nama_pt" class="form-control" required>
                                                         <option value="" selected disabled>-- Select PT --</option>
                                                         <?php foreach ($pt as $p) : ?>
@@ -306,8 +305,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row mb-2">
-                                                <label class="col-3 col-form-label">Nama</label>
-                                                <div class="col-9">
+                                                <div class="col">
                                                     <select name="user_nama" id="user_nama" class="form-control" required>
                                                         <!-- <option value="<?= $this->session->userdata('userlogin') ?>"><?= $this->session->userdata('userlogin') ?></option> -->
                                                         <option value="" selected disabled>-- Select Name --</option>
@@ -318,13 +316,43 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-1"></div>
-                                        <div class="col-md-7 border border-secondary">
-                                            <div class="form-group row mb-2 px-1 py-2">
-                                                <div class="col-3">
-                                                    <label class="col-form-label">Nama ATK</label>
+                                        <div class="col-md-3">
+                                            <div class="form-group row mb-2">
+                                                <div class="col">
+                                                    <input type="text" id="getitematk" class="form-control" placeholder="Masukkan ATK" disabled>
                                                 </div>
-                                                <div class="col-6">
+                                            </div>
+                                            <div class="form-group row mb-2">
+                                                <div class="col">
+                                                    <div class="input-group mb-1">
+                                                        <input type="number" class="form-control bg-light" id="getitemqty_info" id="inlineFormInputGroup" placeholder="Qty Yang Tersedia" disabled>
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text"><span id="satuan">Sat</span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group row mb-2">
+                                                <div class="col">
+                                                    <div class="input-group">
+                                                        <input type="number" class="form-control" min="1" max="10000" id="getitemqty" placeholder="Masukkan Qty">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text"><span id="satuan_inp">Sat</span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-2">
+                                                <div class="col">
+                                                    <textarea type="text" id="getitemkep" class="form-control" placeholder="Keperluan"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group row mb-2">
+                                                <div class="col">
                                                     <input type="hidden" id="kode_atk" class="form-control">
                                                     <input type="hidden" id="getuser" class="form-control">
                                                     <input type="hidden" id="getpt" class="form-control">
@@ -333,26 +361,14 @@
                                                     <input type="hidden" id="getitem_sat" class="form-control">
 
                                                     <input type="hidden" id="getitemharga" class="form-control">
-                                                    <input type="text" id="getitematk" class="form-control mb-2" placeholder="Masukkan ATK" disabled>
-                                                    <div class="input-group mb-1">
-                                                        <input type="number" class="form-control bg-light" id="getitemqty_info" id="inlineFormInputGroup" placeholder="Qty Yang Tersedia" disabled>
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text"><span id="satuan">Sat</span></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="input-group mb-2">
-                                                        <input type="number" class="form-control" min="1" max="10000" id="getitemqty" placeholder="Masukkan Qty">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text"><span id="satuan_inp">Sat</span></div>
-                                                        </div>
-                                                    </div>
+
+
                                                     <!-- <input type="text" id="getitemqty" class="form-control mb-1" placeholder="Masukkan QTY"> -->
-                                                    <textarea type="text" id="getitemkep" class="form-control" placeholder="Keperluan"></textarea>
+                                                    <button class="btn btn-md btn-rounded waves-effect btn-info mb-2 mr-1" type="button" data-toggle="modal" data-target="#modal-item">Pilih ATK&nbsp;&nbsp;</button>
+                                                    <button class="btn btn-md btn-rounded waves-effect btn-success mb-2 mr-1" type="button" id="clickambilatk">Ambil ATK</button>
                                                 </div>
-                                                <div class="col-3">
-                                                    <button class="btn btn-md btn-info mb-2 mr-1" type="button" data-toggle="modal" data-target="#modal-item">Pilih ATK&nbsp;&nbsp;</button>
-                                                    <button class="btn btn-md btn-success mb-2 mr-1" type="button" id="clickambilatk">Ambil ATK</button>
-                                                </div>
+                                                <!-- <div class="col-3">
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -428,11 +444,64 @@
                                         </div>
                                     </div>
 
+                                    <hr>
+                                    <h4 class="header-title mb-3">Total Booking ATK</h4>
+                                    <div class="table-responsive">
+                                        <table class="table table-borderless table-hover table-nowrap table-sm m-0" id="basic-datatable">
+
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>No Ambil ATk</th>
+                                                    <th>User</th>
+                                                    <th>Jumlah Item</th>
+                                                    <th>Tgl Pengambilan</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $no = 1; ?>
+                                                <?php foreach ($ambil_atk as $aa) { ?>
+                                                    <?php $jml = $aa['no_ambilatk'] ?>
+                                                    <tr>
+                                                        <td><?= $no++; ?>
+                                                        </td>
+                                                        <td>
+                                                            <h5 class="m-0 font-weight-normal"><?= $aa['no_ambilatk'] ?></h5>
+                                                        </td>
+
+                                                        <td>
+                                                            <?= strtoupper($aa['user_nama']); ?>
+                                                        </td>
+
+                                                        <td class="text-center">
+                                                            <?= $this->db->query("SELECT * FROM tb_detail_ambilatk WHERE no_ambilatk = '$jml' ")->num_rows() ?>
+                                                        </td>
+
+                                                        <td>
+                                                            <?= $aa['tgl_permintaan'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <!-- <button href="#!" data-no_ambilatk=<?= $jml ?> id="oke" class="btn btn-sm  btn-rounded waves-effect waves-light btn-success"><i class="mdi mdi-check mr-1"></i></button> -->
+                                                            <?= anchor('Permintaan/lebihLanjut/' . $aa['no_ambilatk'], '<button class="btn btn-sm  btn-rounded waves-effect waves-light btn-info"><i class="mdi mdi-eye mr-1"></i></button>'); ?>
+                                                            <!-- <button onclick="deleteConfirm('<?= base_url('Ambil_atk/deletePermintaan/' . $aa['no_ambilatk']) ?>')" href="#!" class="btn btn-sm  btn-rounded waves-effect waves-light btn-danger"><i class="mdi mdi-delete mr-1"></i></button> -->
+                                                            <!-- <button class="btn btn-xs btn-info" data-toggle="modal" data-target="#editModal<?= $aa['id'] ?>"><i class="fas fa-angle-double-right mr-1"></i>Lebih lanjut</button> -->
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div> <!-- end card-body -->
                             </div> <!-- end card -->
                         </div> <!-- end col -->
 
+                        <!-- end card-box -->
+
                     </div>
+
                 </div> <!-- end col-->
 
 

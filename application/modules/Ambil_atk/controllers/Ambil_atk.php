@@ -75,6 +75,20 @@ class Ambil_atk extends CI_Controller
         redirect('Ambil_atk/lebihLanjut/' . $no_ambilatk);
     }
 
+    public function editAmbilAtkUser()
+    {
+        $id = $this->input->post('id_detail');
+        $no_ambilatk = $this->input->post('no_ambilatk');
+        $ubahambil_atk = [
+            'qty' => $this->input->post('qty'),
+            'keperluan' => $this->input->post('keperluan'),
+        ];
+
+        $this->M_ambil_atk->updateAmbilAtk($ubahambil_atk, $id);
+        $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Anda Berhasil Mengubah Pengambilan ATK</div>');
+        redirect('Permintaan/lebihLanjut/' . $no_ambilatk);
+    }
+
     public function delete($id)
     {
         $this->M_ambil_atk->delete($id);
@@ -88,7 +102,7 @@ class Ambil_atk extends CI_Controller
         $this->M_ambil_atk->delete($id);
         $this->M_ambil_atk->deleteDetail($id);
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Pengambilan ATK Berhasil Dihapus</div>');
-        redirect('Permintaan');
+        redirect('Permintaan/permintaanAtk');
     }
 
     public function BatalAmbil($no_ambilatk)
@@ -110,6 +124,14 @@ class Ambil_atk extends CI_Controller
         $this->M_ambil_atk->deleteItemAmbil($id);
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Item ATK Yang sudah anda ambil berhasil dihapus</div>');
         redirect('Ambil_atk/lebihLanjut/' . $no_ambil);
+    }
+    public function deleteItemUser()
+    {
+        $no_ambil = $this->input->post('no_ambilatk_del');
+        $id = $this->input->post('id');
+        $this->M_ambil_atk->deleteItemAmbil($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Item ATK Yang sudah anda ambil berhasil dihapus</div>');
+        redirect('Permintaan/lebihLanjut/' . $no_ambil);
     }
 
     public function pilihAtk()
