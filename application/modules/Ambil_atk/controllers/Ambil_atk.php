@@ -97,6 +97,14 @@ class Ambil_atk extends CI_Controller
         redirect('Ambil_atk');
     }
 
+    public function deletePermintaanByAdmin($id)
+    {
+        $this->M_ambil_atk->delete($id);
+        $this->M_ambil_atk->deleteDetail($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Pengambilan ATK Berhasil Dihapus</div>');
+        redirect('Permintaan');
+    }
+
     public function deletePermintaan($id)
     {
         $this->M_ambil_atk->delete($id);

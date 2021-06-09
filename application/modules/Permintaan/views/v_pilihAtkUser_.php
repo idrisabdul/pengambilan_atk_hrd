@@ -10,7 +10,7 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="<?= base_url() ?>/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="<?= base_url() ?>/assets/images/msal.gif">
 
     <!-- SELECT2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -292,7 +292,7 @@
                                     <input type="hidden" name="no_urut" id="no_urut" value="<?= $memberi_no ?>">
                                     <br>
                                     <input type="hidden" name="nama_pt" class="form-control" value="">
-                                    <div class="row">
+                                    <div class="row justify-content-md-center">
                                         <div class="col-md-3">
                                             <div class="form-group row mb-2">
                                                 <div class="col">
@@ -319,7 +319,13 @@
                                         <div class="col-md-3">
                                             <div class="form-group row mb-2">
                                                 <div class="col">
-                                                    <input type="text" id="getitematk" class="form-control" placeholder="Masukkan ATK" disabled>
+                                                    <div class="input-group">
+                                                        <input type="text" id="getitematk" class="form-control" placeholder="Masukkan ATK" disabled>
+                                                        <!-- <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username"> -->
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-primary waves-effect waves-light" type="button" data-toggle="modal" data-target="#modal-item">Pilih</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group row mb-2">
@@ -346,11 +352,11 @@
                                             </div>
                                             <div class="form-group row mb-2">
                                                 <div class="col">
-                                                    <textarea type="text" id="getitemkep" class="form-control" placeholder="Keperluan"></textarea>
+                                                    <input type="text" id="getitemkep" class="form-control" rows="1" placeholder="Keperluan">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-2">
                                             <div class="form-group row mb-2">
                                                 <div class="col">
                                                     <input type="hidden" id="kode_atk" class="form-control">
@@ -364,7 +370,7 @@
 
 
                                                     <!-- <input type="text" id="getitemqty" class="form-control mb-1" placeholder="Masukkan QTY"> -->
-                                                    <button class="btn btn-md btn-rounded waves-effect btn-info mb-2 mr-1" type="button" data-toggle="modal" data-target="#modal-item">Pilih ATK&nbsp;&nbsp;</button>
+                                                    <!-- <button class="btn btn-md btn-rounded waves-effect btn-info mb-2 mr-1" type="button" data-toggle="modal" data-target="#modal-item">Pilih ATK&nbsp;&nbsp;</button> -->
                                                     <button class="btn btn-md btn-rounded waves-effect btn-success mb-2 mr-1" type="button" id="clickambilatk">Ambil ATK</button>
                                                 </div>
                                                 <!-- <div class="col-3">

@@ -11,7 +11,9 @@ class Permintaan extends CI_Controller
             // redirect('https://192.168.1.231/msal-login/Login');
             redirect('localhost/Login');
         }
+        date_default_timezone_set("Asia/Bangkok");
     }
+
     public function index()
     {
         $sqlambil = "SELECT * FROM tb_ambil_atk WHERE status = 1 ORDER BY id DESC";

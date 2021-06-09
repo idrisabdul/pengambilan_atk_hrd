@@ -10,7 +10,7 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="<?= base_url() ?>/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="<?= base_url() ?>/assets/images/msal.gif">
 
     <!-- SELECT2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -537,7 +537,7 @@
                             </div>
                             <div class="modal-body">
                                 Data yang dihapus tidak akan bisa dikembalikan.
-                                <form action="<?= base_url('Ambil_atk/deleteItem') ?>" method="POST">
+                                <form action="<?= base_url('Ambil_atk/deleteItemUser') ?>" method="POST">
                                     <input type="hidden" name="no_ambilatk_del" id="no_ambilatk_del">
                                     <input type="hidden" name="id" id="id">
                             </div>
@@ -588,7 +588,7 @@
                             // alert(no_ambilatk);
                             $('#no_ambilatk_del').val(no_ambilatk);
                             $('#id').val(id);
-                            $('#btn-delete').attr('href', '<?= base_url() ?>Ambil_atk/deleteItem/' + id);
+                            // $('#btn-delete').attr('href', '<?= base_url() ?>Ambil_atk/deleteItemUser/' + id);
                         });
                     });
 
