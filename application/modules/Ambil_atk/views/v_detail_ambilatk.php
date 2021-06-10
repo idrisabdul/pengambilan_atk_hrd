@@ -29,7 +29,11 @@
         <div class="card-box">
             <?php if ($status == 2) { ?>
                 <div class="alert alert-warning" role="alert">
-                    <i class="mdi mdi-alert-outline mr-2"></i> <strong>ATK</strong> ini belum diambil oleh User
+                    <i class="mdi mdi-alert-outline mr-2"></i> <strong>WAITING</strong> ATK ini menunggu konfirmasi dari Admin
+                </div>
+            <?php } else if ($status == 4) { ?>
+                <div class="alert alert-info" role="alert">
+                    <i class="mdi mdi-information-outline mr-2"></i> <strong>APPROVED</strong> ATK ini menunggu User untuk diambil
                 </div>
             <?php } else { ?>
                 <div class="text-right mb-1">

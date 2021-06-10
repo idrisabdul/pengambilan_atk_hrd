@@ -8,7 +8,7 @@
                     <!-- <button class="btn btn-primary btn-rounded mr-2" onclick="add()"><i class="fas fa-eye mr-1"></i>Lihat ATK Saat ini</button>
                     <a href="<?= base_url('Ambil_atk/pilihAtk') ?>" class="btn btn-rounded btn-success"><i class="fas fa-user-edit mr-1"></i>Ajukan Pengambilan ATK</a> -->
                 </div>
-                <h4 class="page-title">Daftar Pengambilan ATK</h4>
+                <h4 class="page-title">Daftar Booking ATK</h4>
                 <?= $this->session->flashdata('message') ?>
             </div>
         </div>
@@ -24,7 +24,7 @@
                     </div>
                 </div>
 
-                <h4 class="header-title mb-3">Total ambil ATK</h4>
+                <h4 class="header-title mb-3">Jumlah User Meminta ATK</h4>
                 <div class="table-responsive">
                     <table class="table table-borderless table-hover table-nowrap table-sm m-0" id="basic-datatable">
 
@@ -35,6 +35,7 @@
                                 <th>User</th>
                                 <th>Jumlah Item</th>
                                 <th>Tgl Pengambilan</th>
+                                <th>Status</th>
                                 <th>Sdh Diambil?</th>
                             </tr>
                         </thead>
@@ -61,7 +62,18 @@
                                         <?= $aa['tgl_permintaan'] ?>
                                     </td>
                                     <td>
-                                        <button href="#!" data-no_ambilatk=<?= $jml ?> id="oke" class="btn btn-sm  btn-rounded waves-effect waves-light btn-success"><i class="mdi mdi-check mr-1"></i></button>
+                                        <?php if ($aa['status'] == 1) { ?>
+                                            <span class="badge badge-info">Menunggu Approve</span>
+                                        <?php } else if ($aa['status'] == 2) { ?>
+                                            <span class="badge badge-primary">Menunggu Diambil</span>
+                                        <?php } ?>
+                                    </td>
+                                    <td>
+                                        <?php if ($aa['status'] == 1) { ?>
+                                            <button href="#!" data-no_ambilatk=<?= $jml ?> id="oke" class="btn btn-sm  btn-rounded waves-effect waves-light btn-success"><i class="mdi mdi-check mr-1"></i></button>
+                                        <?php } else if ($aa['status'] == 2) { ?>
+                                            <button href="#!" data-no_ambilatk=<?= $jml ?> id="btn-terambil" class="btn btn-sm  btn-rounded waves-effect waves-light btn-primary"><i class="mdi mdi-account-check-outline mr-1"></i></button>
+                                        <?php } ?>
                                         <?= anchor('Ambil_atk/lebihLanjut/' . $aa['no_ambilatk'], '<button class="btn btn-sm  btn-rounded waves-effect waves-light btn-info"><i class="mdi mdi-eye mr-1"></i></button>'); ?>
                                         <button onclick="deleteConfirm('<?= base_url('Ambil_atk/deletePermintaanByAdmin/' . $aa['no_ambilatk']) ?>')" href="#!" class="btn btn-sm  btn-rounded waves-effect waves-light btn-danger"><i class="mdi mdi-delete mr-1"></i></button>
                                         <!-- <button class="btn btn-xs btn-info" data-toggle="modal" data-target="#editModal<?= $aa['id'] ?>"><i class="fas fa-angle-double-right mr-1"></i>Lebih lanjut</button> -->
@@ -283,7 +295,8 @@
             var no_ambilatk = $(this).data('no_ambilatk');
             // alert(no_ambilatk);
 
-            //UPDATE STATUS DI TB DETAIL ATK = 1 DAN TB AMBIL ATK = 0
+            //UPDATE STATUS DI TB AMBIL ATK => 2 (USER DI APPROVE/ BOLEH DIAMBIL)
+            //UPDATE STATUS DI TB DETAIL ATK => 4 (Barang ATK Menjadi di setujui)
             $.ajax({
                 dataType: 'JSON',
                 type: 'POST',
@@ -291,6 +304,36 @@
                     no_ambilatk: no_ambilatk
                 },
                 url: '<?= base_url() ?>Permintaan/updateStatusUser',
+                cache: false,
+                success: function() {
+                    swal({
+                        title: "Wow!",
+                        text: no_ambilatk + " Berhasil Diapproved!",
+                        type: "success"
+                    }).then(function() {
+                        window.location.href = '<?= base_url() ?>Ambil_atk/lebihLanjut/' + no_ambilatk;
+                    });
+
+                }
+            });
+        });
+    });
+
+
+    $(document).ready(function() {
+        $(document).on('click', '#btn-terambil', function() {
+            var no_ambilatk = $(this).data('no_ambilatk');
+            // alert(no_ambilatk);
+
+            //UPDATE STATUS DI TB AMBIL ATK => 0 (USER SUDAH MENGAMBIL ATK)
+            //UPDATE STATUS DI TB DETAIL ATK => 1 (Barang ATK BERHASIL DIAMBIL)
+            $.ajax({
+                dataType: 'JSON',
+                type: 'POST',
+                data: {
+                    no_ambilatk: no_ambilatk
+                },
+                url: '<?= base_url() ?>Permintaan/updateStatusUserDiambil',
                 cache: false,
                 success: function() {
                     swal({

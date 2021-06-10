@@ -16,7 +16,7 @@ class Permintaan extends CI_Controller
 
     public function index()
     {
-        $sqlambil = "SELECT * FROM tb_ambil_atk WHERE status = 1 ORDER BY id DESC";
+        $sqlambil = "SELECT * FROM tb_ambil_atk WHERE status != 0 ORDER BY id DESC";
         $data['ambil_atk'] = $this->db->query($sqlambil)->result_array();
 
         $sqluser = "SELECT nama FROM db_sso.user_ho";
@@ -57,7 +57,7 @@ class Permintaan extends CI_Controller
         $data['user_nama'] = $this->db->query($sqluser)->result_array();
 
         //SHOW
-        $sqlambil = "SELECT * FROM tb_ambil_atk WHERE status = 1 ORDER BY id DESC";
+        $sqlambil = "SELECT * FROM tb_ambil_atk WHERE status != 0 ORDER BY id DESC";
         $data['ambil_atk'] = $this->db->query($sqlambil)->result_array();
 
         $sqluser = "SELECT nama FROM db_sso.user_ho";
@@ -150,11 +150,12 @@ class Permintaan extends CI_Controller
         echo json_encode($data);
     }
 
-    public function updateStatusUser()
+    public function updateStatusUserDiambil()
     {
         $no_ambilatk = $this->input->post('no_ambilatk');
-        $this->db->update('tb_detail_ambilatk', ['status' => 1], ['no_ambilatk' => $no_ambilatk]);
+        // $this->db->update('tb_detail_ambilatk', ['status' => 1], ['no_ambilatk' => $no_ambilatk]);
         $this->db->update('tb_ambil_atk', ['status' => 0], ['no_ambilatk' => $no_ambilatk]);
+        $this->db->update('tb_detail_ambilatk', ['status' => 1], ['no_ambilatk' => $no_ambilatk]);
         echo json_encode($no_ambilatk);
     }
 

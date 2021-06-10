@@ -462,6 +462,7 @@
                                                     <th>User</th>
                                                     <th>Jumlah Item</th>
                                                     <th>Tgl Pengambilan</th>
+                                                    <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -488,10 +489,20 @@
                                                             <?= $aa['tgl_permintaan'] ?>
                                                         </td>
                                                         <td>
+                                                            <?php if ($aa['status'] == 1) { ?>
+                                                                <span class="badge badge-info">Waiting</span>
+                                                            <?php } else if ($aa['status'] == 2) { ?>
+                                                                <span class="badge badge-primary">Approved</span>
+                                                            <?php } ?>
+                                                        </td>
+                                                        <td>
+
                                                             <!-- <button href="#!" data-no_ambilatk=<?= $jml ?> id="oke" class="btn btn-sm  btn-rounded waves-effect waves-light btn-success"><i class="mdi mdi-check mr-1"></i></button> -->
                                                             <?= anchor('Permintaan/lebihLanjut/' . $aa['no_ambilatk'], '<button class="btn btn-sm  btn-rounded waves-effect waves-light btn-info"><i class="mdi mdi-eye mr-1"></i></button>'); ?>
                                                             <!-- <button onclick="deleteConfirm('<?= base_url('Ambil_atk/deletePermintaan/' . $aa['no_ambilatk']) ?>')" href="#!" class="btn btn-sm  btn-rounded waves-effect waves-light btn-danger"><i class="mdi mdi-delete mr-1"></i></button> -->
                                                             <!-- <button class="btn btn-xs btn-info" data-toggle="modal" data-target="#editModal<?= $aa['id'] ?>"><i class="fas fa-angle-double-right mr-1"></i>Lebih lanjut</button> -->
+
+
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
@@ -839,7 +850,7 @@
                                 buttonsStyling: true
                             }).then(result => {
                                 if (result.value) {
-                                    // update status 0 -> 1
+                                    // update status 0 -> 2 (Menunggu Approve dari Admin)
                                     var no_ambilatk = $('#no_ambilatk_').text();
 
                                     $.ajax({
