@@ -150,6 +150,15 @@ class Permintaan extends CI_Controller
         echo json_encode($data);
     }
 
+    public function updateStatusUser()
+    {
+        $no_ambilatk = $this->input->post('no_ambilatk');
+        // $this->db->update('tb_detail_ambilatk', ['status' => 1], ['no_ambilatk' => $no_ambilatk]);
+        $this->db->update('tb_ambil_atk', ['status' => 2], ['no_ambilatk' => $no_ambilatk]);
+        $this->db->update('tb_detail_ambilatk', ['status' => 4], ['no_ambilatk' => $no_ambilatk]);
+        echo json_encode($no_ambilatk);
+    }
+
     public function updateStatusUserDiambil()
     {
         $no_ambilatk = $this->input->post('no_ambilatk');

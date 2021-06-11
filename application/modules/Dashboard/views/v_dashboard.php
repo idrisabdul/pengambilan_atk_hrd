@@ -124,7 +124,8 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Barang</th>
-                                <th>Kode Input ATK</th>
+                                <th>Kode ATK</th>
+                                <th>Kode Barang</th>
                                 <th>Kategori</th>
                                 <th>Satuan</th>
                                 <th>Jumlah Stok</th>
@@ -170,7 +171,15 @@
                                         </td>
 
                                         <td>
-                                            <?= $sa['kd_barang'] ?>
+                                            <?= $sa['kode_atk'] ?>
+                                        </td>
+
+                                        <td>
+                                            <?php if ($sa['kode_barang'] == null) { ?>
+                                                <span>Tidak ada</span>
+                                            <?php } else { ?>
+                                                <img src="<?= site_url('Atk/Barcode/' . $sa['kode_barang']) ?>" alt="">
+                                            <?php } ?>
                                         </td>
 
                                         <td>
@@ -227,12 +236,14 @@
                             </div>
                         </div>
                         <div class="row clearfix">
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <label for="">Nama ATK</label>
                                 <div class="form-group">
                                     <input type="text" name="nama_bar" class="form-control" placeholder="Nama Barang" required />
                                 </div>
                             </div>
+                        </div>
+                        <div class="row clearfix">
                             <div class="col-sm-6">
                                 <label for="">Kode ATK</label>
                                 <select name="kd_atk" class="form-control" required>
@@ -241,6 +252,12 @@
                                         <option value="<?= $ka['kode_atk'] ?>"><?= $ka['kode_atk'] ?> - <?= $ka['nm_barang'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="">Kode Barang (Opsional) </label>
+                                <div class="form-group">
+                                    <input type="text" name="kode_barang" class="form-control" placeholder="Kode Barang" />
+                                </div>
                             </div>
                         </div>
                         <div class="row clearfix mb-1">

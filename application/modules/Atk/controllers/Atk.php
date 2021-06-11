@@ -6,6 +6,9 @@ class Atk extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_atk');
+        $this->load->library('Zend');
+
+        // require 'vendor/autoload.php';
 
         require_once APPPATH . 'third_party/dompdf/dompdf_config.inc.php';
 
@@ -23,7 +26,7 @@ class Atk extends CI_Controller
         $sql_atk = "SELECT * FROM tb_barang ORDER BY id_barang DESC";
         $data['atk'] = $this->db->query($sql_atk)->result_array();
         $data['atk_filt'] = $this->db->query($sql_atk)->result_array();
-        $sql_kat = "SELECT * FROM kategori";
+        $sql_kat = "SELECT * FROM tb_barang GROUP BY kat_barang ORDER BY id_barang DESC";
         $data['kategori'] = $this->db->query($sql_kat)->result_array();
         $sql_sat = "SELECT * FROM satuan";
         $data['sat'] = $this->db->query($sql_sat)->result_array();
@@ -89,7 +92,8 @@ class Atk extends CI_Controller
         $atk = [
             'kd_inputatk' => $string,
             'nm_barang' => $this->input->post('nama_bar'),
-            'kd_barang' => $this->input->post('kd_atk'),
+            'kode_atk' => $this->input->post('kd_atk'),
+            'kode_barang' => $this->input->post('kode_barang'),
             'nama_pt' => $this->input->post('nama_pt'),
             'kat_barang' => $this->input->post('kat_bar'),
             'merek' => $this->input->post('merek'),
@@ -112,7 +116,8 @@ class Atk extends CI_Controller
             'nm_barang' => $this->input->post('nm_barang'),
             'nama_pt' => $this->input->post('nama_pt'),
             'kat_barang' => $this->input->post('kat_barang'),
-            'kd_barang' => $this->input->post('kd_atk'),
+            'kode_atk' => $this->input->post('kd_atk'),
+            'kode_barang' => $this->input->post('kode_barang'),
             'qty' => $this->input->post('qty'),
             'satuan' => $this->input->post('satuan'),
         ];
@@ -141,5 +146,16 @@ class Atk extends CI_Controller
         // $dompdf->set_option('enable_html5_parser', TRUE);
         $pdf = $dompdf->output();
         $dompdf->stream('atk.pdf', array('Attachment' => false));
+    }
+
+    // public function barcode_barang()
+    // {
+    //     $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
+    //     echo $generator->getBarcode('081231723897', $generator::TYPE_CODE_128);
+    // }
+    public function Barcode($kodenya)
+    {
+        $this->zend->load('Zend/Barcode');
+        Zend_Barcode::render('code128', 'image', array('text' => $kodenya));
     }
 }

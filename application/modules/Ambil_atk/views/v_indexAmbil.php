@@ -137,7 +137,7 @@
                                         </td>
 
                                         <td>
-                                            <?= $sa['kd_barang'] ?>
+                                            <?= $sa['kode_atk'] ?>
                                         </td>
 
                                         <td>

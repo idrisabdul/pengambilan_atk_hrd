@@ -252,6 +252,7 @@ class Ambil_atk extends CI_Controller
                 'kd_inputatk' => $kd_inputatk,
                 'nm_barang' => $this->input->post('nm_barang'),
                 'kode_atk' => $this->input->post('kode_atk'),
+                'kode_barang' => $this->input->post('kode_barang'),
                 'kat_barang' => $this->input->post('kat_barang'),
                 'qty' => $qty,
                 'sat' => $this->input->post('sat'),

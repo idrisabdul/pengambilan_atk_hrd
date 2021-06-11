@@ -588,7 +588,7 @@
                                                     </td>
 
                                                     <td>
-                                                        <button type="button" class="btn btn-sm btn-info btn-rounded waves-effect waves-light" id="select" data-qty="<?php echo $saldo  ?>" data-ket="<?= $sa['keterangan'] ?>" data-kd_atk="<?= $sa['kd_barang'] ?>" data-harga="<?= $sa['harga'] ?>" data-satuan="<?php echo $sa['satuan']  ?>" data-kat_barang="<?php echo $sa['kat_barang']  ?>" data-kd_inputatk="<?php echo $sa['kd_inputatk']  ?>" data-nm_barang="<?php echo $sa['nm_barang'] ?>"><i class="fas fa-check mr-1"></i>Select</button>
+                                                        <button type="button" class="btn btn-sm btn-info btn-rounded waves-effect waves-light" id="select" data-qty="<?php echo $saldo  ?>" data-ket="<?= $sa['keterangan'] ?>" data-kd_atk="<?= $sa['kode_atk'] ?>" data-harga="<?= $sa['harga'] ?>" data-satuan="<?php echo $sa['satuan']  ?>" data-kat_barang="<?php echo $sa['kat_barang']  ?>" data-kd_inputatk="<?php echo $sa['kd_inputatk']  ?>" data-nm_barang="<?php echo $sa['nm_barang'] ?>"><i class="fas fa-check mr-1"></i>Select</button>
                                                     </td>
                                                 </tr>
                                             <?php endif; ?>

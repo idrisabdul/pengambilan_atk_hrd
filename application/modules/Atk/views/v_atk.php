@@ -63,6 +63,7 @@
                                 <th>No</th>
                                 <th>Nama Barang</th>
                                 <th>Kode Atk</th>
+                                <th>Kode Barang</th>
                                 <th>Kategori</th>
                                 <th>Satuan</th>
                                 <th>Jumlah Stok</th>
@@ -82,7 +83,14 @@
                                     </td>
 
                                     <td>
-                                        <?= $a['kd_barang'] ?>
+                                        <?= $a['kode_atk'] ?>
+                                    </td>
+                                    <td>
+                                        <?php if ($a['kode_barang'] == null) { ?>
+                                            <span>Tidak ada</span>
+                                        <?php } else { ?>
+                                            <img src="<?= site_url('Atk/Barcode/' . $a['kode_barang']) ?>" alt="">
+                                        <?php } ?>
                                     </td>
 
                                     <td>
@@ -135,12 +143,14 @@
                         </div>
                     </div>
                     <div class="row clearfix">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <label for="">Nama ATK</label>
                             <div class="form-group">
                                 <input type="text" name="nama_bar" class="form-control" placeholder="Nama Barang" required />
                             </div>
                         </div>
+                    </div>
+                    <div class="row clearfix">
                         <div class="col-sm-6">
                             <label for="">Kode ATK</label>
                             <select name="kd_atk" class="form-control" required>
@@ -149,6 +159,12 @@
                                     <option value="<?= $ka['kode_atk'] ?>"><?= $ka['kode_atk'] ?> - <?= $ka['nm_barang'] ?></option>
                                 <?php endforeach; ?>
                             </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="">Kode Barang (Opsional) </label>
+                            <div class="form-group">
+                                <input type="text" name="kode_barang" class="form-control" placeholder="Kode Barang" />
+                            </div>
                         </div>
                     </div>
                     <div class="row clearfix mb-1">
@@ -236,21 +252,29 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="row clearfix">
-                            <div class="col-sm-6">
+                        <div class="row clearfix mb-1">
+                            <div class="col-sm-12">
                                 <label for="">Nama ATK</label>
                                 <div class="form-group">
                                     <input type="text" name="nm_barang" class="form-control" placeholder="Nama Barang" value="<?= $a['nm_barang'] ?>" required />
                                 </div>
                             </div>
+                        </div>
+                        <div class="row clearfix">
                             <div class="col-sm-6">
                                 <label for="">Kode ATK</label>
                                 <select name="kd_atk" class="form-control" required>
-                                    <option value="<?= $a['kd_barang'] ?>" selected><?= $a['kd_barang'] ?></option>
+                                    <option value="<?= $a['kode_atk'] ?>" selected><?= $a['kode_atk'] ?></option>
                                     <?php foreach ($kodeatk as $ka) : ?>
                                         <option value="<?= $ka['kode_atk'] ?>"><?= $ka['kode_atk'] ?> - <?= $ka['nm_barang'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="">Kode Barang</label>
+                                <div class="form-group">
+                                    <input type="text" name="kode_barang" class="form-control" placeholder="Kode Barang" value="<?= $a['kode_barang'] ?>" />
+                                </div>
                             </div>
                         </div>
                         <div class="row clearfix mb-1">
@@ -334,7 +358,7 @@
                             <label for="">Kategori</label>
                             <select name="kat_barang" class="form-control" required>
                                 <?php foreach ($kategori as $k) : ?>
-                                    <option value="<?= $k['nm_kategori'] ?>"><?= $k['nm_kategori'] ?></option>
+                                    <option value="<?= $k['kat_barang'] ?>"><?= $k['kat_barang'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
