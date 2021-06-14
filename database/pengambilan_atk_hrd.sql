@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2021 at 11:29 AM
+-- Generation Time: Jun 14, 2021 at 11:34 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -136,7 +136,10 @@ INSERT INTO `tb_ambil_atk` (`id`, `no_ambilatk`, `user_nama`, `nama_pt`, `status
 (60, 'ATK-20210609-0019', 'SUSANTO', 'PT MULIA SAWIT AGRO LESTARI (HO)', 1, '2021-06-09 15:39:57'),
 (61, 'ATK-20210610-0020', 'ABDUL ROHMAN', 'PT MULIA SAWIT AGRO LESTARI (HO)', 0, '2021-06-10 10:24:08'),
 (62, 'ATK-20210610-0021', 'IDRIS ABDUL AZIS', 'PT MULIA SAWIT AGRO LESTARI (HO)', 0, '2021-06-10 13:24:38'),
-(63, 'ATK-20210611-0022', 'IDRIS ABDUL AZIS', 'PT MULIA SAWIT AGRO LESTARI (HO)', 1, '2021-06-11 15:32:21');
+(63, 'ATK-20210611-0022', 'IDRIS ABDUL AZIS', 'PT MULIA SAWIT AGRO LESTARI (HO)', 1, '2021-06-11 15:32:21'),
+(64, 'ATK-20210614-0023', 'IDRIS ABDUL AZIS', 'PT MULIA SAWIT AGRO LESTARI (HO)', 0, '2021-06-14 14:13:18'),
+(65, 'ATK-20210614-0024', 'IDRIS ABDUL AZIS', 'PT MULIA SAWIT AGRO LESTARI (HO)', 1, '2021-06-14 14:49:53'),
+(66, 'ATK-20210614-0025', 'ENDAH SULISTIYANI', 'PT MULIA SAWIT AGRO LESTARI (HO)', 1, '2021-06-14 14:51:19');
 
 -- --------------------------------------------------------
 
@@ -217,7 +220,9 @@ INSERT INTO `tb_barang` (`id_barang`, `kd_inputatk`, `nm_barang`, `merek`, `harg
 (28, 'ATK-20210611458', 'Cutter', 'Kenko', '12000.00', 'Benda Tajam', '4010', NULL, 48, 'PT MSAL (HO)', 'Pcs', 'hati-hati dibawah 10+ th', '2021-06-11 10:16:54'),
 (30, 'ATK-20210611114', 'Spidol', 'Joyko', '13000.00', 'Alat tulis', '1013', '4970129727514', 1, 'PT MSAL (HO)', 'Pcs', 'nulis di papan', '2021-06-11 10:36:02'),
 (31, 'ATK-20210611151', 'Buku Tulis', 'LOCOMOTIF', '40000.00', 'Buku Tulis', '5010', '8992221088009', 12, 'PT MSAL (HO)', 'Pcs', 'Buku mahal', '2021-06-11 13:55:16'),
-(32, 'ATK-20210611675', 'Kalender', 'BCA', '20000.00', 'Dan Lain-lain', '6010', '', 24, 'PT MSAL (HO)', 'Pcs', 'vendor', '2021-06-11 14:18:35');
+(32, 'ATK-20210611675', 'Kalender', 'BCA', '20000.00', 'Dan Lain-lain', '6010', '', 24, 'PT MSAL (HO)', 'Pcs', 'vendor', '2021-06-11 14:18:35'),
+(33, 'ATK-20210614439', 'Buku', 'jjj', '2000.00', 'Buku Tulis', '5010', '8992221088009', 1, 'PT MSAL (HO)', 'Pcs', 'aa', '2021-06-14 09:29:19'),
+(34, 'ATK-20210614873', 'Buku Tes', 'LOKO', '12000.00', 'Buku Tulis', '5010', '8992221088009', 1, 'PT MSAL (HO)', 'Pcs', 'A', '2021-06-14 13:45:25');
 
 -- --------------------------------------------------------
 
@@ -281,7 +286,10 @@ INSERT INTO `tb_detail_ambilatk` (`id_detail_ambilatk`, `no_urut`, `no_ambilatk`
 (208, 21, 'ATK-20210610-0021', 'Penghapus', '1012', '', 'ATK-20210520669', 'Alat Menulis', 20, 'Pcs', '30000', 'menghapus kemiskinan', 1),
 (213, 22, 'ATK-20210611-0022', 'Buku Tulis', '5010', '', 'ATK-20210611151', 'Buku Tulis', 6, 'Pcs', '40000', 'coba yaa', 2),
 (214, 22, 'ATK-20210611-0022', 'Spidol', '1013', '', 'ATK-20210611114', 'Alat tulis', 1, 'Pcs', '13000', 'spidol spesial', 2),
-(217, 23, 'ATK-20210611-0023', 'Buku Tulis', '5010', '8992221088009', 'ATK-20210611151', 'Buku Tulis', 2, 'Pcs', '40000', 'a', 0);
+(215, 23, 'ATK-20210614-0023', 'Buku Tes', '5010', '8992221088009', 'ATK-20210614873', 'Buku Tulis', 1, 'Pcs', '12000', 's', 1),
+(216, 23, 'ATK-20210614-0023', 'Buku', '5010', '8992221088009', 'ATK-20210614439', 'Buku Tulis', 1, 'Pcs', '2000', 'a', 1),
+(219, 24, 'ATK-20210614-0024', 'Buku Tulis', '5010', '8992221088009', 'ATK-20210611151', 'Buku Tulis', 2, 'Pcs', '40000', 'aa', 2),
+(220, 25, 'ATK-20210614-0025', 'Buku Tulis', '5010', '8992221088009', 'ATK-20210611151', 'Buku Tulis', 1, 'Pcs', '40000', 'aaaaa', 2);
 
 --
 -- Indexes for dumped tables
@@ -355,7 +363,7 @@ ALTER TABLE `satuan`
 -- AUTO_INCREMENT for table `tb_ambil_atk`
 --
 ALTER TABLE `tb_ambil_atk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `tb_atk_rusak`
@@ -367,13 +375,13 @@ ALTER TABLE `tb_atk_rusak`
 -- AUTO_INCREMENT for table `tb_barang`
 --
 ALTER TABLE `tb_barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tb_detail_ambilatk`
 --
 ALTER TABLE `tb_detail_ambilatk`
-  MODIFY `id_detail_ambilatk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=218;
+  MODIFY `id_detail_ambilatk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=222;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

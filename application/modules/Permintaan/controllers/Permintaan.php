@@ -129,6 +129,7 @@ class Permintaan extends CI_Controller
                 'nm_barang' => $this->input->post('nm_barang'),
                 'kode_atk' => $this->input->post('kode_atk'),
                 'kat_barang' => $this->input->post('kat_barang'),
+                'kode_barang' => $this->input->post('kode_barang'),
                 'qty' => $qty,
                 'sat' => $this->input->post('sat'),
                 'harga' => $this->input->post('harga'),

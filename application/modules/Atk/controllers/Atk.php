@@ -37,6 +37,8 @@ class Atk extends CI_Controller
         $sql_atkf = "SELECT * FROM tb_barang GROUP BY nm_barang ORDER BY id_barang DESC ";
         $data['atkf'] = $this->db->query($sql_atkf)->result_array();
 
+        $sql_kat = "SELECT * FROM kategori";
+        $data['kategori_'] = $this->db->query($sql_kat)->result_array();
         // $data['atk-filt'] = $this->M_atk->filterAtk('')
         // echo "<pre>";
         // var_dump($data['user_nama']);

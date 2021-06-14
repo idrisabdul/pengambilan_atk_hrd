@@ -257,6 +257,7 @@
                                             <span>Tidak ada</span>
                                         <?php } else { ?>
                                             <img src="<?= site_url('Atk/Barcode/' . $sa['kode_barang']) ?>" alt="">
+                                            <p style="font-size: 1px"><?= $sa['kode_barang'] ?></p>
                                         <?php } ?>
                                     </td>
 

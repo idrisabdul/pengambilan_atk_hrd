@@ -269,14 +269,13 @@
                             </a>
                         </li> -->
 
-                        <li>
+                        <!-- <li>
                             <a href="<?= base_url('Retur/atkRusak') ?>">
-                                <!-- <i class="fas fa-backspace"></i> -->
                                 <i data-feather="delete"></i>
                                 <span class="badge badge-danger float-right"><?= $this->db->query('SELECT * FROM tb_atk_rusak')->num_rows(); ?></span>
                                 <span>Data Retur</span>
                             </a>
-                        </li>
+                        </li> -->
 
                         <li class="menu-title mt-2">Settings</li>
 

@@ -332,8 +332,9 @@
                                                     <th>Nama ATK</th>
                                                     <th>Kategori</th>
                                                     <th>Qty</th>
-                                                    <th>Retur</th>
-                                                    <th>QTY sebelumnya</th>
+                                                    <!-- <th>Retur</th> -->
+                                                    <th>Kode Barang</th>
+                                                    <!-- <th>QTY sebelumnya</th> -->
                                                     <th>Satuan</th>
                                                     <th>Keperluan</th>
                                                     <th>Action</th>
@@ -382,8 +383,14 @@
                                                         <td><?= $da['nm_barang'] ?></td>
                                                         <td><?= $da['kat_barang'] ?></td>
                                                         <td><?= $da['qty'] ?></td>
-                                                        <td><?= $qtyambilrusak == 0 ? 0 : $qtyambilrusak ?></td>
-                                                        <td><?= $total ?></td>
+                                                        <!-- <td><?= $qtyambilrusak == 0 ? 0 : $qtyambilrusak ?></td> -->
+                                                        <!-- <td><?= $total ?></td> -->
+                                                        <td><?php if ($da['kode_barang'] == null) { ?>
+                                                                <span>Tidak ada</span>
+                                                            <?php } else { ?>
+                                                                <img src="<?= site_url('Atk/Barcode/' . $da['kode_barang']) ?>" alt="">
+                                                            <?php } ?>
+                                                        </td>
                                                         <td><?= $da['sat'] ?></td>
                                                         <td><?= $da['keperluan'] ?></td>
                                                         <td>
@@ -438,8 +445,9 @@
                                                         <th>Nama ATK</th>
                                                         <th>Kategori</th>
                                                         <th>Qty</th>
-                                                        <th>Retur</th>
-                                                        <th>QTY sebelumnya</th>
+                                                        <th>Kode Barang</th>
+                                                        <!-- <th>Retur</th> -->
+                                                        <!-- <th>QTY sebelumnya</th> -->
                                                         <th>Satuan</th>
                                                         <th>Keperluan</th>
                                                     </tr>
@@ -464,8 +472,14 @@
                                                             <td><?= $da['nm_barang'] ?></td>
                                                             <td><?= $da['kat_barang'] ?></td>
                                                             <td><?= $da['qty'] ?></td>
-                                                            <td><?= $qtyambilrusak == 0 ? 0 : $qtyambilrusak ?></td>
-                                                            <td><?= $total ?></td>
+                                                            <!-- <td><?= $qtyambilrusak == 0 ? 0 : $qtyambilrusak ?></td> -->
+                                                            <!-- <td><?= $total ?></td> -->
+                                                            <td><?php if ($da['kode_barang'] == null) { ?>
+                                                                    <span>Tidak ada</span>
+                                                                <?php } else { ?>
+                                                                    <img src="<?= site_url('Atk/Barcode/' . $da['kode_barang']) ?>" alt="">
+                                                                <?php } ?>
+                                                            </td>
                                                             <td><?= $da['sat'] ?></td>
                                                             <td><?= $da['keperluan'] ?></td>
                                                         </tr>

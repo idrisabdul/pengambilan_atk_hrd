@@ -359,6 +359,7 @@
                                         <div class="col-md-2">
                                             <div class="form-group row mb-2">
                                                 <div class="col">
+                                                    <input type="hidden" id="kode_barang" class="form-control">
                                                     <input type="hidden" id="kode_atk" class="form-control">
                                                     <input type="hidden" id="getuser" class="form-control">
                                                     <input type="hidden" id="getpt" class="form-control">
@@ -389,7 +390,8 @@
                                                     <th>No</th>
                                                     <th>Nama ATK</th>
                                                     <th>Qty Input</th>
-                                                    <th>Kode Input ATK</th>
+                                                    <th>Kode ATK</th>
+                                                    <th>Kode Barang</th>
                                                     <th>Kategori</th>
                                                     <th>Satuan</th>
                                                     <th>Harga perATK</th>
@@ -523,6 +525,7 @@
 
 
                 <!-- SELECT MODAL -->
+                <!-- SELECT MODAL -->
                 <div class="modal fade bd-example-modal-lg" id="modal-item" tabindex="-1" aria-labelledby="myLargeModalLabel" role="dialog">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -536,6 +539,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama ATK</th>
+                                            <th>Kode Barang</th>
                                             <th>Qty</th>
                                             <th>Satuan</th>
                                             <th>Action</th>
@@ -580,6 +584,15 @@
                                                     </td>
 
                                                     <td>
+                                                        <?php if ($sa['kode_barang'] == null) { ?>
+                                                            <span>Tidak ada</span>
+                                                        <?php } else { ?>
+                                                            <img src="<?= site_url('Atk/Barcode/' . $sa['kode_barang']) ?>" alt="">
+                                                            <p style="font-size: 1px"><?= $sa['kode_barang'] ?></p>
+                                                        <?php } ?>
+                                                    </td>
+
+                                                    <td>
                                                         </i> <?= $saldo ?>
                                                     </td>
 
@@ -588,7 +601,7 @@
                                                     </td>
 
                                                     <td>
-                                                        <button type="button" class="btn btn-sm btn-info btn-rounded waves-effect waves-light" id="select" data-qty="<?php echo $saldo  ?>" data-ket="<?= $sa['keterangan'] ?>" data-kd_atk="<?= $sa['kode_atk'] ?>" data-harga="<?= $sa['harga'] ?>" data-satuan="<?php echo $sa['satuan']  ?>" data-kat_barang="<?php echo $sa['kat_barang']  ?>" data-kd_inputatk="<?php echo $sa['kd_inputatk']  ?>" data-nm_barang="<?php echo $sa['nm_barang'] ?>"><i class="fas fa-check mr-1"></i>Select</button>
+                                                        <button type="button" class="btn btn-sm btn-info btn-rounded waves-effect waves-light" id="select" data-qty="<?php echo $saldo  ?>" data-ket="<?= $sa['keterangan'] ?>" data-kd_atk="<?= $sa['kode_atk'] ?>" data-kode_barang="<?= $sa['kode_barang'] ?>" data-harga="<?= $sa['harga'] ?>" data-satuan="<?php echo $sa['satuan']  ?>" data-kat_barang="<?php echo $sa['kat_barang']  ?>" data-kd_inputatk="<?php echo $sa['kd_inputatk']  ?>" data-nm_barang="<?php echo $sa['nm_barang'] ?>"><i class="fas fa-check mr-1"></i>Select</button>
                                                     </td>
                                                 </tr>
                                             <?php endif; ?>
@@ -665,6 +678,7 @@
                                             '<td>' + data[i].nm_barang + '</td>' +
                                             '<td>' + data[i].qty + '</td>' +
                                             '<td>' + data[i].kode_atk + '</td>' +
+                                            '<td>' + data[i].kode_barang + '</td>' +
                                             '<td>' + data[i].kat_barang + '</td>' +
                                             '<td>' + data[i].sat + '</td>' +
                                             '<td>Rp. ' + data[i].harga + '</td>' +
@@ -744,6 +758,7 @@
                                     var get_sat = $('#getitem_sat').val();
                                     var get_harga = $('#getitemharga').val();
                                     var get_kep = $('#getitemkep').val();
+                                    var kode_barang = $('#kode_barang').val();
 
                                     $.ajax({
                                         url: "<?= base_url('Permintaan/insertAmbilAtk_sem'); ?>",
@@ -760,6 +775,7 @@
                                             sat: get_sat,
                                             harga: get_harga,
                                             keperluan: get_kep,
+                                            kode_barang: kode_barang
                                         },
                                         cache: false,
                                         success: function(data) {
@@ -783,12 +799,14 @@
                                     var satuan = $(this).data('satuan');
                                     var kd_inputatk = $(this).data('kd_inputatk');
                                     var kd_atk = $(this).data('kd_atk');
+                                    var kode_barang = $(this).data('kode_barang');
                                     var kat_barang = $(this).data('kat_barang');
                                     var harga = $(this).data('harga');
                                     var keterangan = $(this).data('ket');
                                     var user = $('#user_nama').val();
                                     var pt = $('#nama_pt').val();
 
+                                    alert(kode_barang);
                                     // $('#qty').text(qty);
                                     // $('#qty_input').val(qty);
                                     // $('#nm_barang_input').val(nm_barang);
@@ -809,7 +827,7 @@
 
                                     $('#getitem_sat').val(satuan);
                                     $('#kode_atk').val(kd_atk);
-
+                                    // $('#kode_barang').val(kode_barang);
 
 
                                     $('#modal-item').modal('hide');
@@ -929,6 +947,7 @@
                             var kat_barang = $(this).data('kat_barang');
                             var harga = $(this).data('harga');
                             var keterangan = $(this).data('ket');
+                            var kode_barang = $(this).data('kode_barang');
                             var user = $('#user_nama').val();
                             var pt = $('#nama_pt').val();
 
@@ -952,7 +971,7 @@
 
                             $('#getitem_sat').val(satuan);
                             $('#kode_atk').val(kd_atk);
-
+                            $('#kode_barang').val(kode_barang);
 
 
                             $('#modal-item').modal('hide');

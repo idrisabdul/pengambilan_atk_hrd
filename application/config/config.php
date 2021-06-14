@@ -24,6 +24,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/pengambilan_atk_hrd/';
+// $config['base_url'] = 'https://192.168.3.95/pengambilan_atk_hrd/';
+
 
 // $base_url = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
 // $base_url .= "://" . @$_SERVER['HTTP_HOST'];
