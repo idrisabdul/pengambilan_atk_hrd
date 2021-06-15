@@ -103,7 +103,7 @@
                                             <span>Tidak ada</span>
                                         <?php } else { ?>
                                             <img src="<?= site_url('Atk/Barcode/' . $a['kode_barang']) ?>" alt="">
-                                            <p style="font-size: 1px"><?= $sa['kode_barang'] ?></p>
+                                            <p style="font-size: 1px"><?= $a['kode_barang'] ?></p>
                                         <?php } ?>
                                     </td>
 
