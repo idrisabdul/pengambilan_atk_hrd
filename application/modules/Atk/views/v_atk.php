@@ -103,6 +103,7 @@
                                             <span>Tidak ada</span>
                                         <?php } else { ?>
                                             <img src="<?= site_url('Atk/Barcode/' . $a['kode_barang']) ?>" alt="">
+                                            <p style="font-size: 1px"><?= $sa['kode_barang'] ?></p>
                                         <?php } ?>
                                     </td>
 
@@ -630,6 +631,7 @@
         Quagga.onDetected(function(result) {
             if (result.codeResult.code) {
                 $('#kode_barang').val(result.codeResult.code);
+                $('#interactive').hide();
                 Quagga.stop();
                 // setTimeout(function() {
                 //     $('#addModal').modal('hide');
