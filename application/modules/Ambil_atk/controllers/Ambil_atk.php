@@ -125,6 +125,18 @@ class Ambil_atk extends CI_Controller
         // redirect('Dashboard');
     }
 
+    public function BatalAmbilUser($no_ambilatk)
+    {
+        //DELETE YG STATUS 0 DAN NO AMBIL ATK SESUAI SAMA VIEW
+        $sql = "DELETE FROM tb_detail_ambilatk WHERE no_ambilatk = '$no_ambilatk' AND status = 0";
+        $this->db->query($sql);
+        redirect('Permintaan/permintaanAtk');
+        // $this->M_ambil_atk->delete($id);
+        // $this->M_ambil_atk->deleteDetail($id);
+        // $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Pengambilan ATK Berhasil Dihapus</div>');
+        // redirect('Dashboard');
+    }
+
     public function deleteItem()
     {
         $no_ambil = $this->input->post('no_ambilatk_del');
@@ -156,7 +168,8 @@ class Ambil_atk extends CI_Controller
         $data['memberi_no'] = $memberi_no;
 
         $sql1 = "SELECT * FROM tb_barang ORDER BY id_barang DESC";
-        $data['stok_atk'] = $this->db->query($sql1)->result_array();
+        // $data['stok_atk'] = $this->db->query($sql1)->result_array();
+        $data['stok_atk'] = $this->M_ambil_atk->tb_atk();
 
         $sqluser = "SELECT nama FROM db_sso.user_ho";
         $data['user_nama'] = $this->db->query($sqluser)->result_array();
@@ -269,8 +282,9 @@ class Ambil_atk extends CI_Controller
     {
         $no_ambilatk = $this->input->get('no_ambilatk');
 
-        $sql = "SELECT * FROM tb_detail_ambilatk WHERE status = 0 && no_ambilatk = '$no_ambilatk'";
-        $data = $this->db->query($sql)->result_array();
+        // $sql = "SELECT * FROM tb_detail_ambilatk WHERE status = 0 && no_ambilatk = '$no_ambilatk'";
+        // $data = $this->db->query($sql)->result_array();
+        $data = $this->M_ambil_atk->join_ambilatk($no_ambilatk);
 
         echo json_encode($data);
     }

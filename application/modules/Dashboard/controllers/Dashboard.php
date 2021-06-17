@@ -20,7 +20,8 @@ class Dashboard extends MX_Controller
         $data['pt'] = $this->db->query($sql)->result_array();
         // $sql1 = "SELECT SUM(qty) as qtyatk,nm_barang,kat_barang,kd_barang,satuan  FROM tb_barang GROUP BY nm_barang";
         $sql1 = "SELECT *  FROM tb_barang ORDER BY id_barang DESC";
-        $data['stok_atk'] = $this->db->query($sql1)->result_array();
+        // $data['stok_atk'] = $this->db->query($sql1)->result_array();
+        $data['stok_atk'] = $this->M_dashboard->tb_atk();
         $data['stok_atk_'] = $this->db->query($sql1)->result_array();
 
 

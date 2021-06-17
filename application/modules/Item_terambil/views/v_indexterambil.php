@@ -60,7 +60,7 @@
                                     </td>
 
                                     <td class="text-center">
-                                        <?= $d['kat_barang'] ?>
+                                        <?= $d['nm_kategori'] ?>
                                     </td>
 
                                     <td>
@@ -70,7 +70,7 @@
                                         Rp. <?= number_format($d['harga']); ?>
                                     </td>
                                     <td>
-                                        <?= $d['sat'] ?>
+                                        <?= $d['satuan'] ?>
                                     </td>
                                     <td>
                                         <?= $d['keperluan'] ?>

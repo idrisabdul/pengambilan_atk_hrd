@@ -62,13 +62,13 @@
                 <?php echo $a['qty']; ?>
             </td>
             <td>
-                <?php echo $a['satuan']; ?>
+                <?php echo $a['satuan_set']; ?>
             </td>
             <td>
                 <?php echo 'Rp. ' . number_format($a['harga']); ?>
             </td>
             <td>
-                <?php echo $a['kat_barang']; ?>
+                <?php echo $a['nm_kategori']; ?>
             </td>
             <td>
                 <?php echo $a['tgl_masuk_barang']; ?>

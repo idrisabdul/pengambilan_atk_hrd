@@ -64,7 +64,8 @@ class Permintaan extends CI_Controller
         $data['user_nama'] = $this->db->query($sqluser)->result_array();
 
         $sql1 = "SELECT *  FROM tb_barang ORDER BY id_barang DESC";
-        $data['stok_atk'] = $this->db->query($sql1)->result_array();
+        // $data['stok_atk'] = $this->db->query($sql1)->result_array();
+        $data['stok_atk'] = $this->M_Permintaan->tb_atk();
 
         $sql = "SELECT * FROM db_sso.tb_pt";
         $data['pt'] = $this->db->query($sql)->result_array();
@@ -98,8 +99,9 @@ class Permintaan extends CI_Controller
     {
         $no_ambilatk = $this->input->get('no_ambilatk');
 
-        $sql = "SELECT * FROM tb_detail_ambilatk WHERE status = 0 && no_ambilatk = '$no_ambilatk'";
-        $data = $this->db->query($sql)->result_array();
+        // $sql = "SELECT * FROM tb_detail_ambilatk WHERE status = 0 && no_ambilatk = '$no_ambilatk'";
+        // $data = $this->db->query($sql)->result_array();
+        $data = $this->M_Permintaan->join_ambilatk($no_ambilatk);
 
         echo json_encode($data);
     }

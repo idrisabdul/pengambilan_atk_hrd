@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
-                    <button class="btn btn-primary btn-rounded mr-2" onclick="add()"><i class="fas fa-eye mr-1"></i>Lihat ATK Saat ini</button>
+                    <!-- <button class="btn btn-primary btn-rounded mr-2" onclick="add()"><i class="fas fa-eye mr-1"></i>Lihat ATK Saat ini</button> -->
                     <a href="<?= base_url('Ambil_atk/pilihAtk') ?>" class="btn btn-rounded btn-success"><i class="fas fa-user-edit mr-1"></i>Ajukan Pengambilan ATK</a>
                 </div>
                 <h4 class="page-title">Daftar Pengambilan ATK</h4>

@@ -381,7 +381,7 @@
                                                         <input type="hidden" name="" id="sisa<?= $no ?>" value="<?= $sisa ?>">
                                                         <td><?= $no++ ?></td>
                                                         <td><?= $da['nm_barang'] ?></td>
-                                                        <td><?= $da['kat_barang'] ?></td>
+                                                        <td><?= $da['nm_kategori'] ?></td>
                                                         <td><?= $da['qty'] ?></td>
                                                         <!-- <td><?= $qtyambilrusak == 0 ? 0 : $qtyambilrusak ?></td> -->
                                                         <!-- <td><?= $total ?></td> -->
@@ -391,7 +391,7 @@
                                                                 <img src="<?= site_url('Atk/Barcode/' . $da['kode_barang']) ?>" alt="">
                                                             <?php } ?>
                                                         </td>
-                                                        <td><?= $da['sat'] ?></td>
+                                                        <td><?= $da['satuan'] ?></td>
                                                         <td><?= $da['keperluan'] ?></td>
                                                         <td>
                                                             <button class="btn btn-xs btn-warning" id="editambil" data-no_ambilatk="<?= $da['no_ambilatk'] ?>" data-id="<?php echo $da['id_detail_ambilatk'] ?>" data-sisa=<?= $sisa ?> data-nm_barang="<?php echo $da['nm_barang'] ?>" data-qty="<?php echo $da['qty'] ?>" data-keperluan="<?php echo $da['keperluan'] ?>" href="javascript:;" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit mr-1"></i>Edit</button>
@@ -470,7 +470,7 @@
                                                         <tr>
                                                             <td><?= $no++ ?></td>
                                                             <td><?= $da['nm_barang'] ?></td>
-                                                            <td><?= $da['kat_barang'] ?></td>
+                                                            <td><?= $da['nm_kategori'] ?></td>
                                                             <td><?= $da['qty'] ?></td>
                                                             <!-- <td><?= $qtyambilrusak == 0 ? 0 : $qtyambilrusak ?></td> -->
                                                             <!-- <td><?= $total ?></td> -->
@@ -480,7 +480,7 @@
                                                                     <img src="<?= site_url('Atk/Barcode/' . $da['kode_barang']) ?>" alt="">
                                                                 <?php } ?>
                                                             </td>
-                                                            <td><?= $da['sat'] ?></td>
+                                                            <td><?= $da['satuan'] ?></td>
                                                             <td><?= $da['keperluan'] ?></td>
                                                         </tr>
                                                     <?php } ?>
@@ -503,7 +503,7 @@
                                 <h4 class="title" id="defaultModalLabel">Edit Ambil ATK</h4>
                             </div>
                             <div class="modal-body">
-                                <form action="<?= base_url('Ambil_atk/editAmbilAtkUserATK-20210604-009') ?>" method="POST">
+                                <form action="<?= base_url('Ambil_atk/editAmbilAtkUser') ?>" method="POST">
                                     <input type="hidden" name="id_detail" id="id_detail" class="form-control" placeholder="Nama Barang" />
                                     <input type="hidden" name="no_ambilatk" id="no_ambilatk" class="form-control" placeholder="Nama Barang" />
 

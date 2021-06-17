@@ -23,19 +23,26 @@ class Atk extends CI_Controller
     {
         $sql = "SELECT * FROM db_sso.tb_pt";
         $data['pt'] = $this->db->query($sql)->result_array();
-        $sql_atk = "SELECT * FROM tb_barang ORDER BY id_barang DESC";
-        $data['atk'] = $this->db->query($sql_atk)->result_array();
-        $data['atk_filt'] = $this->db->query($sql_atk)->result_array();
+
         $sql_kat = "SELECT * FROM tb_barang GROUP BY kat_barang ORDER BY id_barang DESC";
-        $data['kategori'] = $this->db->query($sql_kat)->result_array();
+        // $data['kategori'] = $this->db->query($sql_kat)->result_array();
+        $data['kategori'] = $this->M_atk->joinatk_kodeatk();
         $sql_sat = "SELECT * FROM satuan";
         $data['sat'] = $this->db->query($sql_sat)->result_array();
         $sql_kode = "SELECT * FROM kode_atk";
         $data['kodeatk'] = $this->db->query($sql_kode)->result_array();
 
         //filter
-        $sql_atkf = "SELECT * FROM tb_barang GROUP BY nm_barang ORDER BY id_barang DESC ";
+        // $sql_atkf = "SELECT * FROM tb_barang GROUP BY nm_barang ORDER BY id_barang DESC ";
+        $sql_atkf = "SELECT DISTINCT nm_barang FROM tb_barang ORDER BY id_barang DESC ";
         $data['atkf'] = $this->db->query($sql_atkf)->result_array();
+
+        //SHOW TABLE ATK BARANG
+        $sql_atk = "SELECT * FROM tb_barang ORDER BY id_barang DESC";
+        $data['atk'] = $this->db->query($sql_atk)->result_array();
+        $data['atk_filt'] = $this->M_atk->tb_atk();
+
+
 
         $sql_kat = "SELECT * FROM kategori";
         $data['kategori_'] = $this->db->query($sql_kat)->result_array();
@@ -59,7 +66,7 @@ class Atk extends CI_Controller
         $data['kodeatk'] = $this->db->query($sql_kode)->result_array();
 
         //filter
-        $sql_atkf = "SELECT * FROM tb_barang GROUP BY nm_barang ORDER BY id_barang DESC ";
+        $sql_atkf = "SELECT DISTINCT nm_barang FROM tb_barang ORDER BY id_barang DESC ";
         $data['atkf'] = $this->db->query($sql_atkf)->result_array();
 
 
@@ -139,7 +146,8 @@ class Atk extends CI_Controller
     public function pdf()
     {
         $dompdf = new Dompdf();
-        $data['atk'] = $this->db->query('SELECT * FROM tb_barang ORDER BY id_barang DESC')->result_array();
+        // $data['atk'] = $this->db->query('SELECT * FROM tb_barang ORDER BY id_barang DESC')->result_array();
+        $data['atk'] = $this->M_atk->tb_atk();
         $html = $this->load->view('v_cetak_atk', $data, true);
 
         $dompdf->load_html($html);

@@ -72,7 +72,7 @@
                 <?php echo $d['qty']; ?>
             </td>
             <td>
-                <?php echo $d['sat']; ?>
+                <?php echo $d['satuan']; ?>
             </td>
             <td>
                 <?php echo 'Rp. ' . number_format($d['harga']); ?>

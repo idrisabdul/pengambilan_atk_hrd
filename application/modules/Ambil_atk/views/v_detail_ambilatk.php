@@ -114,7 +114,7 @@
                                         <input type="hidden" name="" id="sisa<?= $no ?>" value="<?= $sisa ?>">
                                         <td><?= $no++ ?></td>
                                         <td><?= $da['nm_barang'] ?></td>
-                                        <td><?= $da['kat_barang'] ?></td>
+                                        <td><?= $da['nm_kategori'] ?></td>
                                         <td><?= $da['qty'] ?></td>
                                         <!-- <td><?= $qtyambilrusak == 0 ? 0 : $qtyambilrusak ?></td> -->
                                         <td><?php if ($da['kode_barang'] == null) { ?>
@@ -124,7 +124,7 @@
                                             <?php } ?>
                                         </td>
                                         <!-- <td><?= $total ?></td> -->
-                                        <td><?= $da['sat'] ?></td>
+                                        <td><?= $da['satuan'] ?></td>
                                         <td><?= $da['keperluan'] ?></td>
                                         <td>
                                             <button class="btn btn-xs btn-warning" id="editambil" data-no_ambilatk="<?= $da['no_ambilatk'] ?>" data-id="<?php echo $da['id_detail_ambilatk'] ?>" data-sisa=<?= $sisa ?> data-nm_barang="<?php echo $da['nm_barang'] ?>" data-qty="<?php echo $da['qty'] ?>" data-keperluan="<?php echo $da['keperluan'] ?>" href="javascript:;" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit mr-1"></i>Edit</button>
@@ -203,7 +203,7 @@
                                         <tr>
                                             <td><?= $no++ ?></td>
                                             <td><?= $da['nm_barang'] ?></td>
-                                            <td><?= $da['kat_barang'] ?></td>
+                                            <td><?= $da['nm_kategori'] ?></td>
                                             <td><?= $da['qty'] ?></td>
                                             <!-- <td><?= $qtyambilrusak == 0 ? 0 : $qtyambilrusak ?></td> -->
                                             <td><?php if ($da['kode_barang'] == null) { ?>
@@ -213,7 +213,7 @@
                                                 <?php } ?>
                                             </td>
                                             <!-- <td><?= $total ?></td> -->
-                                            <td><?= $da['sat'] ?></td>
+                                            <td><?= $da['satuan'] ?></td>
                                             <td><?= $da['keperluan'] ?></td>
                                         </tr>
                                     <?php } ?>

@@ -266,11 +266,11 @@
                                     </td>
 
                                     <td>
-                                        </i> <?= $sa['satuan'] ?>
+                                        </i> <?= $sa['satuan_set'] ?>
                                     </td>
 
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-info btn-rounded waves-effect waves-light" id="select" data-qty="<?php echo $saldo  ?>" data-ket="<?= $sa['keterangan'] ?>" data-kd_atk="<?= $sa['kode_atk'] ?>" data-kode_barang="<?= $sa['kode_barang'] ?>" data-harga="<?= $sa['harga'] ?>" data-satuan="<?php echo $sa['satuan']  ?>" data-kat_barang="<?php echo $sa['kat_barang']  ?>" data-kd_inputatk="<?php echo $sa['kd_inputatk']  ?>" data-nm_barang="<?php echo $sa['nm_barang'] ?>"><i class="fas fa-check mr-1"></i>Select</button>
+                                        <button type="button" class="btn btn-sm btn-info btn-rounded waves-effect waves-light" id="select" data-qty="<?php echo $saldo  ?>" data-ket="<?= $sa['keterangan'] ?>" data-kd_atk="<?= $sa['kode_atk'] ?>" data-kode_barang="<?= $sa['kode_barang'] ?>" data-harga="<?= $sa['harga'] ?>" data-satuan_info="<?php echo $sa['satuan_set']  ?>" data-satuan="<?php echo $sa['satuan']  ?>" data-kat_barang="<?php echo $sa['kat_barang']  ?>" data-kd_inputatk="<?php echo $sa['kd_inputatk']  ?>" data-nm_barang="<?php echo $sa['nm_barang'] ?>"><i class="fas fa-check mr-1"></i>Select</button>
                                     </td>
                                 </tr>
                             <?php endif; ?>
@@ -348,8 +348,8 @@
                             '<td>' + data[i].qty + '</td>' +
                             '<td>' + data[i].kode_atk + '</td>' +
                             '<td>' + data[i].kode_barang + '</td>' +
-                            '<td>' + data[i].kat_barang + '</td>' +
-                            '<td>' + data[i].sat + '</td>' +
+                            '<td>' + data[i].nm_kategori + '</td>' +
+                            '<td>' + data[i].satuan + '</td>' +
                             '<td>Rp. ' + data[i].harga + '</td>' +
                             '<td>' + data[i].keperluan + '</td>' +
                             '<td>' +
@@ -456,53 +456,53 @@
                 }
             }
 
-            $(document).ready(function() {
-                $(document).on('click', '#select', function() {
+            // $(document).ready(function() {
+            //     $(document).on('click', '#select', function() {
 
-                    $('#getitemqty').val('');
-                    $('#getitemkep').val('');
-                    // $('#getitemkep').prop('disabled', false);
+            //         $('#getitemqty').val('');
+            //         $('#getitemkep').val('');
+            //         // $('#getitemkep').prop('disabled', false);
 
-                    var qty = $(this).data('qty');
-                    var nm_barang = $(this).data('nm_barang');
-                    var satuan = $(this).data('satuan');
-                    var kd_inputatk = $(this).data('kd_inputatk');
-                    var kd_atk = $(this).data('kd_atk');
-                    var kat_barang = $(this).data('kat_barang');
-                    var harga = $(this).data('harga');
-                    var keterangan = $(this).data('ket');
-                    var kode_barang = $(this).data('kode_barang');
-                    var user = $('#user_nama').val();
-                    var pt = $('#nama_pt').val();
+            //         var qty = $(this).data('qty');
+            //         var nm_barang = $(this).data('nm_barang');
+            //         var satuan = $(this).data('satuan');
+            //         var kd_inputatk = $(this).data('kd_inputatk');
+            //         var kd_atk = $(this).data('kd_atk');
+            //         var kat_barang = $(this).data('kat_barang');
+            //         var harga = $(this).data('harga');
+            //         var keterangan = $(this).data('ket');
+            //         var kode_barang = $(this).data('kode_barang');
+            //         var user = $('#user_nama').val();
+            //         var pt = $('#nama_pt').val();
 
-                    // $('#qty').text(qty);
-                    // $('#qty_input').val(qty);
-                    // $('#nm_barang_input').val(nm_barang);
-                    // $('#nm_barang').text(nm_barang);
-                    // $('#modal-item').modal('hide');
-                    $('#getuser').val(user);
-                    $('#getpt').val(pt);
-                    $('#getitematk').val(nm_barang);
-                    $('#getitemqty_info').val(qty);
-                    $('#satuan').text(satuan);
-                    $('#satuan_inp').text(satuan);
+            //         // $('#qty').text(qty);
+            //         // $('#qty_input').val(qty);
+            //         // $('#nm_barang_input').val(nm_barang);
+            //         // $('#nm_barang').text(nm_barang);
+            //         // $('#modal-item').modal('hide');
+            //         $('#getuser').val(user);
+            //         $('#getpt').val(pt);
+            //         $('#getitematk').val(nm_barang);
+            //         $('#getitemqty_info').val(qty);
+            //         $('#satuan').text(satuan);
+            //         $('#satuan_inp').text(satuan);
 
-                    $('#getitem_kdinput').val(kd_inputatk);
-                    $('#getitem_katatk').val(kat_barang);
+            //         $('#getitem_kdinput').val(kd_inputatk);
+            //         $('#getitem_katatk').val(kat_barang);
 
-                    $('#getitemharga').val(harga);
-                    $('#getitemket').val(keterangan);
+            //         $('#getitemharga').val(harga);
+            //         $('#getitemket').val(keterangan);
 
-                    $('#getitem_sat').val(satuan);
-                    $('#kode_atk').val(kd_atk);
+            //         $('#getitem_sat').val(satuan);
+            //         $('#kode_atk').val(kd_atk);
 
-                    $('#kode_barang').val(kode_barang);
+            //         $('#kode_barang').val(kode_barang);
 
 
 
-                    $('#modal-item').modal('hide');
-                });
-            });
+            //         $('#modal-item').modal('hide');
+            //     });
+            // });
 
         });
 
@@ -617,6 +617,7 @@
             var kode_barang = $(this).data('kode_barang');
             var harga = $(this).data('harga');
             var keterangan = $(this).data('ket');
+            var satuan_info = $(this).data('satuan_info');
             var user = $('#user_nama').val();
             var pt = $('#nama_pt').val();
             // alert(kode_barang);
@@ -630,8 +631,8 @@
             $('#getpt').val(pt);
             $('#getitematk').val(nm_barang);
             $('#getitemqty_info').val(qty);
-            $('#satuan').text(satuan);
-            $('#satuan_inp').text(satuan);
+            $('#satuan').text(satuan_info);
+            $('#satuan_inp').text(satuan_info);
 
             $('#getitem_kdinput').val(kd_inputatk);
             $('#getitem_katatk').val(kat_barang);

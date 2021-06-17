@@ -171,7 +171,7 @@
                                         </td>
 
                                         <td>
-                                            <?= $sa['kode_atk'] ?>
+                                            <?= $sa['kodeatk_set'] ?>
                                         </td>
 
                                         <td>
@@ -184,10 +184,10 @@
                                         </td>
 
                                         <td>
-                                            <?= $sa['kat_barang'] ?>
+                                            <?= $sa['nm_kategori'] ?>
                                         </td>
                                         <td>
-                                            <?= $sa['satuan'] ?>
+                                            <?= $sa['satuan_set'] ?>
                                         </td>
 
                                         <td>

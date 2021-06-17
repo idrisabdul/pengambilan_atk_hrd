@@ -96,7 +96,7 @@
                                     </td>
 
                                     <td>
-                                        <?= $a['kode_atk'] ?>
+                                        <?= $a['kodeatk_set'] ?>
                                     </td>
                                     <td>
                                         <?php if ($a['kode_barang'] == null) { ?>
@@ -108,10 +108,10 @@
                                     </td>
 
                                     <td>
-                                        <?= $a['kat_barang'] ?>
+                                        <?= $a['nm_kategori'] ?>
                                     </td>
                                     <td>
-                                        <?= $a['satuan'] ?>
+                                        <?= $a['satuan_set'] ?>
                                     </td>
 
                                     <td>
@@ -154,7 +154,7 @@
                             <select name="nama_pt" class="form-control" required>
                                 <option value="" selected disabled>- Select PT - </option>
                                 <?php foreach ($pt as $p) : ?>
-                                    <option value="<?= $p['alias'] ?>"><?= $p['alias'] ?></option>
+                                    <option value="<?= $p['id_pt'] ?>"><?= $p['alias'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -173,7 +173,7 @@
                             <select name="kd_atk" class="form-control" required>
                                 <option value="" selected disabled>- Select Kode ATK - </option>
                                 <?php foreach ($kodeatk as $ka) : ?>
-                                    <option value="<?= $ka['kode_atk'] ?>"><?= $ka['kode_atk'] ?> - <?= $ka['nm_barang'] ?></option>
+                                    <option value="<?= $ka['id_kodeatk'] ?>"><?= $ka['kode_atk'] ?> - <?= $ka['nm_barang'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -193,7 +193,7 @@
                             <select name="kat_bar" class="form-control" required>
                                 <option value="" selected disabled>- Select Kategori - </option>
                                 <?php foreach ($kategori_ as $kat) : ?>
-                                    <option value="<?= $kat['nm_kategori'] ?>"><?= $kat['nm_kategori'] ?></option>
+                                    <option value="<?= $kat['id_kat'] ?>"><?= $kat['nm_kategori'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -202,7 +202,7 @@
                             <select name="sat" class="form-control" required>
                                 <option value="" selected disabled>- Select Satuan - </option>
                                 <?php foreach ($sat as $s) : ?>
-                                    <option value="<?= $s['satuan'] ?>"><?= $s['satuan'] ?></option>
+                                    <option value="<?= $s['id_sat'] ?>"><?= $s['satuan'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -254,7 +254,7 @@
 
 <!-- EDIT ITEM MODAL -->
 <?php $no = 0; ?>
-<?php foreach ($atk as $a) : $no++; ?>
+<?php foreach ($atk_filt as $a) : $no++; ?>
     <div class="modal fade" id="editModal<?= $a['id_barang'] ?>" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -269,9 +269,12 @@
                             <div class="col-sm-12">
                                 <label for="">Nama PT</label>
                                 <select name="nama_pt" class="form-control" required>
-                                    <option value="<?= $a['nama_pt'] ?>" selected><?= $a['nama_pt'] ?></option>
+                                    <?php $idpt = $a['nama_pt'] ?>
+                                    <?php $sql = "SELECT * FROM db_sso.tb_pt WHERE id_pt = $idpt " ?>
+                                    <?php $tbpt = $this->db->query($sql)->row_array(); ?>
+                                    <option value="<?= $idpt ?>" selected><?= $tbpt['alias'] ?></option>
                                     <?php foreach ($pt as $p) : ?>
-                                        <option value="<?= $p['alias'] ?>"><?= $p['alias'] ?></option>
+                                        <option value="<?= $p['id_pt'] ?>"><?= $p['alias'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -288,9 +291,9 @@
                             <div class="col-sm-6">
                                 <label for="">Kode ATK</label>
                                 <select name="kd_atk" class="form-control" required>
-                                    <option value="<?= $a['kode_atk'] ?>" selected><?= $a['kode_atk'] ?></option>
+                                    <option value="<?= $a['kode_atk'] ?>" selected><?= $a['kodeatk_set'] ?></option>
                                     <?php foreach ($kodeatk as $ka) : ?>
-                                        <option value="<?= $ka['kode_atk'] ?>"><?= $ka['kode_atk'] ?> - <?= $ka['nm_barang'] ?></option>
+                                        <option value="<?= $ka['id_kodeatk'] ?>"><?= $ka['kode_atk'] ?> - <?= $ka['nm_barang'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -305,18 +308,18 @@
                             <div class="col-sm-6">
                                 <label for="">Kategori</label>
                                 <select name="kat_barang" class="form-control" required>
-                                    <option value="<?= $a['kat_barang'] ?>" selected><?= $a['kat_barang'] ?></option>
+                                    <option value="<?= $a['kat_barang'] ?>" selected><?= $a['nm_kategori'] ?></option>
                                     <?php foreach ($kategori_ as $kat) : ?>
-                                        <option value="<?= $kat['nm_kategori'] ?>"><?= $kat['nm_kategori'] ?></option>
+                                        <option value="<?= $kat['id_kat'] ?>"><?= $kat['nm_kategori'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="col-sm-6">
                                 <label for="">Satuan</label>
                                 <select name="satuan" class="form-control" required>
-                                    <option value="<?= $a['satuan'] ?>" selected><?= $a['satuan'] ?></option>
+                                    <option value="<?= $a['satuan'] ?>" selected><?= $a['satuan_set'] ?></option>
                                     <?php foreach ($sat as $s) : ?>
-                                        <option value="<?= $s['satuan'] ?>"><?= $s['satuan'] ?></option>
+                                        <option value="<?= $s['id_sat'] ?>"><?= $s['satuan'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -406,8 +409,8 @@
                         <div class="col-sm-4">
                             <label for="">Kategori</label>
                             <select name="kat_barang" class="form-control" required>
-                                <?php foreach ($kategori as $k) : ?>
-                                    <option value="<?= $k['kat_barang'] ?>"><?= $k['kat_barang'] ?></option>
+                                <?php foreach ($kategori_ as $k) : ?>
+                                    <option value="<?= $k['id_kat'] ?>"><?= $k['nm_kategori'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -415,7 +418,7 @@
                             <label for="">Satuan</label>
                             <select name="satuan" class="form-control" required>
                                 <?php foreach ($sat as $s) : ?>
-                                    <option value="<?= $s['satuan'] ?>"><?= $s['satuan'] ?></option>
+                                    <option value="<?= $s['id_sat'] ?>"><?= $s['satuan'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
